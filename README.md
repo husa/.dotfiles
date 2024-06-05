@@ -3,6 +3,7 @@
 # General
 
 * [iterm2](https://iterm2.com/) - terminal emulator
+* [homebrew](https://brew.sh/) - package manager
 * [fish](https://fishshell.com/) - shell
 * [starship](https://starship.rs/) - prompt
 * [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) - fonts with added glyphs, used - `font-fira-code-nerd-font`
