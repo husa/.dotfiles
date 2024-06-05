@@ -18,5 +18,5 @@
 * [ripgrep](https://github.com/BurntSushi/ripgrep) - better `grep`
 * [fd](https://github.com/sharkdp/fd) - better `find`
 * [jq](https://github.com/jqlang/jq) - JSON traversal
-* [jnv](9https://github.com/ynqa/jnv) - interactive `jq`
+* [jnv](https://github.com/ynqa/jnv) - interactive `jq`
 * neovim - text editor
