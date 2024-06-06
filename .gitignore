@@ -3,3 +3,6 @@
 
 # yazi themes
 yazi/flavors
+
+# fish completions
+fish/completions
