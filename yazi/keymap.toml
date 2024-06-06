@@ -1,0 +1,4 @@
+[manager]
+append_keymap = [
+  { on = ['g', 'b'], run = 'cd ~/.Trash', desc = "Go to Trash"}
+]

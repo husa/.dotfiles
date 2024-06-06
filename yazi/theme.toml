@@ -1,0 +1,4 @@
+[flavor]
+use = "catppuccin-frappe"
+# use = "tokyo-night"
+# use = "ls-colors"
