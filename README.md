@@ -1,5 +1,28 @@
 # .dotfiles
 
+# Quick start
+
+## 1. Clone repo into your `$HOME` dir
+
+```sh
+git clone git@github.com:husa/.dotfiles.git
+```
+
+## 2. Install stuff
+
+```sh
+brew bundle install
+```
+
+## 3. Link stuff
+
+```sh
+ln -sv (pwd)/git $HOME/.config/git
+ln -sv (pwd)/fish $HOME/.config/fish
+ln -sv (pwd)/starship/starship.toml $HOME/.config/starship.toml
+ln -sv (pwd)/yazi $HOME/.config/yazi
+```
+
 # General
 
 * [iterm2](https://iterm2.com/) - terminal emulator
