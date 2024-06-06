@@ -1,0 +1,15 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[aws]
+disabled = true
+
+[time]
+disabled = false
+format = '[$time]($style) '
+style = 'yellow'
+
+[shell]
+disabled = false
+fish_indicator = "🐟"
+zsh_indicator = "\uf295"
