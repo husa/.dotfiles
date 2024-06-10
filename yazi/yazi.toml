@@ -20,3 +20,8 @@ rules = [
   { mime = "application/json", use = [ "edit", "vscode", "reveal" ] },
   { mime = "*", use = [ "open", "edit", "reveal" ] },
 ]
+
+[plugin]
+prepend_previewers = [
+  { name = "*.md", run = "glow" },
+]
