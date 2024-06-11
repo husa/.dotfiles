@@ -1,26 +1,37 @@
 # .dotfiles
 
-# Quick start
+## Quick start
 
-## 1. Clone repo into your `$HOME` dir
+### 1. Clone repo into your `$HOME` dir
 
 ```sh
 git clone git@github.com:husa/.dotfiles.git
 ```
 
-## 2. Install stuff
+### 2. Install stuff
 
 ```sh
 brew bundle install
 ```
 
-## 3. Link stuff
+### 3. Link stuff
 
 ```sh
 ln -sv (pwd)/git $HOME/.config/git
 ln -sv (pwd)/fish $HOME/.config/fish
 ln -sv (pwd)/starship/starship.toml $HOME/.config/starship.toml
 ln -sv (pwd)/yazi $HOME/.config/yazi
+```
+
+### 4. Install other stuff
+
+* `yazi` flavors
+* `yazi` markdown preview plugin
+* `delta` themes
+```sh
+git clone https://github.com/yazi-rs/flavors.git yazi/flavors
+git clone https://github.com/Reledia/glow.yazi yazi/plugins/glow.yazi
+curl https://raw.githubusercontent.com/dandavison/delta/main/themes.gitconfig > git/delta.themes.gitconfig
 ```
 
 # General
