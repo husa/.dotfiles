@@ -6,9 +6,16 @@ return {
     vim.o.timeoutlen = 150
   end,
   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
+    plugins = { spelling = true },
+    defaults = {
+      mode = { 'n', 'v' },
+      ["<leader>e"] = { name = "+explore" },
+      ["<leader>f"] = { name = "+file/find" },
+    }
+  },
+  config = function(_, opts)
+    local wk = require("which-key")
+    wk.setup(opts)
+    wk.register(opts.defaults)
+  end,
 }
-
