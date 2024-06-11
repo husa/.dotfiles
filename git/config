@@ -13,8 +13,10 @@
   st = status --short
   f = fetch
   fa = fetch --all --prune
-  d = !git diff --name-only --relative --diff-filter=d | xargs bat --diff
-  dc = !git diff --cached --name-only --relative --diff-filter=d | xargs bat --diff
+  # d = !git diff --name-only --relative --diff-filter=d | xargs bat --diff
+  # dc = !git diff --cached --name-only --relative --diff-filter=d | xargs bat --diff
+  d = diff
+  dc = diff --cached
   c = commit
   a = add
   history = log --graph --pretty=format:'%C(magenta)%h%Creset -%C(bold yellow)%d%Creset %s %C(cyan)(%ad) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=short --max-count=20 --date-order --all
@@ -26,8 +28,27 @@
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
 [core]
   editor = nvim
+  pager = delta
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+[interactive]
+  diffFilter = delta --color-only
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
+[include]
+    path = ~/.config/git/delta.themes.gitconfig
+
+[delta]
+  navigate = true     # use n and N to move between diff sections
+  side-by-side = true # side-by-side view
+  line-numbers = true
+  features = colibri 
+
