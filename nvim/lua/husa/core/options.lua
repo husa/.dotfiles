@@ -2,6 +2,9 @@ vim.cmd("let g:netrw_liststyle = 3")
 
 vim.cmd('language en_US')
 
+-- disable Netrw
+ vim.g.loaded_netrw = 1
+ vim.g.loaded_netrwPlugin = 1
 
 local opt = vim.opt
 
@@ -26,7 +29,7 @@ opt.cursorline = true
 -- (have to use iterm2 or any other true color terminal)
 opt.termguicolors = true
 opt.background = "dark" -- colorschemes that can be light or dark will be made dark
--- opt.signcolumn = "yes" -- show sign column so that text doesn't shift
+opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
