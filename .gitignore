@@ -3,3 +3,6 @@
 
 # Brew lock
 Brewfile.lock.json
+
+# temp stuff
+tmp
