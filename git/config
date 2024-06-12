@@ -1,8 +1,10 @@
 [user]
   name = husa
   email = 1536549+husa@users.noreply.github.com
+
 [init]
   defaultBranch = master
+
 [alias]
   pr = pull --rebase origin
   up = !git fetch --all --prune && git pull --rebase origin $(git symbolic-ref --short HEAD)
@@ -26,14 +28,22 @@
   undo = "!f() { echo 'Are you sure you want to revert your last commit?(y/n)'; read answer; case \"$answer\" in y) git reset --soft HEAD^ && echo "done";; n) echo 'as you wish';; *) f;; esac; }; f";
   aliases = "!git config -l | grep alias | cut -c 7- | tr '=' '\t\t'"
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+
 [core]
+  eol = lf
+  autocrlf = false
   editor = nvim
   pager = delta
+
+[pull]
+  rebase = true
+
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+
 [interactive]
   diffFilter = delta --color-only
 
