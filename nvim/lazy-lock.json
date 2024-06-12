@@ -5,6 +5,8 @@
   "lualine.nvim": { "branch": "master", "commit": "0a5a66803c7407767b799067986b4dc3036e1983" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "29f7c215332ba95e470811c380ddbce2cebe2af4" },
   "nui.nvim": { "branch": "main", "commit": "322978c734866996274467de084a95e4f9b5e0b1" },
+  "nvim-treesitter": { "branch": "master", "commit": "26171d8f105d97746371d1b6c07c8d88bf13fec2" },
+  "nvim-ts-autotag": { "branch": "main", "commit": "06fe07d7523ba8c755fac7c913fceba43b1720ee" },
   "nvim-web-devicons": { "branch": "master", "commit": "c0cfc1738361b5da1cd0a962dd6f774cc444f856" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "telescope.nvim": { "branch": "master", "commit": "f12b15e1b3a33524eb06a1ae7bc852fb1fd92197" },
