@@ -21,7 +21,7 @@
   dc = diff --cached
   c = commit
   a = add
-  history = log --graph --pretty=format:'%C(magenta)%h%Creset -%C(bold yellow)%d%Creset %s %C(cyan)(%ad) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=short --max-count=20 --date-order --all
+  history = log --graph --pretty=format:'%C(magenta)%h%Creset -%C(bold yellow)%d%Creset %s %C(cyan)(%ad) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=short --date-order --all
   unstage = reset HEAD
   h = !git history
   cleanup = "!git branch --merged | grep f.*/ | xargs git branch -d"
