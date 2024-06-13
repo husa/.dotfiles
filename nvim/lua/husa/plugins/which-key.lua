@@ -8,10 +8,11 @@ return {
   opts = {
     plugins = { spelling = true },
     defaults = {
-      mode = { 'n', 'v' },
+      mode = { "n", "v" },
       ["<leader>e"] = { name = "+explore" },
       ["<leader>f"] = { name = "+file/find" },
-    }
+      ["<leader>c"] = { name = "+code" },
+    },
   },
   config = function(_, opts)
     local wk = require("which-key")
