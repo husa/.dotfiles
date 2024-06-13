@@ -1,11 +1,12 @@
-return { 
+return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   dependencies = {
     "windwp/nvim-ts-autotag",
   },
-  config = function ()
+  config = function()
     local configs = require("nvim-treesitter.configs")
+
     configs.setup({
       sync_install = false,
       highlight = { enable = true },
@@ -29,10 +30,11 @@ return {
         "bash",
         "lua",
         "vim",
+        "vimdoc",
         "dockerfile",
         "gitignore",
         "diff",
       },
     })
-  end
+  end,
 }
