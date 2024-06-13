@@ -12,6 +12,8 @@ return {
         typescriptreact = { "prettier" },
         svelte = { "prettier" },
         css = { "prettier" },
+        scss = { "prettier" },
+        sass = { "prettier" },
         html = { "prettier" },
         json = { "prettier" },
         yaml = { "prettier" },
