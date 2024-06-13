@@ -3,8 +3,14 @@ vim.cmd("let g:netrw_liststyle = 3")
 vim.cmd('language en_US')
 
 -- disable Netrw
- vim.g.loaded_netrw = 1
- vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.filetype.add({
+  extension = {
+    styl = 'sass'
+  }
+})
 
 local opt = vim.opt
 
