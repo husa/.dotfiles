@@ -12,6 +12,7 @@ return {
       ["<leader>e"] = { name = "+explore" },
       ["<leader>f"] = { name = "+file/find" },
       ["<leader>c"] = { name = "+code" },
+      ["<leader>w"] = { name = "+windows" },
     },
   },
   config = function(_, opts)
