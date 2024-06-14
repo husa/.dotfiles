@@ -1,11 +1,22 @@
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
-vim.keymap.set("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
+local map = vim.keymap.set
+
+map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
+map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
 
 -- better indent
-vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("v", "<", "<gv")
+map("v", ">", ">gv")
+map("v", "<", "<gv")
 
-vim.keymap.set({ "n", "v" }, "<leader>wv", "<cmd>:vnew<cr>", { desc = "Split Vertically |" })
-vim.keymap.set({ "n", "v" }, "<leader>wh", "<cmd>:new<cr>", { desc = "Split Horizontally ---" })
+-- windows
+map({ "n", "v" }, "<leader>wv", "<cmd>vnew<cr>", { desc = "Split Vertically |" })
+map({ "n", "v" }, "<leader>wh", "<cmd>new<cr>", { desc = "Split Horizontally ---" })
+map("n", "<leader>w<Left>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+map("n", "<leader>w<Down>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+map("n", "<leader>w<Up>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+map("n", "<leader>w<Right>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
+-- utils
+map("n", "<leader>ul", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
