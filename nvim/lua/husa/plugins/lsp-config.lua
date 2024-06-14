@@ -85,35 +85,87 @@ return {
           capabilities = capabilities,
         })
       end,
-      ["svelte"] = function()
-        -- configure svelte server
-        lspconfig["svelte"].setup({
+      ["jsonls"] = function()
+        lspconfig["jsonls"].setup({
           capabilities = capabilities,
-          on_attach = function(client, bufnr)
-            vim.api.nvim_create_autocmd("BufWritePost", {
-              pattern = { "*.js", "*.ts" },
-              callback = function(ctx)
-                -- Here use ctx.match instead of ctx.file
-                client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-              end,
-            })
-          end,
+          settings = {
+            json = {
+              -- Schemas https://www.schemastore.org
+              schemas = {
+                {
+                  fileMatch = { "package.json" },
+                  url = "https://json.schemastore.org/package.json",
+                },
+                {
+                  fileMatch = { "tsconfig*.json" },
+                  url = "https://json.schemastore.org/tsconfig.json",
+                },
+                {
+                  fileMatch = {
+                    ".prettierrc",
+                    ".prettierrc.json",
+                    "prettier.config.json",
+                  },
+                  url = "https://json.schemastore.org/prettierrc.json",
+                },
+                {
+                  fileMatch = { ".eslintrc", ".eslintrc.json" },
+                  url = "https://json.schemastore.org/eslintrc.json",
+                },
+                {
+                  fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
+                  url = "https://json.schemastore.org/babelrc.json",
+                },
+                {
+                  fileMatch = { "lerna.json" },
+                  url = "https://json.schemastore.org/lerna.json",
+                },
+                {
+                  fileMatch = { "now.json", "vercel.json" },
+                  url = "https://json.schemastore.org/now.json",
+                },
+                {
+                  fileMatch = {
+                    ".stylelintrc",
+                    ".stylelintrc.json",
+                    "stylelint.config.json",
+                  },
+                  url = "http://json.schemastore.org/stylelintrc.json",
+                },
+              },
+            },
+          },
         })
       end,
-      ["graphql"] = function()
-        -- configure graphql language server
-        lspconfig["graphql"].setup({
-          capabilities = capabilities,
-          filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-        })
-      end,
-      ["emmet_ls"] = function()
-        -- configure emmet language server
-        lspconfig["emmet_ls"].setup({
-          capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-        })
-      end,
+      -- ["svelte"] = function()
+      --   -- configure svelte server
+      --   lspconfig["svelte"].setup({
+      --     capabilities = capabilities,
+      --     on_attach = function(client, bufnr)
+      --       vim.api.nvim_create_autocmd("BufWritePost", {
+      --         pattern = { "*.js", "*.ts" },
+      --         callback = function(ctx)
+      --           -- Here use ctx.match instead of ctx.file
+      --           client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+      --         end,
+      --       })
+      --     end,
+      --   })
+      -- end,
+      -- ["graphql"] = function()
+      --   -- configure graphql language server
+      --   lspconfig["graphql"].setup({
+      --     capabilities = capabilities,
+      --     filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+      --   })
+      -- end,
+      -- ["emmet_ls"] = function()
+      --   -- configure emmet language server
+      --   lspconfig["emmet_ls"].setup({
+      --     capabilities = capabilities,
+      --     filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+      --   })
+      -- end,
       ["lua_ls"] = function()
         -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
