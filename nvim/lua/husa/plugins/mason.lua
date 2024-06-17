@@ -19,6 +19,7 @@ return {
         "terraformls",
         "dockerls",
         "yamlls",
+        "emmet_ls",
       },
     })
     require("mason-tool-installer").setup({
