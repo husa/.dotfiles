@@ -137,6 +137,20 @@ return {
           },
         })
       end,
+      ["yamlls"] = function()
+        lspconfig["yamlls"].setup({
+          capabilities = capabilities,
+          settings = {
+            yaml = {
+              -- Schemas https://www.schemastore.org
+              schemas = {
+                kubernetes = "*.yaml",
+                ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+              },
+            },
+          },
+        })
+      end,
       -- ["svelte"] = function()
       --   -- configure svelte server
       --   lspconfig["svelte"].setup({

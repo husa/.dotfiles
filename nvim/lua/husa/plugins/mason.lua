@@ -17,6 +17,8 @@ return {
         "somesass_ls",
         "lua_ls",
         "terraformls",
+        "dockerls",
+        "yamlls",
       },
     })
     require("mason-tool-installer").setup({
