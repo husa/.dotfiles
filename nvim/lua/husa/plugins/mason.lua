@@ -16,6 +16,7 @@ return {
         "jsonls",
         "somesass_ls",
         "lua_ls",
+        "terraformls",
       },
     })
     require("mason-tool-installer").setup({

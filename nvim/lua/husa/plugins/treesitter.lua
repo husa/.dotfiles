@@ -34,6 +34,8 @@ return {
         "dockerfile",
         "gitignore",
         "diff",
+        "terraform",
+        "hcl",
       },
     })
   end,
