@@ -785,6 +785,11 @@ rules = [
     { name = "*.vcard", fg = "#ffffff" },
     { name = "*.vcf", fg = "#ffffff" },
     { name = "*.xln", fg = "#ffffff" },
+
+
+    # CUSTOM
+    { name = "*.drawio", fg = "#fba23f"},
+    { name = "*.drawio.bkp", fg = "#4e4e4e" },
 ]
 
 # : }}}
