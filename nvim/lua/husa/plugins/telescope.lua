@@ -9,11 +9,24 @@ return {
     { "<leader>fc", "<cmd>Telescope grep_string<cr>", desc = "Find string under cursor" },
     { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Find todos" },
   },
-  opts = {
-    defaults = {
-      file_ignore_patterns = {
-        "package%-lock%.json",
+  opts = function()
+    local actions = require("telescope.actions")
+    return {
+      defaults = {
+        mappings = {
+          i = {
+            ["<esc>"] = actions.close,
+          },
+        },
+        file_ignore_patterns = {
+          "package%-lock%.json",
+        },
       },
-    },
-  },
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+      },
+    }
+  end,
 }
