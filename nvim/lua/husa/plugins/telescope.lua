@@ -8,6 +8,7 @@ return {
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find buffers" },
     { "<leader>fc", "<cmd>Telescope grep_string<cr>", desc = "Find string under cursor" },
     { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Find todos" },
+    { "<leader>fr", "<cmd>Telescope resume <cr>", desc = "Resume last search" },
   },
   opts = function()
     local actions = require("telescope.actions")
