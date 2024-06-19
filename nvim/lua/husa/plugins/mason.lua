@@ -27,6 +27,7 @@ return {
         "prettier",
         "stylua",
         "eslint_d",
+        "tflint",
       },
     })
   end,
