@@ -1,16 +1,18 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
-  main = "ibl",
-  opts = {
-    scope = { enabled = false },
-    exclude = {
-      filetypes = {
-        "help",
-        "neotree",
-        "trouble",
-        "lazy",
-        "mason",
+  config = function()
+    require("ibl").setup({
+      scope = { enabled = true, char = "▎" },
+      indent = { char = "┊" },
+      exclude = {
+        filetypes = {
+          "help",
+          "neotree",
+          "trouble",
+          "lazy",
+          "mason",
+        },
       },
-    },
-  },
+    })
+  end,
 }
