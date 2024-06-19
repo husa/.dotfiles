@@ -15,8 +15,8 @@ return {
         hide_dotfiles = false,
         hide_gitignored = false,
         hide_by_name = {
-          '.git',
-          '.DS_Store',
+          ".git",
+          ".DS_Store",
         },
       },
       follow_current_file = {
@@ -28,13 +28,13 @@ return {
     window = {
       position = "left",
       mappings = {
-        ["<space>"] = "none"
-      }
-    }
+        ["<space>"] = "none",
+      },
+    },
   },
   keys = {
     { "<leader>ee", "<cmd>Neotree reveal toggle<CR>", desc = "File explorer" }, -- toggle file explorer
     { "<leader>eg", "<cmd>Neotree git_status toggle<CR>", desc = "Git explorer" }, -- toggle file explorer
-    { "<leader>eb", "<cmd>Neotree buffers toggle<CR>", desc = "Buffers explorer" } 
-  }
+    { "<leader>eb", "<cmd>Neotree buffers toggle<CR>", desc = "Buffers explorer" },
+  },
 }
