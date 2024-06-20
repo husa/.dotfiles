@@ -20,3 +20,6 @@ map("n", "<leader>w<Right>", "<C-w>l", { desc = "Go to Right Window", remap = tr
 -- utils
 map("n", "<leader>ul", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
+
+-- save file
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })

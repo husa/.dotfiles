@@ -23,12 +23,32 @@ return {
         enabled = true,
         leave_dirs_open = true,
       },
+      use_libuv_file_watcher = true,
     },
     hijack_netrw_behavior = "open_current",
     window = {
       position = "left",
       mappings = {
         ["<space>"] = "none",
+        ["<Right>"] = "open",
+        ["<Left>"] = "close_node",
+        ["l"] = "open",
+        ["h"] = "close_node",
+        ["P"] = { "toggle_preview", config = { use_float = false } },
+      },
+    },
+    default_component_configs = {
+      indent = {
+        with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+        expander_collapsed = "",
+        expander_expanded = "",
+        expander_highlight = "NeoTreeExpander",
+      },
+      git_status = {
+        symbols = {
+          unstaged = "󰄱",
+          staged = "󰱒",
+        },
       },
     },
   },
