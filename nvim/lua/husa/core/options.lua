@@ -1,6 +1,6 @@
 vim.cmd("let g:netrw_liststyle = 3")
 
-vim.cmd('language en_US')
+vim.cmd("language en_US")
 
 -- disable Netrw
 vim.g.loaded_netrw = 1
@@ -8,8 +8,8 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.filetype.add({
   extension = {
-    styl = 'sass'
-  }
+    styl = "sass",
+  },
 })
 
 local opt = vim.opt
@@ -50,3 +50,19 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- folding
+opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
+}
+opt.foldcolumn = "1"
+opt.foldenable = true
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
