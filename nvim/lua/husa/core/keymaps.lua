@@ -2,8 +2,8 @@ vim.g.mapleader = " "
 
 local map = vim.keymap.set
 
-map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
-map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
+-- map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
+-- map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
 
 -- better indent
 map("v", ">", ">gv")
