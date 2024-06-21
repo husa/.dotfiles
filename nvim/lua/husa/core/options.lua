@@ -66,3 +66,9 @@ opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+-- sessions
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+
+-- updatetime(trigger CursorHold to highlight matching word)
+opt.updatetime = 500
