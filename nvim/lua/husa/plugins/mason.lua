@@ -20,7 +20,7 @@ return {
         "dockerls",
         "yamlls",
         -- "emmet_ls",
-        "emmet_language_server",
+        -- "emmet_language_server",
       },
     })
     require("mason-tool-installer").setup({
