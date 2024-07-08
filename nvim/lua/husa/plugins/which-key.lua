@@ -9,11 +9,13 @@ return {
     plugins = { spelling = true },
     defaults = {
       mode = { "n", "v" },
+      ["<leader>b"] = { name = "+ Buffer" },
       ["<leader>e"] = { name = "+ Explore" },
       ["<leader>f"] = { name = "+ Find/file" },
       ["<leader>c"] = { name = "+ Code" },
       ["<leader>w"] = { name = "+ Window" },
       ["<leader>u"] = { name = "+ Utils/Tools" },
+      ["<leader>q"] = { name = "+ Quit/session" },
     },
   },
   config = function(_, opts)
