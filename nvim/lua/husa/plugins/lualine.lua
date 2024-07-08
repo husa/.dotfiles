@@ -7,7 +7,8 @@ return {
 
     lualine.setup({
       options = {
-        globalstatus = false,
+        globalstatus = true,
+        extensions = { "neo-tree", "lazy" },
       },
     })
   end,
