@@ -2,8 +2,10 @@ return {
   "nvim-telescope/telescope.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File" },
     { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find File" },
+    { "<leader>/", "<cmd>Telescope find_files<cr>", desc = "Find String" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find String" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Find Old Files" },
     { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find String" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers" },
