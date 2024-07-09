@@ -11,7 +11,7 @@ return {
       sync_install = false,
       highlight = { enable = true },
       indent = { enable = true },
-      autotag = { enable = true },
+      -- autotag = { enable = true }, -- autotag wants this removed
       ensure_installed = {
         "json",
         "javascript",
