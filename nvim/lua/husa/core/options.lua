@@ -72,3 +72,8 @@ opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "glob
 
 -- updatetime(trigger CursorHold to highlight matching word)
 opt.updatetime = 500
+
+-- spellcheck
+opt.spell = true
+opt.spelllang = "en"
+opt.spellsuggest = "best,9"
