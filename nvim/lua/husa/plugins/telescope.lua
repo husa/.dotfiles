@@ -3,7 +3,7 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
     { "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find File" },
-    { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Find String" },
+    { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find String" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File" },
     { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find String" },
     { "<leader>fo", "<cmd>Telescope oldfiles cwd_only=true<cr>", desc = "Find Old Files" },
