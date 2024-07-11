@@ -34,4 +34,9 @@ return {
     --     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
     -- end,
   },
+  keys = {
+    { "<leader>ugs", "<cmd>:Gitsigns toggle_signs<cr>", desc = "Toggle signs (GitSigns)" },
+    { "<leader>ugl", "<cmd>:Gitsigns toggle_linehl<cr>", desc = "Toggle line highlight (GitSigns)" },
+    { "<leader>ugn", "<cmd>:Gitsigns toggle_numhl<cr>", desc = "Toggle linenumbers highlight (GitSigns)" },
+  },
 }
