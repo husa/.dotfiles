@@ -62,7 +62,7 @@ opt.fillchars = {
   diff = "╱",
   eob = " ",
 }
-opt.foldcolumn = "1"
+opt.foldcolumn = "auto"
 opt.foldenable = true
 opt.foldlevel = 99
 opt.foldlevelstart = 99
