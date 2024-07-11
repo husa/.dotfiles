@@ -58,6 +58,20 @@ return {
           treesitter_context = true,
           which_key = true,
         },
+        highlight_overrides = {
+          all = function(colors)
+            return {
+              NormalMoody = { fg = colors.blue },
+              InsertMoody = { fg = colors.green },
+              VisualMoody = { fg = colors.pink },
+              CommandMoody = { fg = colors.maroon },
+              ReplaceMoody = { fg = colors.red },
+              SelectMoody = { fg = colors.pink },
+              TerminalMoody = { fg = colors.mauve },
+              TerminalNormalMoody = { fg = colors.mauve },
+            }
+          end,
+        },
       })
       vim.cmd("colorscheme catppuccin")
     end,
