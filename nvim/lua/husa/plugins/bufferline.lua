@@ -20,6 +20,7 @@ return {
     require("bufferline").setup({
       options = {
         always_show_bufferline = true,
+        separator_style = { " ", " " }, -- remove separators altogether, messes with transparency
         offsets = {
           {
             filetype = "neo-tree",
