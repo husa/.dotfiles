@@ -103,8 +103,8 @@ map("v", "<A-Down>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-Up>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- scroll
-map("n", "<S-Down>", "10j", { desc = "Scroll down and center" })
-map("n", "<S-Up>", "10k", { desc = "Scroll up and center" })
+map({ "n", "v" }, "<S-Down>", "10j", { desc = "Scroll down and center" })
+map({ "n", "v" }, "<S-Up>", "10k", { desc = "Scroll up and center" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
