@@ -32,6 +32,7 @@
 [core]
   eol = lf
   autocrlf = false
+  ignorecase = false
   editor = nvim
   pager = delta
 
