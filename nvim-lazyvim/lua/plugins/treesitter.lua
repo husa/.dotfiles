@@ -29,6 +29,7 @@ return {
       "terraform",
       "hcl",
       "java",
+      "sql",
     },
   },
 }
