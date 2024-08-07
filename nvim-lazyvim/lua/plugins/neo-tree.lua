@@ -9,6 +9,8 @@ return {
         hide_gitignored = false,
         hide_by_name = {
           ".git",
+        },
+        never_show = {
           ".DS_Store",
         },
       },
@@ -17,7 +19,6 @@ return {
       },
     },
     window = {
-      position = "left",
       mappings = {
         ["<Right>"] = "open",
         ["<Left>"] = "close_node",
