@@ -15,7 +15,7 @@ opt.wrap = true -- wrap by default
 vim.filetype.add({
   filename = {},
   pattern = {
-    [".*/git/config"] = "gitconfig",
-    [".*/.kube/config"] = "yaml",
+    ["git/config"] = "gitconfig",
+    [".*/%.kube/config"] = "yaml",
   },
 })
