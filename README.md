@@ -22,13 +22,16 @@ ln -sv (pwd)/fish $HOME/.config/fish
 ln -sv (pwd)/starship/starship.toml $HOME/.config/starship.toml
 ln -sv (pwd)/yazi $HOME/.config/yazi
 ln -sv (pwd)/nvim $HOME/.config/nvim
+ln -sv (pwd)/nvim-lazyvim $HOME/.config/nvim-lazyvim
+ln -sv (pwd)/wezterm $HOME/.config/wezterm
 ```
 
 ### 4. Install other stuff
 
-* `yazi` flavors
-* `yazi` markdown preview plugin
-* `delta` themes
+- `yazi` flavors
+- `yazi` markdown preview plugin
+- `delta` themes
+
 ```sh
 git clone https://github.com/yazi-rs/flavors.git yazi/flavors
 git clone https://github.com/Reledia/glow.yazi yazi/plugins/glow.yazi
@@ -37,21 +40,21 @@ curl https://raw.githubusercontent.com/dandavison/delta/main/themes.gitconfig > 
 
 # General
 
-* [iterm2](https://iterm2.com/) - terminal emulator
-* [homebrew](https://brew.sh/) - package manager
-* [fish](https://fishshell.com/) - shell
-* [starship](https://starship.rs/) - prompt
-* [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) - fonts with added glyphs, used - `font-fira-code-nerd-font`
+- [iterm2](https://iterm2.com/) - terminal emulator
+- [homebrew](https://brew.sh/) - package manager
+- [fish](https://fishshell.com/) - shell
+- [starship](https://starship.rs/) - prompt
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) - fonts with added glyphs, used - `font-fira-code-nerd-font`
 
 # Tools
 
-* [zoxide](https://github.com/ajeetdsouza/zoxide) - better `cd`
-* [eza](https://github.com/ajeetdsouza/zoxide) - better `ls`, fork of `exa`
-* [bat](https://github.com/sharkdp/bat) - better `cat`
-* [fzf](https://github.com/junegunn/fzf) - fuzzy search
-* [yazi](https://github.com/sxyazi/yazi) - file manager
-* [ripgrep](https://github.com/BurntSushi/ripgrep) - better `grep`
-* [fd](https://github.com/sharkdp/fd) - better `find`
-* [jq](https://github.com/jqlang/jq) - JSON traversal
-* [jnv](https://github.com/ynqa/jnv) - interactive `jq`
-* neovim - text editor
+- [zoxide](https://github.com/ajeetdsouza/zoxide) - better `cd`
+- [eza](https://github.com/ajeetdsouza/zoxide) - better `ls`, fork of `exa`
+- [bat](https://github.com/sharkdp/bat) - better `cat`
+- [fzf](https://github.com/junegunn/fzf) - fuzzy search
+- [yazi](https://github.com/sxyazi/yazi) - file manager
+- [ripgrep](https://github.com/BurntSushi/ripgrep) - better `grep`
+- [fd](https://github.com/sharkdp/fd) - better `find`
+- [jq](https://github.com/jqlang/jq) - JSON traversal
+- [jnv](https://github.com/ynqa/jnv) - interactive `jq`
+- neovim - text editor
