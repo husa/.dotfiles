@@ -7,11 +7,7 @@ return {
 
     -- add emoji support in markdown only
     cmp.setup.filetype({ "markdown" }, {
-      sources = {
-        { name = "buffer" },
-        { name = "path" },
-        { name = "emoji" },
-      },
+      sources = vim.tbl_extend("force", opts.sources, { { name = "emoji" } }),
     })
 
     -- complete with Tab(like usual IDEs)
