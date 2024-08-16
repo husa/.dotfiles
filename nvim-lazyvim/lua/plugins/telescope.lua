@@ -6,4 +6,21 @@ return {
 
     { "<leader>ut", "<cmd>Telescope filetypes<cr>", desc = "Filetype" },
   },
+  opts = {
+    defaults = {
+      mappings = {
+        i = {
+          ["<esc>"] = require("telescope.actions").close,
+        },
+      },
+      file_ignore_patterns = {
+        "package%-lock%.json",
+      },
+    },
+    pickers = {
+      find_files = {
+        hidden = true, -- show hidden files in results
+      },
+    },
+  },
 }
