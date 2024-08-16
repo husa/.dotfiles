@@ -16,3 +16,5 @@ map("v", "<A-Up>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 -- scroll
 map({ "n", "v" }, "<S-Down>", "10j", { desc = "Scroll down and center" })
 map({ "n", "v" }, "<S-Up>", "10k", { desc = "Scroll up and center" })
+
+map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
