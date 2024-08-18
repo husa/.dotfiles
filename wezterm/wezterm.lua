@@ -34,6 +34,9 @@ config.use_fancy_tab_bar = false
 -- 	window:set_right_status({ Text = "yoo" })
 -- end)
 
+config.cursor_blink_rate = 500
+config.cursor_thickness = "200%"
+
 wezterm.on("update-right-status", function(window, pane)
 	local date = wezterm.strftime("%Y-%m-%d %H:%M:%S")
 
