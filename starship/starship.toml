@@ -1,16 +1,45 @@
+format = """\
+$shell\
+$sudo\
+$all\
+$fill\
+$cmd_duration\
+$status\
+$time\
+$line_break\
+$character"""
+
+
+[fill]
+symbol = ' '
+
 [aws]
 disabled = true
 
 [time]
 disabled = false
 format = '[$time]($style) '
-style = 'yellow'
+style = 'yellow italic'
 
 [shell]
 disabled = false
 fish_indicator = "🐟"
-zsh_indicator = "\uf295"
+zsh_indicator = '\$'
 
+[character]
+success_symbol = "[ I [](green bg:none)](bold black bg:green)"
+error_symbol = "[ I [](green bg:none)](bold black bg:green)"
+vimcmd_symbol = "[ N [](blue bg:none)](bold black bg:blue)"
+vimcmd_visual_symbol = "[ V [](purple bg:none)](bold black bg:purple)"
+vimcmd_replace_one_symbol = "[ R [](cyan bg:none)](bold black bg:cyan)"
+vimcmd_replace_symbol = "[ R [](cyan bg:none)](bold black bg:cyan)"
+
+
+[status]
+disabled = false
+
+[sudo]
+disabled = false
 
 # No Runtime Versions Preset
 [bun]
