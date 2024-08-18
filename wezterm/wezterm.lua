@@ -37,6 +37,34 @@ config.use_fancy_tab_bar = false
 config.cursor_blink_rate = 500
 config.cursor_thickness = "200%"
 
+config.command_palette_font_size = 16
+
+config.keys = {
+	-- create "panes" as in iTerm
+	{
+		key = "d",
+		mods = "SUPER",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "D",
+		mods = "SUPER",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	-- close pane, then tab, then window
+	{
+		key = "w",
+		mods = "CMD",
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+	},
+	-- command palette(as in Sublime Text, waay too old)
+	{
+		key = "p",
+		mods = "SUPER|SHIFT",
+		action = wezterm.action.ActivateCommandPalette,
+	},
+}
+
 wezterm.on("update-right-status", function(window, pane)
 	local date = wezterm.strftime("%Y-%m-%d %H:%M:%S")
 
