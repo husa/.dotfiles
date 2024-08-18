@@ -7,7 +7,8 @@ $cmd_duration\
 $status\
 $time\
 $line_break\
-$character"""
+[❯](yellow ) """
+right_format = "$character"
 
 
 [fill]
@@ -27,12 +28,12 @@ fish_indicator = "🐟"
 zsh_indicator = '\$'
 
 [character]
-success_symbol = "[ I [](green bg:none)](bold black bg:green)"
-error_symbol = "[ I [](green bg:none)](bold black bg:green)"
-vimcmd_symbol = "[ N [](blue bg:none)](bold black bg:blue)"
-vimcmd_visual_symbol = "[ V [](purple bg:none)](bold black bg:purple)"
-vimcmd_replace_one_symbol = "[ R [](cyan bg:none)](bold black bg:cyan)"
-vimcmd_replace_symbol = "[ R [](cyan bg:none)](bold black bg:cyan)"
+success_symbol = "[[](green bg:none) INSERT ](bold black bg:prev_fg)"
+error_symbol = "[[](green bg:none) INSERT ](bold black bg:prev_fg)"
+vimcmd_symbol = "[[](blue bg:none) NORMAL ](bold black bg:prev_fg)"
+vimcmd_visual_symbol = "[[](purple bg:none) VISUAL ](bold black bg:prev_fg)"
+vimcmd_replace_one_symbol = "[[](cyan bg:none) REPLACE ONE ](bold black bg:prev_fg)"
+vimcmd_replace_symbol = "[[](cyan bg:none) REPLACE ](bold black bg:prev_fg)"
 
 
 [status]
