@@ -16,7 +16,7 @@ config.font_size = 14
 -- window appearance
 -- config.window_decorations = "MACOS_FORCE_ENABLE_SHADOW|INTEGRATED_BUTTONS|RESIZE"
 -- config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
-config.window_decorations = "RESIZE"
+config.window_decorations = "MACOS_FORCE_ENABLE_SHADOW|RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.enable_scroll_bar = true
 config.window_background_opacity = 0.9
@@ -28,7 +28,9 @@ config.hide_tab_bar_if_only_one_tab = false
 config.use_fancy_tab_bar = false
 config.prefer_to_spawn_tabs = true
 config.tab_max_width = 32
+config.tab_bar_at_bottom = false
 
+-- cursor
 config.cursor_blink_rate = 500
 config.cursor_thickness = "200%"
 
