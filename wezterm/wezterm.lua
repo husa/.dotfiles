@@ -6,6 +6,7 @@ local config = wezterm.config_builder()
 config.default_prog = { "/usr/local/bin/fish", "-l" }
 
 -- colorscheme
+-- config.color_scheme = "Catppuccin Mocha (Gogh)" -- black tabs
 config.color_scheme = "Catppuccin Mocha"
 
 -- font
@@ -25,14 +26,8 @@ config.macos_window_background_blur = 40
 config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
 config.use_fancy_tab_bar = false
-
--- experiment
-
--- wezterm.on("update-right-status", function(window)
--- 	local cwd = window:get_current_tab().cwd
--- 	local cwd_uri = cwd
--- 	window:set_right_status({ Text = "yoo" })
--- end)
+config.prefer_to_spawn_tabs = true
+config.tab_max_width = 32
 
 config.cursor_blink_rate = 500
 config.cursor_thickness = "200%"
@@ -63,16 +58,24 @@ config.keys = {
 		mods = "SUPER|SHIFT",
 		action = wezterm.action.ActivateCommandPalette,
 	},
+	-- pane selection
+	{
+		key = "p",
+		mods = "SUPER",
+		action = wezterm.action.PaneSelect,
+	},
 }
 
-wezterm.on("update-right-status", function(window, pane)
-	local date = wezterm.strftime("%Y-%m-%d %H:%M:%S")
+-- status
+config.status_update_interval = 1000
+wezterm.on("update-status", function(window, pane)
+	local ws = window:active_workspace()
+	local kt = window:active_key_table()
 
 	-- Make it italic and underlined
 	window:set_right_status(wezterm.format({
-		{ Attribute = { Underline = "Single" } },
 		{ Attribute = { Italic = true } },
-		{ Text = "Hello " .. date },
+		{ Text = ws .. kt },
 	}))
 end)
 
