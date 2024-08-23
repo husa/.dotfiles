@@ -71,13 +71,22 @@ config.keys = {
 -- status
 config.status_update_interval = 1000
 wezterm.on("update-status", function(window, pane)
-	local ws = window:active_workspace()
-	local kt = window:active_key_table()
+	local status = ""
+	-- current workspace and number of workspaces
+	status = wezterm.nerdfonts.oct_table .. " " .. window:active_workspace()
+	local numberOfWorkspaces = #wezterm.mux.get_workspace_names()
+	if numberOfWorkspaces > 1 then
+		status = status .. " [" .. numberOfWorkspaces .. "]"
+	end
+	-- active key table
+	if window:active_key_table() then
+		status = status .. window:active_key_table()
+	end
 
-	-- Make it italic and underlined
+	-- make it italic
 	window:set_right_status(wezterm.format({
 		{ Attribute = { Italic = true } },
-		{ Text = ws .. kt },
+		{ Text = status .. " " },
 	}))
 end)
 
