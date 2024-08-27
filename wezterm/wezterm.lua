@@ -34,6 +34,13 @@ config.tab_bar_at_bottom = false
 config.cursor_blink_rate = 500
 config.cursor_thickness = "200%"
 
+-- inactive panes
+config.inactive_pane_hsb = {
+	saturation = 0.7,
+	brightness = 0.3,
+}
+
+-- command palette
 config.command_palette_font_size = 16
 
 config.keys = {
