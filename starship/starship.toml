@@ -12,6 +12,9 @@ $line_break\
 $character"""
 
 
+[username]
+disabled = true
+
 [fill]
 symbol = ' '
 
