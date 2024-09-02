@@ -50,6 +50,9 @@ disabled = false
 [git_branch]
 symbol = " "
 
+[git_metrics]
+disabled = false
+
 [package]
 symbol = "󰏗 "
 
