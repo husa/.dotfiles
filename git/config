@@ -21,9 +21,13 @@
   dc = diff --cached
   c = commit
   a = add
-  history = log --graph --date short --date-order --pretty=format:'%C(auto)%h %d %s %C(cyan) %ad %C(cyan bold) %an'
-  unstage = reset HEAD
+  # log/history
+  # one-line graph with date and author
+  history = log --graph --all --date short --date-order --pretty=format:'%C(auto)%h %d %s %C(cyan) %ad %C(cyan bold) %an'
   h = !git history
+  # minimal one-line
+  hs = log --graph --all --oneline
+  unstage = reset HEAD
   cleanup = "!git branch --merged | grep f.*/ | xargs git branch -d"
   undo = "!f() { echo 'Are you sure you want to revert your last commit?(y/n)'; read answer; case \"$answer\" in y) git reset --soft HEAD^ && echo "done";; n) echo 'as you wish';; *) f;; esac; }; f";
   aliases = "!git config -l | grep alias | cut -c 7- | tr '=' '\t\t'"
