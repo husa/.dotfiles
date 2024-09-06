@@ -18,3 +18,7 @@ map({ "n", "v" }, "<S-Down>", "10j", { desc = "Scroll down and center" })
 map({ "n", "v" }, "<S-Up>", "10k", { desc = "Scroll up and center" })
 
 map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
+
+-- find and center
+map("n", "n", "nzzzv", { desc = "Find next and center" })
+map("n", "N", "Nzzzv", { desc = "Find previous and center" })
