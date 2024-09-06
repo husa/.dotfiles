@@ -22,3 +22,6 @@ map("n", "<leader>d", LazyVim.ui.bufremove, { desc = "Delete Buffer" })
 -- find and center
 map("n", "n", "nzzzv", { desc = "Find next and center" })
 map("n", "N", "Nzzzv", { desc = "Find previous and center" })
+
+-- delete single character without copying into register
+map({ "n", "v" }, "x", '"_x', { desc = "Delete single character" })
