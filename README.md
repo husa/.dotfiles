@@ -24,6 +24,13 @@ ln -sv (pwd)/yazi $HOME/.config/yazi
 ln -sv (pwd)/nvim $HOME/.config/nvim
 ln -sv (pwd)/nvim-lazyvim $HOME/.config/nvim-lazyvim
 ln -sv (pwd)/wezterm $HOME/.config/wezterm
+ln -sv (pwd)/hammerspoon $HOME/.config/hammerspoon
+```
+
+change default hammerspoon config location
+
+```sh
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 ```
 
 ### 4. Install other stuff
