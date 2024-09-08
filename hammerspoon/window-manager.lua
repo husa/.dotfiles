@@ -1,7 +1,7 @@
 hs.window.animationDuration = 0
 
 -- move between windows
-local windowNavLeader = { "cmd", "alt", "ctrl" }
+local windowNavLeader = { "alt", "ctrl" }
 hs.hotkey.bind(windowNavLeader, "left", function()
 	local win = hs.window.focusedWindow()
 	win:focusWindowWest()
@@ -20,17 +20,36 @@ hs.hotkey.bind(windowNavLeader, "right", function()
 end)
 
 -- resize windows
-local windowResizeLeader = { "alt", "ctrl" }
+local windowResizeLeader = { "alt", "ctrl", "shift" }
 -- fullscreen
+-- TODO: this map will grow infinitely, memory leak!!!
+local windowSizeBeforeFullscreen = {}
+
+local eqWithTolerance = function(tolerance)
+	return function(a, b)
+		return math.abs(a - b) <= tolerance
+	end
+end
+local eq = eqWithTolerance(2)
 hs.hotkey.bind(windowResizeLeader, "return", function()
-	-- TODO: consider saving/restoring windows size/position
 	local win = hs.window.focusedWindow()
+	local id = win:id()
 	local winFrame = win:frame()
 	local screen = win:screen()
 	local screenFrame = screen:frame()
-	print(winFrame, screenFrame)
-	winFrame = screenFrame
-	win:setFrame(winFrame, 0)
+	local isFullScreen = eq(winFrame.w, screenFrame.w) and eq(winFrame.h, screenFrame.h)
+
+	if not isFullScreen then
+		-- store current frame for restoration and fullscreen
+		windowSizeBeforeFullscreen[id] = winFrame
+		winFrame = screenFrame
+		win:setFrame(winFrame, 0)
+	else
+		-- try to restore frame
+		if windowSizeBeforeFullscreen[id] then
+			win:setFrame(windowSizeBeforeFullscreen[id], 0)
+		end
+	end
 end)
 -- halves
 hs.hotkey.bind(windowResizeLeader, "left", function()
