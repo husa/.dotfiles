@@ -1,5 +1,8 @@
 require("window-manager")
 
+local bindHotkey = require("bind-hotkey")
+bindHotkey("WezTerm", "cmd", "escape")
+
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
 	hs.reload()
 end)
