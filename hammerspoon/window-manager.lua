@@ -22,7 +22,6 @@ end)
 -- resize windows
 local windowResizeLeader = { "alt", "ctrl", "shift" }
 -- fullscreen
--- TODO: this map will grow infinitely, memory leak!!!
 local windowSizeBeforeFullscreen = {}
 
 local eqWithTolerance = function(tolerance)
@@ -51,6 +50,15 @@ hs.hotkey.bind(windowResizeLeader, "return", function()
 		end
 	end
 end)
+-- clear cached window size on window close
+-- NOTE: this "filter" is damn slow to initalize
+hs.window.filter.default:subscribe(hs.window.filter.windowDestroyed, function(win)
+	local id = win:id()
+	if windowSizeBeforeFullscreen[id] then
+		windowSizeBeforeFullscreen[id] = nil
+	end
+end)
+
 -- halves
 hs.hotkey.bind(windowResizeLeader, "left", function()
 	local win = hs.window.focusedWindow()
