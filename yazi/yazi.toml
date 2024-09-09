@@ -6,22 +6,11 @@ linemode = "mtime"
 tab_size = 2
 
 [opener]
-vscode = [
-  { run = 'code "$@"', block = false, orphan = true, desc = "Open in VSCode" }
-]
-
-[open]
-# override default rules
-# defualt rules - https://github.com/sxyazi/yazi/blob/latest/yazi-config/preset/yazi.toml#L54
-# should be "append_rules", but current version doesn't support it
-rules = [
-  { name = "*/", use = [ "edit", "open", "vscode", "reveal" ] },
-  { mime = "text/*", use = [ "edit", "vscode", "reveal" ] },
-  { mime = "application/json", use = [ "edit", "vscode", "reveal" ] },
-  { mime = "*", use = [ "open", "edit", "reveal" ] },
+edit = [
+  { run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true },
+  { run = 'code "$@"', block = false, orphan = true, desc = "Open in VSCode" },
+  { run = 'NVIM_APPNAME=nvim-lazyvim neovide "$@"', block = false, orphan = true, desc = "Open in Neovide(LazyVim)" },
 ]
 
 [plugin]
-prepend_previewers = [
-  { name = "*.md", run = "glow" },
-]
+prepend_previewers = [{ name = "*.md", run = "glow" }]
