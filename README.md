@@ -5,7 +5,7 @@
 ### 1. Clone repo into your `$HOME` dir
 
 ```sh
-git clone git@github.com:husa/.dotfiles.git
+git clone git@github.com:husa/.dotfiles.git ~/.dotfiles
 ```
 
 ### 2. Install stuff
@@ -47,10 +47,12 @@ curl https://raw.githubusercontent.com/dandavison/delta/main/themes.gitconfig > 
 
 # General
 
-- [iterm2](https://iterm2.com/) - terminal emulator
+- ~~[iterm2](https://iterm2.com/) - terminal emulator~~
+- [wewzterm](https://wezfurlong.org/wezterm/index.html) - terminal emulator
 - [homebrew](https://brew.sh/) - package manager
 - [fish](https://fishshell.com/) - shell
 - [starship](https://starship.rs/) - prompt
+- [hammerspoon](https://www.hammerspoon.org/) - macos automation tool
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) - fonts with added glyphs, used - `font-fira-code-nerd-font`
 
 # Tools
@@ -64,4 +66,4 @@ curl https://raw.githubusercontent.com/dandavison/delta/main/themes.gitconfig > 
 - [fd](https://github.com/sharkdp/fd) - better `find`
 - [jq](https://github.com/jqlang/jq) - JSON traversal
 - [jnv](https://github.com/ynqa/jnv) - interactive `jq`
-- neovim - text editor
+- [neovim](https://neovim.io/) - text editor
