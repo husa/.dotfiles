@@ -35,13 +35,11 @@ defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/i
 
 ### 4. Install other stuff
 
-- `yazi` flavors
-- `yazi` markdown preview plugin
+- `yazi` flavors and plugins
 - `delta` themes
 
 ```sh
-git clone https://github.com/yazi-rs/flavors.git yazi/flavors
-git clone https://github.com/Reledia/glow.yazi yazi/plugins/glow.yazi
+ya pack -i
 curl https://raw.githubusercontent.com/dandavison/delta/main/themes.gitconfig > git/delta.themes.gitconfig
 ```
 
