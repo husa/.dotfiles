@@ -3,25 +3,6 @@ local window = require("hs.window")
 
 window.animationDuration = 0
 
--- move between windows
-local windowNavLeader = { "alt", "ctrl" }
-hotkey.bind(windowNavLeader, "left", function()
-  local win = window.focusedWindow()
-  win:focusWindowWest()
-end)
-hotkey.bind(windowNavLeader, "down", function()
-  local win = window.focusedWindow()
-  win:focusWindowSouth()
-end)
-hotkey.bind(windowNavLeader, "up", function()
-  local win = window.focusedWindow()
-  win:focusWindowNorth()
-end)
-hotkey.bind(windowNavLeader, "right", function()
-  local win = window.focusedWindow()
-  win:focusWindowEast()
-end)
-
 -- resize windows
 local windowResizeLeader = { "alt", "ctrl", "shift" }
 -- fullscreen
