@@ -24,5 +24,8 @@ spoon.MiroWindowsManager:bindHotkeys({
 -- window navigation
 require("window-navigation")
 
+-- modal application launcher
+require("app-launcher")
+
 -- display total config load time
 hs.alert.show("Config loaded in " .. os.time() - startTime .. "s")
