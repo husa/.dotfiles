@@ -65,11 +65,18 @@ local apps = {
     desc = "󰮤 Alfred",
     color = { hex = catpuccinPalette.pink },
   },
-  { key = "/", app = "Admin By Request", desc = "󱥡 Admin By Request", color = { hex = catpuccinPalette.peach } },
+  {
+    key = "1",
+    modifier = { "shift" },
+    app = "Admin By Request",
+    keySymbol = "!",
+    desc = "󱥡 Admin By Request",
+    color = { hex = catpuccinPalette.peach },
+  },
 }
 
 local NUMBER_OF_COLUMNS = 2
-local OVERLAY_WIDTH_FRACTION = "3"
+local OVERLAY_WIDTH_FRACTION = "4"
 local FONT_SIZE = 18
 local LINE_HEIGHT = 28
 local PADDING_Y = 8
@@ -82,7 +89,6 @@ local remainingRows = #apps - rowsPerColumn * NUMBER_OF_COLUMNS
 
 local maxRowsInCol = rowsPerColumn + remainingRows
 local screenFrame = hs.screen.mainScreen():frame()
-print(screenFrame.w .. screenFrame.h)
 
 -- overlay canvas
 local overlayWidth = screenFrame.w / OVERLAY_WIDTH_FRACTION
@@ -212,7 +218,7 @@ for i = 1, #apps do
     modifier = ""
   end
   modal:bind(modifier, appConfig.key, nil, function()
-    application.launchOrFocus(appConfig.app)
     modal:exit()
+    application.launchOrFocus(appConfig.app)
   end)
 end
