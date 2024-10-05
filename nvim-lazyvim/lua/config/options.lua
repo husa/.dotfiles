@@ -7,7 +7,8 @@ if vim.g.neovide then
 end
 
 vim.g.neovide_window_blurred = true
-vim.g.neovide_transparency = 0.85
+-- disable transparency as neovide loses window shadow when it's enabled
+-- vim.g.neovide_transparency = 0.85
 
 -- LazyVim
 -- disable root detection(not convenient when editing multi-language dirs, like this ".dotfiles" one)
