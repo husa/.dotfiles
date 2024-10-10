@@ -73,6 +73,12 @@ config.keys = {
 		mods = "SUPER",
 		action = wezterm.action.PaneSelect,
 	},
+	-- disable full-screen toggle by ALT+Enter
+	{
+		key = "Enter",
+		mods = "ALT",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
 }
 
 -- status

@@ -25,3 +25,13 @@ map("n", "N", "Nzzzv", { desc = "Find previous and center" })
 
 -- delete single character without copying into register
 map({ "n", "v" }, "x", '"_x', { desc = "Delete single character" })
+
+-- "natural" navigation by words using Alt
+map("n", "<A-Left>", "b")
+map("n", "<A-Right>", "e")
+map("i", "<A-Left>", "<C-o>b")
+map("i", "<A-Right>", "<C-o>e")
+
+-- insert newline in insert mode, same as <A-o> and <S-A-o>
+map("i", "<A-cr>", "<C-o>o", { desc = "Append line and enter" })
+map("i", "<S-A-cr>", "<C-o>O", { desc = "Prepend line and enter" })
