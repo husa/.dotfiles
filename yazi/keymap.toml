@@ -1,9 +1,16 @@
 [manager]
 append_keymap = [
-  { on = [
-    'g',
-    'b',
-  ], run = 'cd ~/.Trash', desc = "Go to Trash" },
+  # directories shortcuts
+  { on = ['g', 'b'], run = 'cd ~/.Trash', desc = "Go to Trash" },
+  { on = ['g', '.'], run = 'cd ~/.dotfiles', desc = "Go to .dotfiles" },
+  { on = ['g', 'p'], run = 'cd ~/Projects', desc = "Go to Projects" },
+
+  # navigation
   { on = "<S-Up>", run = "arrow -5", desc = "Move cursor 10 lines up" },
   { on = "<S-Down>", run = "arrow 5", desc = "Move cursor 10 lines down" },
+  #
+  # WFT! Shift works with arrow keys, but not PageUp/Down, Enter, etc.
+  #
+  # # testing
+  # { on = "<S-PageUp>", run = "arrow -1", desc = "testing" },
 ]
