@@ -20,6 +20,15 @@ vim.g.root_spec = { "cwd" }
 -- wrapping
 opt.wrap = true -- wrap by default
 
+opt.list = true
+opt.listchars = {
+  trail = "·",
+  lead = "·", -- TODO: think how to deal with indent-blankline
+  tab = ">-",
+  extends = ">",
+  precedes = "<",
+}
+
 -- Custom filetypes
 vim.filetype.add({
   filename = {},
