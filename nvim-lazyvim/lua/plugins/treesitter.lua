@@ -29,6 +29,7 @@ return {
       "hcl",
       "java",
       "sql",
+      "properties",
     },
   },
 }
