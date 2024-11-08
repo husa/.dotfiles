@@ -2,6 +2,14 @@ local hotkey = require("hs.hotkey")
 local application = require("hs.application")
 local canvas = require("hs.canvas")
 
+-- helper functions
+local setImmediate = function(fn)
+  hs.timer.doAfter(0, function()
+    fn()
+  end)
+end
+
+-- configuration
 local catpuccinPalette = {
   rosewater = "#f5e0dc",
   flamingo = "#f2cdcd",
@@ -76,7 +84,7 @@ local apps = {
 }
 
 local NUMBER_OF_COLUMNS = 2
-local OVERLAY_WIDTH_FRACTION = "4"
+local OVERLAY_WIDTH_FRACTION = "3"
 local FONT_SIZE = 18
 local LINE_HEIGHT = 28
 local PADDING_Y = 8
@@ -195,7 +203,9 @@ end
 -- register modal key
 local modal = hotkey.modal.new({ "alt" }, "space")
 function modal:entered()
-  overlay:show()
+  setImmediate(function()
+    overlay:show()
+  end)
 end
 function modal:exited()
   overlay:hide()
@@ -203,10 +213,6 @@ end
 
 modal:bind("", "escape", function()
   print("<Esc> pressed. Exiting mode...")
-  modal:exit()
-end)
-modal:bind("shift", "space", function()
-  print("Shift+space pressed. Exiting mode...")
   modal:exit()
 end)
 
@@ -219,6 +225,8 @@ for i = 1, #apps do
   end
   modal:bind(modifier, appConfig.key, nil, function()
     modal:exit()
-    application.launchOrFocus(appConfig.app)
+    setImmediate(function()
+      application.launchOrFocus(appConfig.app)
+    end)
   end)
 end
