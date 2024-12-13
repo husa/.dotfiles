@@ -12,10 +12,12 @@ vim.filetype.add({
   },
 })
 
-local opt = vim.opt
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
+local opt = vim.opt
+
+opt.confirm = true -- get confirmation on :q and similar
 
 opt.relativenumber = true
 opt.number = true
