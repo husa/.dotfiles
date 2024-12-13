@@ -7,7 +7,7 @@ tab_size = 2
 
 [opener]
 edit = [
-  { run = 'NVIM_APPNAME=nvim-lazyvim nvim "$@"', desc = "Open in nvim", block = true },
+  { run = 'nvim "$@"', desc = "Open in nvim", block = true },
   { run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true },
   { run = 'code "$@"', block = false, orphan = true, desc = "Open in VSCode" },
   { run = 'NVIM_APPNAME=nvim-lazyvim neovide "$@"', block = false, orphan = true, desc = "Open in Neovide(LazyVim)" },

@@ -1,3 +1,1 @@
-require('husa.core')
-require('husa.lazy')
-
+require('config')
