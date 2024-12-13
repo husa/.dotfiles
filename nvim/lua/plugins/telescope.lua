@@ -21,6 +21,15 @@ return {
     { "<leader>fr", "<cmd>Telescope resume<cr>", desc = "Resume Last Search" },
     { "<leader>fT", "<cmd>Telescope<cr>", desc = "Telescope" },
     {
+      "<leader>fp",
+      function()
+        require("telescope.builtin").find_files({
+          cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
+        })
+      end,
+      desc = "Plugins",
+    },
+    {
       "<leader>fc",
       function()
         require("telescope.builtin").find_files({
