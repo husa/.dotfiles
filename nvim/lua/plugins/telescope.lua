@@ -25,6 +25,7 @@ return {
       function()
         require("telescope.builtin").find_files({
           cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
+          hidden = false,
         })
       end,
       desc = "Plugins",
