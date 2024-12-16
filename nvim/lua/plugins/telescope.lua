@@ -98,6 +98,7 @@ return {
         },
         file_ignore_patterns = {
           "package%-lock%.json",
+          ".git/*",
         },
       },
       pickers = {
