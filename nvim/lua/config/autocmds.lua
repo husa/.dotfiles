@@ -23,6 +23,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "CmdlineEn
   end,
 })
 
+-- Delete empty buffers  automatically, such as after :enew
 local empty_buf_delete_augroup = vim.api.nvim_create_augroup("emptybufdelete", {})
 vim.api.nvim_create_autocmd({ "BufLeave" }, {
   pattern = "*",
@@ -42,6 +43,24 @@ vim.api.nvim_create_autocmd({ "BufLeave" }, {
           print("deleted empty bufffer")
         end
       end
+    end
+  end,
+})
+
+-- open telescope by default instead of netrw
+-- https://github.com/nvim-telescope/telescope.nvim/issues/2806
+local find_files_on_startup = vim.api.nvim_create_augroup("find_files_on_startup", { clear = true })
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = find_files_on_startup,
+  pattern = "*",
+  callback = function()
+    if vim.fn.isdirectory(vim.fn.expand("%:p")) ~= 0 then
+      -- open Telescope
+      -- local current_dir = vim.fn.expand("%:p:h")
+      -- require("telescope.builtin").find_files({ cwd = current_dir })
+
+      -- open Dashboard
+      Snacks.dashboard.open()
     end
   end,
 })
