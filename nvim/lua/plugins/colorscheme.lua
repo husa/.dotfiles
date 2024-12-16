@@ -19,6 +19,7 @@ return {
           Pmenu = { bg = colors.surface0 }, -- popups(autocomplete)
         }
       end,
+      integrations = { blink_cmp = true },
     })
     vim.cmd.colorscheme("catppuccin")
   end,
