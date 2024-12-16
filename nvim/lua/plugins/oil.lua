@@ -2,7 +2,8 @@ return {
   "stevearc/oil.nvim",
   version = "*",
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
-  -- command = "Oil",
+  command = "Oil",
+  event = "VeryLazy", -- uncomment, to replace this way
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
