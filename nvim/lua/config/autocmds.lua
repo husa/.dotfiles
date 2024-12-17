@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
   group = startup,
   pattern = "*",
   callback = function()
-    if vim.fn.isdirectory(vim.fn.expand("%:p")) ~= 0 then
+    if vim.fn.isdirectory(vim.fn.expand("%:p")) ~= 0 or vim.fn.argc() == 0 and not vim.g.started_with_stdin then
       -- open Telescope
       -- local current_dir = vim.fn.expand("%:p:h")
       -- require("telescope.builtin").find_files({ cwd = current_dir })
