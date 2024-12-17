@@ -47,11 +47,11 @@ vim.api.nvim_create_autocmd({ "BufLeave" }, {
   end,
 })
 
--- open telescope by default instead of netrw
+-- open telescope/dashboard/restore session by default instead of netrw
 -- https://github.com/nvim-telescope/telescope.nvim/issues/2806
-local find_files_on_startup = vim.api.nvim_create_augroup("find_files_on_startup", { clear = true })
+local startup = vim.api.nvim_create_augroup("startup", { clear = true })
 vim.api.nvim_create_autocmd("VimEnter", {
-  group = find_files_on_startup,
+  group = startup,
   pattern = "*",
   callback = function()
     if vim.fn.isdirectory(vim.fn.expand("%:p")) ~= 0 then
@@ -60,7 +60,27 @@ vim.api.nvim_create_autocmd("VimEnter", {
       -- require("telescope.builtin").find_files({ cwd = current_dir })
 
       -- open Dashboard
-      Snacks.dashboard.open()
+      -- Snacks.dashboard.open()
+
+      -- load last session
+      require("persistence").load()
     end
   end,
+  nested = true,
 })
+
+-- auto load last session for current_dir
+-- from https://github.com/folke/persistence.nvim/issues/13
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   group = vim.api.nvim_create_augroup("persistence", { clear = true }),
+--   callback = function()
+--     -- NOTE: Before restoring the session, check:
+--     -- 1. No arg passed when opening nvim, means no `nvim --some-arg ./some-path`
+--     -- 2. No pipe, e.g. `echo "Hello world" | nvim`
+--     if vim.fn.argc() == 0 and not vim.g.started_with_stdin then
+--       require("persistence").load()
+--     end
+--   end,
+--   -- HACK: need to enable `nested` otherwise the current buffer will not have a filetype(no syntax)
+--   nested = true,
+-- })
