@@ -19,6 +19,8 @@ local opt = vim.opt
 
 opt.confirm = true -- get confirmation on :q and similar
 
+opt.undofile = true -- save undo history
+
 opt.relativenumber = true
 opt.number = true
 
