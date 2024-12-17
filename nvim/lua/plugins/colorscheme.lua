@@ -10,6 +10,7 @@ return {
     if vim.g.neovide then
       transparent_background = false
     end
+
     require("catppuccin").setup({
       transparent_background = transparent_background,
       custom_highlights = function(colors)
@@ -17,6 +18,7 @@ return {
           -- force solid background
           Folded = { bg = colors.surface1 }, -- folds
           Pmenu = { bg = colors.surface0 }, -- popups(autocomplete)
+          NormalFloat = { fg = colors.text, bg = colors.mantle }, -- floating windows/popups
         }
       end,
       integrations = { blink_cmp = true },
