@@ -1,6 +1,10 @@
 return {
   "leath-dub/snipe.nvim",
-  opts = {},
+  opts = {
+    ui = {
+      text_align = "file-first",
+    },
+  },
   keys = {
     {
       "<leader>v",

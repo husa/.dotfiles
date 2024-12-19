@@ -26,7 +26,6 @@ local open_gitui = function()
 
   vim.fn.termopen("gitui -l", {
     on_exit = function()
-      print("on exit")
       vim.api.nvim_win_close(win_id, true)
       vim.api.nvim_buf_delete(buffer, { force = true })
     end,
