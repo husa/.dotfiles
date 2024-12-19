@@ -17,6 +17,8 @@ vim.g.maplocalleader = "\\"
 
 local opt = vim.opt
 
+-- opt.cmdheight = 0
+
 opt.confirm = true -- get confirmation on :q and similar
 
 opt.undofile = true -- save undo history
