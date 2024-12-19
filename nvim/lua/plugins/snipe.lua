@@ -1,10 +1,6 @@
 return {
   "leath-dub/snipe.nvim",
-  opts = {
-    ui = {
-      text_align = "file-first",
-    },
-  },
+  version = "*",
   keys = {
     {
       "<leader>v",
@@ -14,4 +10,15 @@ return {
       desc = "Open Snipe buffer menu",
     },
   },
+  config = function()
+    require("snipe").setup({
+      ui = {
+        text_align = "file-first",
+        open_win_override = {
+          border = "rounded",
+        },
+        preselect = require("snipe").preselect_by_classifier("#"),
+      },
+    })
+  end,
 }
