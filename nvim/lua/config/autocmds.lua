@@ -69,6 +69,30 @@ vim.api.nvim_create_autocmd("VimEnter", {
   nested = true,
 })
 
+-- highlight CursorLineNr with mode colors from lualine
+local set_cursorlinenr_highlight_based_on_mode = function()
+  local modes_map = {
+    n = "normal",
+    i = "insert",
+    v = "visual",
+    V = "visual",
+    c = "command",
+    R = "replace",
+  }
+  local mode = vim.api.nvim_get_mode().mode
+  local hl_name = modes_map[mode] or "normal"
+  vim.api.nvim_set_hl(0, "CursorLineNr", { link = "lualine_b_" .. hl_name })
+end
+local cursorlinenr_hightlight_augroup = vim.api.nvim_create_augroup("cursorlinenrhighlight", {})
+vim.api.nvim_create_autocmd("ModeChanged", {
+  group = cursorlinenr_hightlight_augroup,
+  callback = set_cursorlinenr_highlight_based_on_mode,
+})
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = cursorlinenr_hightlight_augroup,
+  callback = set_cursorlinenr_highlight_based_on_mode,
+})
+
 -- auto load last session for current_dir
 -- from https://github.com/folke/persistence.nvim/issues/13
 -- vim.api.nvim_create_autocmd("VimEnter", {
