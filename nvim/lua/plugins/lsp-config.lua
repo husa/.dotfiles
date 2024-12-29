@@ -7,6 +7,16 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "saghen/blink.cmp",
+    {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      cmd = "LazyDev",
+      opts = {
+        library = {
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+      },
+    },
   },
   config = function()
     local language_servers = {

@@ -20,23 +20,41 @@ return {
       nerd_font_variant = "mono",
     },
 
-    sources = {
-      completion = {
-        enabled_providers = { "lsp", "path", "snippets", "buffer" },
-      },
-    },
+    -- sources = {
+    --   completion = {
+    --     enabled_providers = { "lsp", "path", "snippets", "buffer" },
+    --   },
+    -- },
 
     -- experimental auto-brackets support
     completion = {
-      accept = { auto_brackets = { enabled = true } },
+      -- accept = { auto_brackets = { enabled = true } },
+
       menu = {
         draw = {
           treesitter = { "lsp" },
+          -- https://cmp.saghen.dev/recipes.html#mini-icons
+          components = {
+            kind_icon = {
+              ellipsis = false,
+              text = function(ctx)
+                local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+                return kind_icon
+              end,
+              -- Optionally, you may also use the highlights from mini.icons
+              highlight = function(ctx)
+                local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+                return hl
+              end,
+            },
+          },
         },
+        -- border = "rounded",
       },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
+        -- window = { border = "rounded" },
       },
       ghost_text = {
         enabled = true,
@@ -44,9 +62,12 @@ return {
     },
 
     -- experimental signature help support
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      -- window = {
+      --   treesitter_highlighting = false,
+      -- },
+      -- window = { border = "rounded" }
+    },
   },
-  -- allows extending the enabled_providers array elsewhere in your config
-  -- without having to redefine it
-  opts_extend = { "sources.completion.enabled_providers" },
 }

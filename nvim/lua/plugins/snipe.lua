@@ -3,7 +3,7 @@ return {
   version = "*",
   keys = {
     {
-      "<leader>v",
+      "<leader>V",
       function()
         require("snipe").open_buffer_menu()
       end,
