@@ -31,6 +31,9 @@ return {
       -- accept = { auto_brackets = { enabled = true } },
 
       menu = {
+        auto_show = function(ctx)
+          return ctx.mode ~= "cmdline"
+        end,
         draw = {
           treesitter = { "lsp" },
           -- https://cmp.saghen.dev/recipes.html#mini-icons
@@ -70,4 +73,7 @@ return {
       -- window = { border = "rounded" }
     },
   },
+  -- allows extending the enabled_providers array elsewhere in your config
+  -- without having to redefine it
+  -- opts_extend = { "sources.completion.enabled_providers" },
 }
