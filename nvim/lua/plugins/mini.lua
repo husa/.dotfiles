@@ -1,7 +1,7 @@
 return {
   "echasnovski/mini.nvim",
-  event = "VeryLazy",
   version = "*",
+  event = "VeryLazy",
   config = function()
     require("mini.ai").setup()
     require("mini.bufremove").setup()

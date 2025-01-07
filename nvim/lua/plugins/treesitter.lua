@@ -1,5 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  -- version = "*", -- releases are not really updated
   build = ":TSUpdate",
   main = "nvim-treesitter.configs",
   lazy = false,

@@ -1,10 +1,8 @@
 return {
   "saghen/blink.cmp",
+  version = "*",
   lazy = false, -- lazy loading handled internally
   dependencies = "rafamadriz/friendly-snippets",
-
-  version = "*",
-
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {

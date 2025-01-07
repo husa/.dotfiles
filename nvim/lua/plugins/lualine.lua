@@ -1,7 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
   version = "*",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   event = "VeryLazy",
   config = function()
     local function lsp_name()
