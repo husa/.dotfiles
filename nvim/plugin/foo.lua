@@ -290,10 +290,8 @@ function BufferList:format_filenames()
 end
 function BufferList:add_filetype_icons()
   for _, buffer in pairs(self.items) do
-    if _G.MiniIcons then
-      local icon, hl = MiniIcons.get("file", buffer.basename)
-      buffer.icon = { symbol = icon, hlgroup = hl }
-    end
+    local icon, hl = require("mini.icons").get("file", buffer.basename)
+    buffer.icon = { symbol = icon, hlgroup = hl }
   end
 end
 function BufferList:format_lines()
@@ -441,7 +439,7 @@ Foo.setup = function()
   local menu = Menu:new(BufferList:new())
   vim.keymap.set("n", "<leader>v", function()
     menu:open()
-  end)
+  end, { desc = "Open buffer picker" })
 end
 
 Foo.setup()
