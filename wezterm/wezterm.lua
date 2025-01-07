@@ -10,8 +10,9 @@ config.default_prog = { "/usr/local/bin/fish", "-l" }
 config.color_scheme = "Catppuccin Mocha"
 
 -- font
-config.font = wezterm.font("FiraCode Nerd Font")
-config.font_size = 14
+-- config.font = wezterm.font("FiraCode Nerd Font")
+config.font = wezterm.font("GeistMono Nerd Font")
+config.font_size = 15
 
 -- window appearance
 -- config.window_decorations = "MACOS_FORCE_ENABLE_SHADOW|INTEGRATED_BUTTONS|RESIZE"
@@ -36,71 +37,71 @@ config.cursor_thickness = "200%"
 
 -- inactive panes
 config.inactive_pane_hsb = {
-	saturation = 0.7,
-	brightness = 0.3,
+  saturation = 0.7,
+  brightness = 0.3,
 }
 
 -- command palette
 config.command_palette_font_size = 16
 
 config.keys = {
-	-- create "panes" as in iTerm
-	{
-		key = "d",
-		mods = "SUPER",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "D",
-		mods = "SUPER",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	-- close pane, then tab, then window
-	{
-		key = "w",
-		mods = "CMD",
-		action = wezterm.action.CloseCurrentPane({ confirm = true }),
-	},
-	-- command palette(as in Sublime Text, waay too old)
-	{
-		key = "p",
-		mods = "SUPER|SHIFT",
-		action = wezterm.action.ActivateCommandPalette,
-	},
-	-- pane selection
-	{
-		key = "p",
-		mods = "SUPER",
-		action = wezterm.action.PaneSelect,
-	},
-	-- disable full-screen toggle by ALT+Enter
-	{
-		key = "Enter",
-		mods = "ALT",
-		action = wezterm.action.DisableDefaultAssignment,
-	},
+  -- create "panes" as in iTerm
+  {
+    key = "d",
+    mods = "SUPER",
+    action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+  },
+  {
+    key = "D",
+    mods = "SUPER",
+    action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+  },
+  -- close pane, then tab, then window
+  {
+    key = "w",
+    mods = "CMD",
+    action = wezterm.action.CloseCurrentPane({ confirm = true }),
+  },
+  -- command palette(as in Sublime Text, waay too old)
+  {
+    key = "p",
+    mods = "SUPER|SHIFT",
+    action = wezterm.action.ActivateCommandPalette,
+  },
+  -- pane selection
+  {
+    key = "p",
+    mods = "SUPER",
+    action = wezterm.action.PaneSelect,
+  },
+  -- disable full-screen toggle by ALT+Enter
+  {
+    key = "Enter",
+    mods = "ALT",
+    action = wezterm.action.DisableDefaultAssignment,
+  },
 }
 
 -- status
 config.status_update_interval = 1000
 wezterm.on("update-status", function(window, pane)
-	local status = ""
-	-- current workspace and number of workspaces
-	status = wezterm.nerdfonts.oct_table .. " " .. window:active_workspace()
-	local numberOfWorkspaces = #wezterm.mux.get_workspace_names()
-	if numberOfWorkspaces > 1 then
-		status = status .. " [" .. numberOfWorkspaces .. "]"
-	end
-	-- active key table
-	if window:active_key_table() then
-		status = status .. window:active_key_table()
-	end
+  local status = ""
+  -- current workspace and number of workspaces
+  status = wezterm.nerdfonts.oct_table .. " " .. window:active_workspace()
+  local numberOfWorkspaces = #wezterm.mux.get_workspace_names()
+  if numberOfWorkspaces > 1 then
+    status = status .. " [" .. numberOfWorkspaces .. "]"
+  end
+  -- active key table
+  if window:active_key_table() then
+    status = status .. window:active_key_table()
+  end
 
-	-- make it italic
-	window:set_right_status(wezterm.format({
-		{ Attribute = { Italic = true } },
-		{ Text = status .. " " },
-	}))
+  -- make it italic
+  window:set_right_status(wezterm.format({
+    { Attribute = { Italic = true } },
+    { Text = status .. " " },
+  }))
 end)
 
 return config
