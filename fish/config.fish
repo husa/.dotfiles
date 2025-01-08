@@ -21,6 +21,8 @@ set fish_cursor_visual block
 # Force change it for Wezterm
 set fish_vi_force_cursor 1
 
+kubectl completion fish | source
+
 starship init fish | source
 
 zoxide init fish | source
