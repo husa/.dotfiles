@@ -7,7 +7,16 @@ return {
     require("mini.bufremove").setup()
     require("mini.cursorword").setup()
     require("mini.indentscope").setup()
-    require("mini.pairs").setup()
+
+    local neigh_pattern = "[^\\%a%d][^%a%d]"
+    require("mini.pairs").setup({
+      mappings = {
+        ['"'] = { action = "closeopen", pair = '""', neigh_pattern = neigh_pattern, register = { cr = false } },
+        ["'"] = { action = "closeopen", pair = "''", neigh_pattern = neigh_pattern, register = { cr = false } },
+        ["`"] = { action = "closeopen", pair = "``", neigh_pattern = neigh_pattern, register = { cr = false } },
+      },
+    })
+
     require("mini.surround").setup({
       mappings = {
         add = "gsa", -- Add surrounding in Normal and Visual modes
