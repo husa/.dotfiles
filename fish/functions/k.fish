@@ -1,3 +1,3 @@
 function k --wraps=kubectl --description kubectl
-    kubectl $argv
+    command kubecolor $argv
 end
