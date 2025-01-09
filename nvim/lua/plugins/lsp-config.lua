@@ -40,6 +40,8 @@ return {
         },
       },
       vtsls = {},
+      pyright = {},
+      dockerls = {},
     }
 
     local tools = {
