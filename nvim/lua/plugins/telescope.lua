@@ -101,6 +101,13 @@ return {
           "%.git%/.*",
           "node_modules",
         },
+        sorting_strategy = "ascending",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.5,
+          },
+        },
       },
       pickers = {
         find_files = {
