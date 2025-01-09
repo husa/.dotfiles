@@ -98,7 +98,8 @@ return {
         },
         file_ignore_patterns = {
           "package%-lock%.json",
-          ".git/*",
+          "%.git%/.*",
+          "node_modules",
         },
       },
       pickers = {
