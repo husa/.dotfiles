@@ -11,11 +11,15 @@ return {
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     -- see the "default configuration" section below for full documentation on how to define
     -- your own keymap.
-    keymap = { preset = "super-tab", ["<CR>"] = { "accept", "fallback" } },
+    keymap = {
+      preset = "super-tab",
+      ["<Esc>"] = { "cancel", "fallback" },
+      -- ["<CR>"] = { "accept", "fallback" }
+    },
 
     appearance = {
       use_nvim_cmp_as_default = false,
-      nerd_font_variant = "mono",
+      -- nerd_font_variant = "mono",
     },
 
     -- sources = {
@@ -60,6 +64,10 @@ return {
       ghost_text = {
         enabled = true,
       },
+    },
+
+    sources = {
+      cmdline = {},
     },
 
     -- experimental signature help support
