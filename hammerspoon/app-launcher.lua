@@ -66,6 +66,7 @@ local apps = {
   { key = "s", app = "Slack", desc = " Slack", color = { hex = catpuccinPalette.maroon } },
   { key = "t", app = "Microsoft Teams", desc = "󰊻 Teams", color = { hex = catpuccinPalette.mauve } },
   { key = "w", app = "Wezterm", desc = " Wezterm", color = { hex = catpuccinPalette.lavender } },
+  { key = "z", app = "Zen Browser", desc = " Zen Browser", color = { hex = catpuccinPalette.mauve } },
   {
     key = "space",
     app = "Alfred 5",
