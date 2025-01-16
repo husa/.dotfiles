@@ -20,6 +20,7 @@ return {
   },
   config = function()
     local language_servers = {
+      -- lua
       lua_ls = {
         settings = {
           Lua = {
@@ -29,6 +30,7 @@ return {
           },
         },
       },
+      -- yaml
       yamlls = {
         settings = {
           yaml = {
@@ -39,8 +41,19 @@ return {
           },
         },
       },
+      -- js/ts
       vtsls = {},
+      -- vue
+      volar = {
+        init_options = {
+          vue = {
+            hybridMode = true,
+          },
+        },
+      },
+      -- python
       pyright = {},
+      -- dockerfile
       dockerls = {},
     }
 

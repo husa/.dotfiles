@@ -21,6 +21,7 @@ return {
       "jsdoc",
       "markdown",
       "markdown_inline",
+      "vue",
       -- "mermaid",
       "python",
       "toml",
