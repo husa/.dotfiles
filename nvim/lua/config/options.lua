@@ -15,6 +15,9 @@ vim.filetype.add({
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- custom globals
+vim.g.autoformat = true
+
 local opt = vim.opt
 
 -- opt.cmdheight = 0
