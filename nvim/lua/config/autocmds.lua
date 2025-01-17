@@ -108,3 +108,16 @@ vim.api.nvim_create_autocmd("VimEnter", {
 --   -- HACK: need to enable `nested` otherwise the current buffer will not have a filetype(no syntax)
 --   nested = true,
 -- })
+
+-- close windows on q/Esc
+vim.api.nvim_create_autocmd("filetype", {
+  pattern = {
+    "help",
+    "lspinfo",
+    "lazy",
+  },
+  callback = function(ev)
+    vim.keymap.set("n", "q", "<cmd>q<cr>", { desc = "close", buffer = ev.buf })
+    vim.keymap.set("n", "<Esc>", "<cmd>q<cr>", { desc = "close", buffer = ev.buf })
+  end,
+})
