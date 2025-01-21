@@ -115,6 +115,7 @@ vim.api.nvim_create_autocmd("filetype", {
     "help",
     "lspinfo",
     "lazy",
+    "oil",
   },
   callback = function(ev)
     vim.keymap.set("n", "q", "<cmd>q<cr>", { desc = "close", buffer = ev.buf })
