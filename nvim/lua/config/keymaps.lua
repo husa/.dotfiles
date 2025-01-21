@@ -66,6 +66,15 @@ end, { desc = "Toggle wrap" })
 map("n", "<leader>us", function()
   vim.opt.spell = not vim.opt.spell:get()
 end, { desc = "Toggle spelling" })
+-- utility shortcuts
 map("n", "<leader>ul", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
 map("n", "<leader>ui", "<cmd>LspInfo<cr>", { desc = "LspInfo" })
+
+-- next/prev diagnostics
+map("n", "]d", function()
+  vim.diagnostic.goto_next()
+end, { desc = "Diagnostics next" })
+map("n", "[d", function()
+  vim.diagnostic.goto_prev()
+end, { desc = "Diagnostics prev" })
