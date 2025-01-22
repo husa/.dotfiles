@@ -104,6 +104,19 @@ return {
           server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
           server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities)
           require("lspconfig")[server_name].setup(server)
+
+          -- add rounded borders for hover/signature Help/diagnostics
+          vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+            border = "rounded",
+          })
+          vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+            border = "rounded",
+          })
+          vim.diagnostic.config({
+            float = {
+              border = "rounded",
+            },
+          })
         end,
       },
     })
