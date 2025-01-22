@@ -38,7 +38,12 @@ return {
               -- default to kubernetes
               kubernetes = { "*.yml", "*.yaml" },
               -- github workflows
-              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+              ["https://json.schemastore.org/github-workflow.json"] = {
+                "**/.github/workflows/*.yml",
+                "**/.github/workflows/*.yaml",
+                "**/.gitea/workflows/*.yml",
+                "**/.gitea/workflows/*.yaml",
+              },
               -- docker compose
               ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = {
                 "*compose.yml",
