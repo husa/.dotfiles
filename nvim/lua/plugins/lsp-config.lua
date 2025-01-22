@@ -62,6 +62,9 @@ return {
       pyright = {},
       -- dockerfile
       dockerls = {},
+      -- css
+      cssls = {},
+      somesass_ls = {},
     }
 
     local tools = {
