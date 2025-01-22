@@ -65,6 +65,8 @@ return {
       -- css
       cssls = {},
       somesass_ls = {},
+      -- terraform
+      terraformls = {},
     }
 
     local tools = {

@@ -30,6 +30,10 @@ return {
       typescriptreact = { "prettierd", "prettier", stop_after_first = true },
       css = { "prettier" },
       scss = { "prettier" },
+      -- terraform
+      terraform = { "terraform_fmt" },
+      tf = { "terraform_fmt" },
+      ["terraform-vars"] = { "terraform_fmt" },
     },
     format_on_save = function()
       if not vim.g.autoformat then
