@@ -105,6 +105,26 @@ config.keys = {
     mods = "SUPER",
     action = wezterm.action.PaneSelect,
   },
+  -- pane swap
+  {
+    key = "s",
+    mods = "SUPER",
+    action = wezterm.action.PaneSelect({
+      mode = "SwapWithActiveKeepFocus",
+    }),
+  },
+
+  -- pane rotation
+  {
+    key = "r",
+    mods = "SUPER",
+    action = wezterm.action.RotatePanes("Clockwise"),
+  },
+  {
+    key = "r",
+    mods = "SUPER|SHIFT",
+    action = wezterm.action.RotatePanes("CounterClockwise"),
+  },
   -- disable full-screen toggle by ALT+Enter
   {
     key = "Enter",
