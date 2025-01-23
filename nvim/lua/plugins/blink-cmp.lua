@@ -13,7 +13,7 @@ return {
     -- your own keymap.
     keymap = {
       preset = "super-tab",
-      ["<Esc>"] = { "cancel", "fallback" },
+      -- ["<Esc>"] = { "cancel", "fallback" },
       -- ["<CR>"] = { "accept", "fallback" }
     },
 
