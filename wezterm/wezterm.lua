@@ -1,5 +1,7 @@
+---@type Wezterm
 local wezterm = require("wezterm")
 
+---@class Config
 local config = wezterm.config_builder()
 
 -- Spawn a fish shell in login mode
@@ -30,6 +32,7 @@ config.use_fancy_tab_bar = false
 config.prefer_to_spawn_tabs = true
 config.tab_max_width = 32
 config.tab_bar_at_bottom = false
+config.show_new_tab_button_in_tab_bar = false
 
 -- cursor
 config.cursor_blink_rate = 500
@@ -61,6 +64,34 @@ config.keys = {
     key = "w",
     mods = "CMD",
     action = wezterm.action.CloseCurrentPane({ confirm = true }),
+  },
+  -- zoom panel
+  {
+    key = "F",
+    mods = "CMD|SHIFT",
+    action = wezterm.action.TogglePaneZoomState,
+  },
+  -- tab navigation
+  {
+    key = "[",
+    mods = "CMD",
+    action = wezterm.action.ActivateTabRelative(-1),
+  },
+  {
+    key = "]",
+    mods = "CMD",
+    action = wezterm.action.ActivateTabRelative(1),
+  },
+  -- tab reordering
+  {
+    key = "[",
+    mods = "CMD|SHIFT",
+    action = wezterm.action.MoveTabRelative(-1),
+  },
+  {
+    key = "]",
+    mods = "CMD|SHIFT",
+    action = wezterm.action.MoveTabRelative(1),
   },
   -- command palette(as in Sublime Text, waay too old)
   {
@@ -102,6 +133,47 @@ wezterm.on("update-status", function(window, pane)
     { Attribute = { Italic = true } },
     { Text = status .. " " },
   }))
+end)
+wezterm.on("format-tab-title", function(tab)
+  local panel_title = tab.active_pane.title
+  local tab_index = tab.tab_index + 1
+  local title = { Text = " " .. tab_index .. ": " .. panel_title .. " " }
+  if tab.is_active and not tab.active_pane.is_zoomed then
+    return { title }
+  end
+  if tab.active_pane.is_zoomed then
+    if tab.is_active then
+      return {
+        { Background = { Color = "#fab387" } },
+        { Foreground = { Color = "#11111b" } },
+        title,
+        { Text = wezterm.nerdfonts.oct_screen_full .. "  " },
+      }
+    else
+      return {
+        { Foreground = { Color = "#fab387" } },
+        title,
+        { Text = wezterm.nerdfonts.oct_screen_full .. "  " },
+      }
+    end
+  end
+
+  -- local has_unseen_output = false
+  -- for _, pane in ipairs(tab.panes) do
+  --   if pane.has_unseen_output then
+  --     has_unseen_output = true
+  --     break
+  --   end
+  -- end
+  -- if has_unseen_output then
+  --   return {
+  --     { Background = { Color = "#f5e0dc" } },
+  --     { Foreground = { Color = "#11111b" } },
+  --     { Text = " " .. tab_index .. ": " },
+  --     { Text = panel_title .. " " },
+  --   }
+  -- end
+  return { title }
 end)
 
 return config
