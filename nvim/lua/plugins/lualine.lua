@@ -13,6 +13,20 @@ return {
       return "-"
     end
 
+    local function autoformat_enabled()
+      if vim.g.autoformat then
+        return ""
+      end
+      return ""
+    end
+
+    local function copilot_status()
+      if package.loaded["copilot"] and not require("copilot.client").is_disabled() then
+        return " "
+      end
+      return " "
+    end
+
     local opts = {
       options = {
         globalstatus = true,
@@ -21,7 +35,7 @@ return {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff" },
         lualine_c = { "diagnostics" },
-        lualine_x = { "searchcount", "encoding", "fileformat" },
+        lualine_x = { "searchcount", copilot_status, autoformat_enabled, "encoding", "fileformat" },
         lualine_y = {
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { lsp_name, separator = "" },

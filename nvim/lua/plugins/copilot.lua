@@ -10,6 +10,19 @@ return {
     },
     panel = { enabled = false },
   },
+  keys = {
+    {
+      "<leader>uA",
+      function()
+        if require("copilot.client").is_disabled() then
+          require("copilot.command").enable()
+        else
+          require("copilot.command").disable()
+        end
+      end,
+      desc = "Toggle Copilot",
+    },
+  },
   -- opts = {
   --   suggestion = {
   --     enabled = not vim.g.ai_cmp,
