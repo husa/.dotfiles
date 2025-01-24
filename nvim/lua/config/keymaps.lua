@@ -27,8 +27,8 @@ map("i", "<A-Left>", "<C-o>b")
 map("i", "<A-Right>", "<C-o>e")
 
 -- insert newline in insert mode, same as <A-o> and <S-A-o>
-map("i", "<A-cr>", "<C-o>o", { desc = "Append line and enter" })
-map("i", "<S-A-cr>", "<C-o>O", { desc = "Prepend line and enter" })
+-- map("i", "<A-cr>", "<C-o>o", { desc = "Append line and enter" })
+-- map("i", "<S-A-cr>", "<C-o>O", { desc = "Prepend line and enter" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })

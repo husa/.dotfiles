@@ -8,6 +8,12 @@ return {
     require("mini.cursorword").setup()
     require("mini.indentscope").setup()
 
+    require("mini.icons").setup({
+      lsp = {
+        copilot = { glyph = "", hl = "MiniIconsBlue" },
+      },
+    })
+
     local neigh_pattern = "[^\\%a%d][^%a%d]"
     require("mini.pairs").setup({
       mappings = {
