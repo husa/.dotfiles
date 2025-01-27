@@ -27,7 +27,18 @@ return {
           BlinkCmpSignatureHelpBorder = { link = "Pmenu" },
         }
       end,
-      integrations = { blink_cmp = true },
+      integrations = {
+        blink_cmp = true,
+        native_lsp = {
+          enabled = true,
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
+        },
+      },
     })
     vim.cmd.colorscheme("catppuccin")
   end,
