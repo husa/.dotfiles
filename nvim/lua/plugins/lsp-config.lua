@@ -18,7 +18,7 @@ return {
       },
     },
   },
-  config = function()
+  config = function(opts)
     local language_servers = {
       -- lua
       lua_ls = {
@@ -115,6 +115,20 @@ return {
           vim.diagnostic.config({
             float = {
               border = "rounded",
+              source = "if_many",
+            },
+            virtual_text = {
+              spacing = 4,
+              -- source = "if_many",
+              prefix = "●",
+            },
+            signs = {
+              text = {
+                [vim.diagnostic.severity.ERROR] = " ",
+                [vim.diagnostic.severity.WARN] = " ",
+                [vim.diagnostic.severity.HINT] = " ",
+                [vim.diagnostic.severity.INFO] = " ",
+              },
             },
           })
         end,
