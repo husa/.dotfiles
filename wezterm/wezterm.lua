@@ -154,6 +154,7 @@ wezterm.on("update-status", function(window, pane)
     { Text = status .. " " },
   }))
 end)
+
 wezterm.on("format-tab-title", function(tab)
   local panel_title = tab.active_pane.title
   local tab_index = tab.tab_index + 1
@@ -195,5 +196,45 @@ wezterm.on("format-tab-title", function(tab)
   -- end
   return { title }
 end)
+
+-- pane navigation between Wezterm and Neovim
+local function add_pane_nav_keys()
+  local pane_nav_mods = "CTRL|SHIFT"
+  -- map of { key = direction }
+  local pane_nav_keys = {
+    UpArrow = "Up",
+    DownArrow = "Down",
+    LeftArrow = "Left",
+    RightArrow = "Right",
+  }
+
+  local is_vim = function(pane)
+    local process_info = pane:get_foreground_process_info()
+    local process_name = process_info and process_info.name
+    return process_name == "nvim" or process_name == "vim"
+  end
+
+  local try_nav_pane = function(key, direction, win, pane)
+    if is_vim(pane) then
+      -- pass the keys through to vim/nvim
+      win:perform_action({
+        SendKey = { key = key, mods = pane_nav_mods },
+      }, pane)
+    else
+      win:perform_action({ ActivatePaneDirection = direction }, pane)
+    end
+  end
+
+  for key, direction in pairs(pane_nav_keys) do
+    table.insert(config.keys, {
+      key = key,
+      mods = pane_nav_mods,
+      action = wezterm.action_callback(function(win, pane)
+        try_nav_pane(key, direction, win, pane)
+      end),
+    })
+  end
+end
+add_pane_nav_keys()
 
 return config
