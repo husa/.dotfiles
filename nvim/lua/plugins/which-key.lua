@@ -13,6 +13,8 @@ return {
       { "<leader>q", group = "Quit/session" },
       { "<leader>u", group = "Utils/Tools" },
       { "<leader>w", group = "Window" },
+      { "<leader>g", group = "Git" },
+      { "<leader>x", group = "Trouble" },
     },
   },
   keys = {
