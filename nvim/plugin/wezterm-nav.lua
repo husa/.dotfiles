@@ -1,3 +1,4 @@
+-- similar to https://github.com/letieu/wezterm-move.nvim and https://github.com/mrjones2014/smart-splits.nvim
 local wezterm_directions = { h = "Left", j = "Down", k = "Up", l = "Right" }
 
 --- Check if the current window is at the edge of the screen
@@ -29,7 +30,7 @@ local function try_move(direction)
   end
 end
 
--- attach keymaps
+-- attach keymaps(same as wezterm)
 vim.keymap.set("n", "<C-S-Up>", function()
   try_move("k")
 end)

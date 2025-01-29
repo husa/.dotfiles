@@ -34,6 +34,8 @@ return {
       mappings = {
         ["<Right>"] = "open",
         ["<Left>"] = "close_node",
+        ["<space>"] = "none",
+        -- ["P"] = { "toggle_preview" },
       },
     },
     hijack_netrw_behavior = "disabled",

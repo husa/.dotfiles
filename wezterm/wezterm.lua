@@ -178,7 +178,10 @@ wezterm.on("format-tab-title", function(tab)
       }
     end
   end
-
+  -- add highlight for panes with unseen output
+  -- doesn't work well with nvim(it always has unseen output)
+  -- might add a check for nvim specifically
+  -- but what about other(vim, yazi, k8s, other tui's) will it work? need to investigate
   -- local has_unseen_output = false
   -- for _, pane in ipairs(tab.panes) do
   --   if pane.has_unseen_output then
@@ -200,6 +203,7 @@ end)
 -- pane navigation between Wezterm and Neovim
 local function add_pane_nav_keys()
   local pane_nav_mods = "CTRL|SHIFT"
+
   -- map of { key = direction }
   local pane_nav_keys = {
     UpArrow = "Up",
@@ -226,12 +230,18 @@ local function add_pane_nav_keys()
   end
 
   for key, direction in pairs(pane_nav_keys) do
+    -- alternative is:
+    -- action = wezterm.action_callback(function(win, pane)
+    --   try_nav_pane(key, direction, win, pane)
+    -- end),
+    -- but for some reason, events are messed up, need to investigate further
+    wezterm.on("nav-" .. key .. direction, function(win, pane)
+      try_nav_pane(key, direction, win, pane)
+    end)
     table.insert(config.keys, {
       key = key,
       mods = pane_nav_mods,
-      action = wezterm.action_callback(function(win, pane)
-        try_nav_pane(key, direction, win, pane)
-      end),
+      action = wezterm.action.EmitEvent("nav-" .. key .. direction),
     })
   end
 end
