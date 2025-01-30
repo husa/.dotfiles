@@ -35,6 +35,7 @@ return {
         end,
         draw = {
           treesitter = { "lsp" },
+          columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
           -- https://cmp.saghen.dev/recipes.html#mini-icons
           components = {
             kind_icon = {
@@ -44,7 +45,7 @@ return {
                   ctx.kind = "copilot"
                 end
                 local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                return kind_icon .. " " .. ctx.kind
+                return kind_icon
               end,
               -- Optionally, you may also use the highlights from mini.icons
               highlight = function(ctx)
@@ -67,6 +68,11 @@ return {
       ghost_text = {
         enabled = true,
       },
+      list = {
+        selection = {
+          auto_insert = false,
+        },
+      },
     },
 
     sources = {
@@ -86,10 +92,10 @@ return {
     -- experimental signature help support
     signature = {
       enabled = true,
-      -- window = {
-      --   border = "rounded",
-      --   treesitter_highlighting = false,
-      -- },
+      window = {
+        --   border = "rounded",
+        treesitter_highlighting = false, -- need to disable treesitter highlighting because of errors: https://github.com/Saghen/blink.cmp/discussions/776?sort=new
+      },
     },
   },
 }
