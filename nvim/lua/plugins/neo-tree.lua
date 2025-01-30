@@ -35,10 +35,10 @@ return {
         ["<Right>"] = "open",
         ["<Left>"] = "close_node",
         ["<space>"] = "none",
-        -- ["P"] = { "toggle_preview" },
       },
     },
-    hijack_netrw_behavior = "disabled",
+    hijack_netrw_behavior = "open_default",
+    use_libuv_file_watcher = true,
     default_component_configs = {
       indent = {
         with_expanders = true, -- if nil and file nesting is enabled, will enable expanders

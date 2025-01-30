@@ -87,12 +87,9 @@ return {
     signature = {
       enabled = true,
       -- window = {
+      --   border = "rounded",
       --   treesitter_highlighting = false,
       -- },
-      -- window = { border = "rounded" }
     },
   },
-  -- allows extending the enabled_providers array elsewhere in your config
-  -- without having to redefine it
-  -- opts_extend = { "sources.completion.enabled_providers" },
 }
