@@ -83,13 +83,7 @@ local set_cursorlinenr_highlight_based_on_mode = function()
   local hl_name = modes_map[mode] or "normal"
   vim.api.nvim_set_hl(0, "CursorLineNr", { link = "lualine_b_" .. hl_name })
 end
-local cursorlinenr_hightlight_augroup = vim.api.nvim_create_augroup("cursorlinenrhighlight", {})
-vim.api.nvim_create_autocmd("ModeChanged", {
-  group = cursorlinenr_hightlight_augroup,
-  callback = set_cursorlinenr_highlight_based_on_mode,
-})
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = cursorlinenr_hightlight_augroup,
+vim.api.nvim_create_autocmd({ "ModeChanged", "VimEnter" }, {
   callback = set_cursorlinenr_highlight_based_on_mode,
 })
 
