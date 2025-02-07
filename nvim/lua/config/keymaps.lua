@@ -78,3 +78,18 @@ end, { desc = "Diagnostics next" })
 map("n", "[d", function()
   vim.diagnostic.goto_prev()
 end, { desc = "Diagnostics prev" })
+
+map("n", "<leader>ur", function()
+  local plugins = require("lazy").plugins()
+
+  local plugin_names = {}
+  for _, plugin in ipairs(plugins) do
+    table.insert(plugin_names, plugin.name)
+  end
+
+  vim.ui.select(plugin_names, {
+    title = "Reload plugin",
+  }, function(selected, idx)
+    require("lazy").reload({ plugins = { selected } })
+  end)
+end, { desc = "Reload plugin" })
