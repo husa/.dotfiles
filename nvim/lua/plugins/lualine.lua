@@ -7,7 +7,7 @@ return {
     local function lsp_name()
       local clients = vim.lsp.get_clients({ bufnr = 0 })
 
-      if clients ~= nil and #clients >= 1 then
+      if clients ~= nil and #clients >= 1 and clients[1].name ~= "copilot" then
         return clients[1].name
       end
       return "-"
