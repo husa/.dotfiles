@@ -79,6 +79,7 @@ map("n", "[d", function()
   vim.diagnostic.goto_prev()
 end, { desc = "Diagnostics prev" })
 
+-- select and reload a lazy plugin
 map("n", "<leader>ur", function()
   local plugins = require("lazy").plugins()
 
@@ -89,7 +90,7 @@ map("n", "<leader>ur", function()
 
   vim.ui.select(plugin_names, {
     title = "Reload plugin",
-  }, function(selected, idx)
+  }, function(selected)
     require("lazy").reload({ plugins = { selected } })
   end)
 end, { desc = "Reload plugin" })

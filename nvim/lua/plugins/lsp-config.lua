@@ -53,6 +53,12 @@ return {
           },
         },
       },
+      -- json schemas validation
+      jsonls = {
+        capabilities = {
+          textDocument = { completion = { completionItem = { snippetSupport = true } } },
+        },
+      },
       -- js/ts
       vtsls = {},
       -- vue
