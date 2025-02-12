@@ -5,9 +5,10 @@ return {
   event = "VeryLazy",
   config = function()
     local function lsp_name()
-      local clients = vim.lsp.get_clients({ bufnr = 0 })
-
-      if clients ~= nil and #clients >= 1 and clients[1].name ~= "copilot" then
+      local clients = vim.tbl_filter(function(client)
+        return client.name ~= "copilot"
+      end, vim.lsp.get_clients({ bufnr = 0 }))
+      if clients ~= nil and #clients >= 1 then
         return clients[1].name
       end
       return "-"
