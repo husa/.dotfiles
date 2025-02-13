@@ -7,10 +7,20 @@ tab_size = 2
 
 [opener]
 edit = [
+  { run = '${EDITOR:-vi} "$@"', desc = "Open in $EDITOR", block = true },
   { run = 'nvim "$@"', desc = "Open in nvim", block = true },
-  { run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true },
-  { run = 'code "$@"', block = false, orphan = true, desc = "Open in VSCode" },
   { run = 'neovide "$@"', block = false, orphan = true, desc = "Open in Neovide" },
+  { run = 'code "$@"', block = false, orphan = true, desc = "Open in VSCode" },
+]
+open = [
+  { run = 'open "$@"',  desc = "Open", for = "macos" },
+]
+
+[open]
+rules = [
+  # Text
+  # add "open" to the list
+  { mime = "text/*", use = [ "edit", "open", "reveal" ] },
 ]
 
 [plugin]
