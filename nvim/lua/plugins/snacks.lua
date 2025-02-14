@@ -17,6 +17,14 @@ return {
           hidden = true,
           ignored = true,
           exclude = { ".DS_Store" },
+          win = {
+            list = {
+              keys = {
+                ["<Left>"] = "explorer_close",
+                ["<Right>"] = "confirm",
+              },
+            },
+          },
         },
       },
     },
