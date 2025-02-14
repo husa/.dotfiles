@@ -17,7 +17,7 @@ open = [
 ]
 
 [open]
-rules = [
+append_rules = [
   # Text
   # add "open" to the list
   { mime = "text/*", use = [ "edit", "open", "reveal" ] },
