@@ -97,7 +97,7 @@ opt.foldtext = ""
 -- end
 
 -- sessions
--- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+opt.sessionoptions = { "buffers", "curdir", "folds", "help", "tabpages", "winsize", "terminal" }
 
 -- updatetime(trigger CursorHold to highlight matching word)
 -- opt.updatetime = 500
