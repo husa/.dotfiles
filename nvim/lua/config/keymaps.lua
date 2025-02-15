@@ -89,8 +89,18 @@ map("n", "<leader>ur", function()
   end
 
   vim.ui.select(plugin_names, {
-    title = "Reload plugin",
+    prompt = "Reload plugin",
   }, function(selected)
     require("lazy").reload({ plugins = { selected } })
   end)
 end, { desc = "Reload plugin" })
+
+-- select and set filetype
+map("n", "<leader>ut", function()
+  local filetypes = vim.fn.getcompletion("", "filetype")
+  vim.ui.select(filetypes, {
+    prompt = "Set Filetype",
+  }, function(selected)
+    vim.bo.filetype = selected
+  end)
+end)

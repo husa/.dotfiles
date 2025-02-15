@@ -309,17 +309,5 @@ return {
       end,
       desc = "Colorschemes",
     },
-    {
-      "<leader>ut",
-      function()
-        local filetypes = vim.fn.getcompletion("", "filetype")
-        vim.ui.select(filetypes, {
-          title = "Select Filetype",
-        }, function(selected)
-          vim.bo.filetype = selected
-        end)
-      end,
-      desc = "Set filetype",
-    },
   },
 }
