@@ -170,7 +170,7 @@ return {
 
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
         map("<leader>cs", function()
-          Snacks.picker.lsp_symbols()
+          Snacks.picker.lsp_symbols({ layout = { preset = "vertical", preview = "main" } })
         end, "LSP Symbols")
         map("<leader>cS", function()
           Snacks.picker.lsp_workspace_symbols()
