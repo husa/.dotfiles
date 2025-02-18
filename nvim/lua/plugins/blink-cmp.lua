@@ -4,7 +4,10 @@ return {
   lazy = false, -- lazy loading handled internally
   dependencies = {
     "rafamadriz/friendly-snippets",
-    "giuxtaposition/blink-cmp-copilot",
+
+    "codeium.nvim",
+    "saghen/blink.compat",
+    -- "giuxtaposition/blink-cmp-copilot",
   },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -22,7 +25,7 @@ return {
 
     appearance = {
       use_nvim_cmp_as_default = false,
-      -- nerd_font_variant = "mono",
+      -- nerd_font_ivariant = "mono",
     },
 
     -- experimental auto-brackets support
@@ -43,6 +46,8 @@ return {
               text = function(ctx)
                 if ctx.source_name == "copilot" then
                   ctx.kind = "copilot"
+                elseif ctx.source_name == "codeium" then
+                  ctx.kind = "codeium"
                 end
                 local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
                 return kind_icon
@@ -51,6 +56,8 @@ return {
               highlight = function(ctx)
                 if ctx.source_name == "copilot" then
                   ctx.kind = "copilot"
+                elseif ctx.source_name == "codeium" then
+                  ctx.kind = "codeium"
                 end
                 local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
                 return hl
@@ -76,13 +83,26 @@ return {
     },
 
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "copilot" },
-      cmdline = {},
+      default = {
+        "lsp",
+        "path",
+        "snippets",
+        "buffer",
+
+        -- "copilot"
+        "codeium",
+      },
 
       providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
+        -- copilot = {
+        --   name = "copilot",
+        --   module = "blink-cmp-copilot",
+        --   score_offset = 100,
+        --   async = true,
+        -- },
+        codeium = {
+          name = "codeium",
+          module = "blink.compat.source",
           score_offset = 100,
           async = true,
         },

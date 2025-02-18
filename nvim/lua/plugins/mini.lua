@@ -11,6 +11,7 @@ return {
     require("mini.icons").setup({
       lsp = {
         copilot = { glyph = "", hl = "MiniIconsBlue" },
+        codeium = { glyph = "🤖", hl = "MiniIconsGreen" },
       },
     })
 
