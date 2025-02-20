@@ -24,6 +24,12 @@ config.window_close_confirmation = "AlwaysPrompt"
 config.enable_scroll_bar = true
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 40
+config.window_padding = {
+  left = 0,
+  bottom = 0,
+  top = 0,
+  right = 0,
+}
 
 -- tabbar
 config.enable_tab_bar = true
