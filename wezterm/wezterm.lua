@@ -173,14 +173,14 @@ wezterm.on("format-tab-title", function(tab)
       return {
         { Background = { Color = "#fab387" } },
         { Foreground = { Color = "#11111b" } },
+        { Text = " " .. wezterm.nerdfonts.oct_screen_full },
         title,
-        { Text = wezterm.nerdfonts.oct_screen_full .. "  " },
       }
     else
       return {
         { Foreground = { Color = "#fab387" } },
+        { Text = " " .. wezterm.nerdfonts.oct_screen_full },
         title,
-        { Text = wezterm.nerdfonts.oct_screen_full .. "  " },
       }
     end
   end
