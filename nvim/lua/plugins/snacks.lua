@@ -232,6 +232,13 @@ return {
       desc = "Highlights",
     },
     {
+      "<leader>sg",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Grep",
+    },
+    {
       "<leader>si",
       function()
         Snacks.picker.icons()
@@ -300,6 +307,14 @@ return {
         Snacks.picker.undo()
       end,
       desc = "Undo History",
+    },
+    {
+      "<leader>sw",
+      function()
+        Snacks.picker.grep_word()
+      end,
+      desc = "Visual selection or word",
+      mode = { "n", "x" },
     },
     -- utils
     {
