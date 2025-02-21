@@ -437,7 +437,7 @@ local Foo = {}
 
 Foo.setup = function()
   local menu = Menu:new(BufferList:new())
-  vim.keymap.set("n", "<leader>v", function()
+  vim.keymap.set("n", "<leader>V", function()
     menu:open()
   end, { desc = "Open buffer picker" })
 end
