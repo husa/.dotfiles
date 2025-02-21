@@ -38,7 +38,15 @@ return {
         lualine_c = {
           { "filename", path = 1, separator = "", padding = { left = 1, right = 0 } },
           "diff",
-          "diagnostics",
+          {
+            "diagnostics",
+            symbols = {
+              error = vim.diagnostic.config().signs.text[vim.diagnostic.severity.ERROR],
+              warn = vim.diagnostic.config().signs.text[vim.diagnostic.severity.WARN],
+              info = vim.diagnostic.config().signs.text[vim.diagnostic.severity.INFO],
+              hint = vim.diagnostic.config().signs.text[vim.diagnostic.severity.HINT],
+            },
+          },
         },
         lualine_x = { "searchcount", copilot_status, autoformat_enabled, "encoding", "fileformat" },
         lualine_y = {
