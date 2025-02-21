@@ -34,8 +34,12 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch", "diff" },
-        lualine_c = { "diagnostics" },
+        lualine_b = { { "branch", icon = "" } },
+        lualine_c = {
+          { "filename", path = 1, separator = "", padding = { left = 1, right = 0 } },
+          "diff",
+          "diagnostics",
+        },
         lualine_x = { "searchcount", copilot_status, autoformat_enabled, "encoding", "fileformat" },
         lualine_y = {
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -52,9 +56,6 @@ return {
             padding = { left = 0 },
           },
         },
-      },
-      tabline = {
-        lualine_b = { { "filename", path = 1, symbols = { modified = " " } } },
       },
     }
     require("lualine").setup(opts)
