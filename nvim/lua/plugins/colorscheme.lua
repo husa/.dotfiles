@@ -44,6 +44,10 @@ return {
       vim.cmd.colorscheme("catppuccin")
     end,
   },
-  "rebelot/kanagawa.nvim",
-  "folke/tokyonight.nvim",
+  { "rebelot/kanagawa.nvim", lazy = true },
+  { "folke/tokyonight.nvim", lazy = true },
+  { "EdenEast/nightfox.nvim", lazy = true },
+  { "rose-pine/neovim", lazy = true },
+  { "shaunsingh/nord.nvim", lazy = true },
+  { "WTFox/jellybeans.nvim", opts = {}, lazy = true },
 }
