@@ -9,16 +9,12 @@ return {
         return client.name ~= "copilot"
       end, vim.lsp.get_clients({ bufnr = 0 }))
       if clients ~= nil and #clients >= 1 then
-        return clients[1].name
+        local names = vim.tbl_map(function(client)
+          return client.name
+        end, clients)
+        return table.concat(names, " ") .. " 󰘧"
       end
       return "-"
-    end
-
-    local function autoformat_enabled()
-      if vim.g.autoformat then
-        return ""
-      end
-      return ""
     end
 
     local function copilot_status()
@@ -26,6 +22,40 @@ return {
         return " "
       end
       return " "
+    end
+
+    local function formatter_name()
+      local has_conform, conform = pcall(require, "conform")
+      local current_formatter = nil
+      if not has_conform then
+        return ""
+      end
+      local formatter_for_current_buffer = conform.list_formatters_to_run()
+      if #formatter_for_current_buffer >= 1 then
+        current_formatter = formatter_for_current_buffer[1].name
+      end
+      if not current_formatter then
+        return ""
+      end
+      if vim.g.autoformat then
+        return current_formatter .. "  "
+      else
+        return current_formatter .. "  "
+      end
+    end
+
+    local function linter_name()
+      local lint = require("lint")
+      local linters = lint._resolve_linter_by_ft(vim.bo.filetype)
+      if #linters == 0 then
+        return ""
+      end
+      local linters_str = table.concat(linters, " ")
+      local running_linters = require("lint").get_running()
+      if #running_linters == 0 then
+        return linters_str .. " 󰦕"
+      end
+      return linters_str .. " 󱉶"
     end
 
     local opts = {
@@ -48,10 +78,12 @@ return {
             },
           },
         },
-        lualine_x = { "searchcount", copilot_status, autoformat_enabled, "encoding", "fileformat" },
+        lualine_x = { "searchcount", copilot_status, "encoding", "fileformat" },
         lualine_y = {
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { lsp_name, separator = "" },
+          formatter_name,
+          linter_name,
+          lsp_name,
+          { "filetype", icon_only = true, padding = { left = 1, right = 0 } },
         },
         lualine_z = {
           {
