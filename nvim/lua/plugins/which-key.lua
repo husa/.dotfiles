@@ -7,6 +7,7 @@ return {
     spec = {
       { "<leader>b", group = "Buffer" },
       { "<leader>c", group = "Code" },
+      { "<leader>d", group = "Debug" },
       { "<leader>e", group = "Explore" },
       { "<leader>f", group = "Find/file" },
       { "<leader>s", group = "Search" },
