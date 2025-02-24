@@ -170,7 +170,27 @@ return {
 
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
         map("<leader>cs", function()
-          Snacks.picker.lsp_symbols({ layout = { preset = "vertical", preview = "main" } })
+          Snacks.picker.lsp_symbols({
+            layout = { preset = "vertical", preview = "main" },
+            filter = {
+              default = {
+                "Class",
+                "Constructor",
+                "Enum",
+                "Field",
+                "Function",
+                "Interface",
+                "Method",
+                "Module",
+                "Namespace",
+                "Package",
+                -- "Property", -- do not include properties, it add all object fields, etc.
+                "StaticMethod",
+                "Struct",
+                "Trait",
+              },
+            },
+          })
         end, "LSP Symbols")
         map("<leader>cS", function()
           Snacks.picker.lsp_workspace_symbols()
