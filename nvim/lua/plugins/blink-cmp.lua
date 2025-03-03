@@ -114,7 +114,7 @@ return {
       enabled = true,
       window = {
         --   border = "rounded",
-        treesitter_highlighting = false, -- need to disable treesitter highlighting because of errors: https://github.com/Saghen/blink.cmp/discussions/776?sort=new
+        treesitter_highlighting = true, -- need to disable treesitter highlighting because of errors: https://github.com/Saghen/blink.cmp/discussions/776?sort=new
       },
     },
   },
