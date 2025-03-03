@@ -21,6 +21,9 @@ set fish_cursor_visual block
 # Force change it for Wezterm
 set fish_vi_force_cursor 1
 
+# remove greeting
+set -U fish_greeting
+
 kubectl completion fish | source
 
 starship init fish | source
