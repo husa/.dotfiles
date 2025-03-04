@@ -5,6 +5,7 @@ return {
   event = "VeryLazy",
   config = function()
     local function lsp_name()
+      ---@type vim.lsp.Client[]
       local clients = vim.tbl_filter(function(client)
         return client.name ~= "copilot"
       end, vim.lsp.get_clients({ bufnr = 0 }))
@@ -12,7 +13,7 @@ return {
         local names = vim.tbl_map(function(client)
           return client.name
         end, clients)
-        return table.concat(names, " ") .. " 󰘧"
+        return table.concat(names, " ") .. " "
       end
       return "-"
     end
@@ -66,7 +67,20 @@ return {
         lualine_a = { "mode" },
         lualine_b = { { "branch", icon = "" } },
         lualine_c = {
-          { "filename", path = 1, separator = "", padding = { left = 1, right = 0 } },
+          {
+            "filename",
+            path = 1,
+            separator = "",
+            file_status = false,
+            padding = { left = 1, right = 0 },
+            color = function()
+              if vim.bo.modified then
+                return "WarningMsg"
+              else
+                return "lualine_c_normal"
+              end
+            end,
+          },
           "diff",
           {
             "diagnostics",
