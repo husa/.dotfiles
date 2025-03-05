@@ -18,7 +18,7 @@ return {
       },
     },
   },
-  config = function(opts)
+  config = function(_)
     local language_servers = {
       -- lua
       lua_ls = {
@@ -61,14 +61,6 @@ return {
       },
       -- js/ts
       vtsls = {},
-      -- vue
-      volar = {
-        init_options = {
-          vue = {
-            hybridMode = true,
-          },
-        },
-      },
       -- python
       pyright = {},
       -- dockerfile
@@ -79,6 +71,38 @@ return {
       -- terraform
       terraformls = {},
     }
+
+    -- Vue
+    -- add vue-language-server and add to TS server
+    language_servers["volar"] = {
+      init_options = {
+        vue = {
+          hybridMode = true,
+        },
+      },
+    }
+    local Utils = require("utils")
+    local vuels_package_path = require("mason-registry").get_package("vue-language-server"):get_install_path()
+    local vtsls_defaults = require("lspconfig.configs.vtsls").default_config
+    local vtsls_with_defaults = Utils.deep_extend(vtsls_defaults, language_servers.vtsls)
+    language_servers.vtsls = Utils.deep_extend(vtsls_with_defaults, {
+      filetypes = { "vue" },
+      settings = {
+        vtsls = {
+          tsserver = {
+            globalPlugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = vuels_package_path .. "/node_modules/@vue/language-server",
+                languages = { "vue" },
+                configNamespace = "typescript",
+                enableForWorkspaceTypeScriptVersions = true,
+              },
+            },
+          },
+        },
+      },
+    })
 
     local tools = {
       "stylua",
@@ -170,7 +194,7 @@ return {
 
         map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
         map("<leader>cs", function()
-          Snacks.picker.lsp_symbols({
+          require("snacks").picker.lsp_symbols({
             layout = { preset = "vertical", preview = "main" },
             filter = {
               default = {
@@ -193,7 +217,7 @@ return {
           })
         end, "LSP Symbols")
         map("<leader>cS", function()
-          Snacks.picker.lsp_workspace_symbols()
+          require("snacks").picker.lsp_workspace_symbols()
         end, "LSP Workspace Symbols")
         map("<leader>cr", vim.lsp.buf.rename, "Rename")
       end,
