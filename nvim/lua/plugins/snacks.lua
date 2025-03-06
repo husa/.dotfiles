@@ -5,10 +5,17 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    bufdelete = { enabled = true },
-    statuscolumn = { enabled = true },
-    zen = { enabled = true },
-    input = {},
+    bufdelete = {},
+    statuscolumn = {},
+    zen = {},
+    input = {
+      win = {
+        title_pos = "left",
+        relative = "cursor",
+        width = 40,
+        row = 1,
+      },
+    },
     explorer = {
       replace_netrw = false, -- Replace netrw with the snacks explorer
     },
