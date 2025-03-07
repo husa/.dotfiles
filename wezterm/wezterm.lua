@@ -161,29 +161,80 @@ wezterm.on("update-status", function(window, pane)
   }))
 end)
 
+-- format and color tab bar
+local colors = {
+  active = "#cba6f7",
+  focused = "#fab387",
+  inactive = "#313244",
+  background = "#11111b",
+  text_on_dark = "#cdd6f4",
+  text_on_light = "#1e1e2e",
+}
+
+local list_concat = function(...)
+  local result = {}
+  local lists = { ... }
+  for _, list in ipairs(lists) do
+    for _, value in ipairs(list) do
+      table.insert(result, value)
+    end
+  end
+  return result
+end
+
 wezterm.on("format-tab-title", function(tab)
   local panel_title = tab.active_pane.title
   local tab_index = tab.tab_index + 1
-  local title = { Text = " " .. tab_index .. ": " .. panel_title .. " " }
+
+  -- define background/foreground colors
+  local background = colors.inactive
+  local foreground = colors.text_on_dark
   if tab.is_active and not tab.active_pane.is_zoomed then
-    return { title }
+    background = colors.active
+    foreground = colors.text_on_light
   end
   if tab.active_pane.is_zoomed then
     if tab.is_active then
-      return {
-        { Background = { Color = "#fab387" } },
-        { Foreground = { Color = "#11111b" } },
-        { Text = " " .. wezterm.nerdfonts.oct_screen_full },
-        title,
-      }
+      background = colors.focused
+      foreground = colors.text_on_light
     else
-      return {
-        { Foreground = { Color = "#fab387" } },
-        { Text = " " .. wezterm.nerdfonts.oct_screen_full },
-        title,
-      }
+      background = colors.inactive
+      foreground = colors.focused
     end
   end
+  -- set start/end symbols
+  local start_symbol_text = wezterm.nerdfonts.ple_left_half_circle_thick
+  local end_symbol_text = wezterm.nerdfonts.ple_right_half_circle_thick .. " "
+  -- local start_symbol_text = wezterm.nerdfonts.ple_lower_right_triangle
+  -- local end_symbol_text = wezterm.nerdfonts.ple_upper_left_triangle
+  local start_symbol = {
+    { Background = { Color = colors.background } },
+    { Foreground = { Color = background } },
+    { Text = start_symbol_text },
+  }
+  local end_symbol = {
+    { Background = { Color = colors.background } },
+    { Foreground = { Color = background } },
+    { Text = end_symbol_text },
+  }
+  -- define
+  local main_style = {
+    { Background = { Color = background } },
+    { Foreground = { Color = foreground } },
+  }
+  -- truncate title
+  local total_width_of_symbols = 3 + #tostring(tab_index) + 2
+  local max_title_width = config.tab_max_width - total_width_of_symbols
+  if #panel_title > max_title_width then
+    panel_title = panel_title:sub(1, max_title_width - 3) .. ""
+  end
+
+  local title = { { Text = tab_index .. ": " .. panel_title } }
+  if tab.active_pane.is_zoomed then
+    title = list_concat({ { Text = wezterm.nerdfonts.oct_screen_full .. " " } }, title)
+  end
+
+  return list_concat(start_symbol, main_style, title, end_symbol)
   -- add highlight for panes with unseen output
   -- doesn't work well with nvim(it always has unseen output)
   -- might add a check for nvim specifically
@@ -203,7 +254,6 @@ wezterm.on("format-tab-title", function(tab)
   --     { Text = panel_title .. " " },
   --   }
   -- end
-  return { title }
 end)
 
 -- pane navigation between Wezterm and Neovim
