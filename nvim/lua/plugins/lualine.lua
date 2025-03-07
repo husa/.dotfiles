@@ -67,12 +67,13 @@ return {
         lualine_a = { "mode" },
         lualine_b = { { "branch", icon = "" } },
         lualine_c = {
+          { "filetype", separator = "", icon_only = true, padding = { left = 1, right = 0 } },
           {
             "filename",
             path = 1,
             separator = "",
             file_status = false,
-            padding = { left = 1, right = 0 },
+            padding = { left = 0, right = 0 },
             color = function()
               if vim.bo.modified then
                 return "WarningMsg"
@@ -97,7 +98,6 @@ return {
           formatter_name,
           linter_name,
           lsp_name,
-          { "filetype", icon_only = true, padding = { left = 1, right = 0 } },
         },
         lualine_z = {
           {
