@@ -21,6 +21,12 @@ return {
     },
     picker = {
       sources = {
+        grep = {
+          exclude = { "package-lock.json", "node_modules" },
+        },
+        files = {
+          exclude = { "node_modules" },
+        },
         explorer = {
           hidden = true,
           ignored = true,
