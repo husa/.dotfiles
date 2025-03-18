@@ -22,7 +22,7 @@ config.font_size = 15
 config.window_decorations = "MACOS_FORCE_ENABLE_SHADOW|RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.enable_scroll_bar = true
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.93
 config.macos_window_background_blur = 40
 config.window_padding = {
   left = 0,
@@ -166,9 +166,14 @@ local colors = {
   active = "#cba6f7",
   focused = "#fab387",
   inactive = "#313244",
-  background = "#11111b",
+  background = "#1e1e2e",
   text_on_dark = "#cdd6f4",
   text_on_light = "#1e1e2e",
+}
+config.colors = {
+  tab_bar = {
+    background = colors.background,
+  },
 }
 
 local list_concat = function(...)
@@ -223,7 +228,7 @@ wezterm.on("format-tab-title", function(tab)
     { Foreground = { Color = foreground } },
   }
   -- truncate title
-  local total_width_of_symbols = 3 + #tostring(tab_index) + 2
+  local total_width_of_symbols = 3 + #tostring(tab_index) + 5 -- make more space on the right
   local max_title_width = config.tab_max_width - total_width_of_symbols
   if #panel_title > max_title_width then
     panel_title = panel_title:sub(1, max_title_width - 3) .. ""
