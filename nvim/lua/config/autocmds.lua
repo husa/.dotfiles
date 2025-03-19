@@ -116,3 +116,11 @@ vim.api.nvim_create_autocmd("filetype", {
     vim.keymap.set("n", "<Esc>", "<cmd>q<cr>", { desc = "close", buffer = ev.buf })
   end,
 })
+
+-- set commentstring for strcturizr
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "structurizr",
+  callback = function()
+    vim.bo.commentstring = "# %s" -- Change this to your desired comment format
+  end,
+})
