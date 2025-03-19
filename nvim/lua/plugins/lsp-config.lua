@@ -35,8 +35,6 @@ return {
         settings = {
           yaml = {
             schemas = {
-              -- default to kubernetes
-              kubernetes = { "*.yml", "*.yaml" },
               -- github workflows
               ["https://json.schemastore.org/github-workflow.json"] = {
                 "**/.github/workflows/*.yml",
@@ -49,6 +47,12 @@ return {
                 "*compose.yml",
                 "*compose.yaml",
               },
+              ["https://raw.githubusercontent.com/lalcebo/json-schema/master/serverless/reference.json"] = {
+                "**/serverless.yml",
+                "**/serverless.yaml",
+              },
+              -- default to kubernetes
+              kubernetes = { "*.yml", "*.yaml" },
             },
           },
         },
@@ -57,6 +61,20 @@ return {
       jsonls = {
         capabilities = {
           textDocument = { completion = { completionItem = { snippetSupport = true } } },
+        },
+        settings = {
+          json = {
+            schemas = {
+              {
+                fileMatch = { "package.json" },
+                url = "https://json.schemastore.org/package",
+              },
+              {
+                fileMatch = { "tsconfig*.json" },
+                url = "https://json.schemastore.org/tsconfig",
+              },
+            },
+          },
         },
       },
       -- js/ts
