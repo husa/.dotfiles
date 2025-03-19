@@ -7,7 +7,7 @@ return {
 
     "codeium.nvim",
     "saghen/blink.compat",
-    -- "giuxtaposition/blink-cmp-copilot",
+    "giuxtaposition/blink-cmp-copilot",
   },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -89,23 +89,23 @@ return {
         "snippets",
         "buffer",
 
-        -- "copilot"
-        "codeium",
+        "copilot",
+        -- "codeium",
       },
 
       providers = {
-        -- copilot = {
-        --   name = "copilot",
-        --   module = "blink-cmp-copilot",
-        --   score_offset = 100,
-        --   async = true,
-        -- },
-        codeium = {
-          name = "codeium",
-          module = "blink.compat.source",
+        copilot = {
+          name = "copilot",
+          module = "blink-cmp-copilot",
           score_offset = 100,
           async = true,
         },
+        -- codeium = {
+        --   name = "codeium",
+        --   module = "blink.compat.source",
+        --   score_offset = 100,
+        --   async = true,
+        -- },
       },
     },
 

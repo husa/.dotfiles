@@ -1,8 +1,8 @@
 local copilot = {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
-  event = "InsertEnter",
-  enabled = false,
+  event = "BufReadPost",
+  enabled = true,
   opts = {
     -- triggered by blink.cmp
     suggestion = {
@@ -81,4 +81,7 @@ local codeium = {
   },
 }
 
-return { codeium }
+return {
+  copilot,
+  -- codeium
+}
