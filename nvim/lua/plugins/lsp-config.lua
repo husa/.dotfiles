@@ -200,15 +200,16 @@ return {
               default = {
                 "Class",
                 "Constructor",
+                "Function",
+                "Variable", -- include variables
                 "Enum",
                 "Field",
-                "Function",
                 "Interface",
                 "Method",
                 "Module",
                 "Namespace",
                 "Package",
-                -- "Property", -- do not include properties, it add all object fields, etc.
+                "Property",
                 "StaticMethod",
                 "Struct",
                 "Trait",
