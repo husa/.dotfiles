@@ -22,7 +22,7 @@ return {
     {
       "<leader>cL",
       "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-      desc = "LSP Definitions / references / ... (Trouble)",
+      desc = "LSP References/calls(Trouble)",
     },
     {
       "<leader>xL",
