@@ -103,4 +103,9 @@ map("n", "<leader>ut", function()
   }, function(selected)
     vim.bo.filetype = selected
   end)
-end)
+end, { desc = "Switch filetype" })
+
+map("n", "<leader>un", function()
+  vim.g.toggle_relativenumber = not vim.g.toggle_relativenumber
+  vim.opt.relativenumber = vim.g.toggle_relativenumber
+end, { desc = "Toggle relative number" })

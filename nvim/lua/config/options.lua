@@ -17,6 +17,7 @@ vim.g.maplocalleader = "\\"
 
 -- custom globals
 vim.g.autoformat = true
+vim.g.toggle_relativenumber = true
 
 local opt = vim.opt
 
