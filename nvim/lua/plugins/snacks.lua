@@ -27,6 +27,9 @@ return {
         files = {
           exclude = { "node_modules" },
         },
+        spelling = {
+          layout = { preset = "vertical", hidden = { "preview" } },
+        },
         explorer = {
           hidden = true,
           ignored = true,
@@ -336,6 +339,13 @@ return {
         Snacks.picker.colorschemes()
       end,
       desc = "Colorschemes",
+    },
+    {
+      "<leader>uS",
+      function()
+        Snacks.picker.spelling()
+      end,
+      desc = "Spelling Suggestions",
     },
   },
 }
