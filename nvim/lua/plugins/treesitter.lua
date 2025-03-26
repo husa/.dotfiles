@@ -35,7 +35,6 @@ return {
       "sql",
       "properties",
       "java",
-      "structurizr",
       -- temp
       "graphql",
       "vue",
