@@ -48,8 +48,8 @@ return {
                 "*compose.yaml",
               },
               ["https://raw.githubusercontent.com/lalcebo/json-schema/master/serverless/reference.json"] = {
-                "**/serverless.yml",
-                "**/serverless.yaml",
+                "serverless.yml",
+                "serverless.yaml",
               },
               -- default to kubernetes
               kubernetes = { "*.yml", "*.yaml" },
