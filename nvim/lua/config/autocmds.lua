@@ -109,6 +109,7 @@ vim.api.nvim_create_autocmd("filetype", {
     "lspinfo",
     "lazy",
     "oil",
+    "dap-float",
   },
   callback = function(ev)
     vim.keymap.set("n", "q", "<cmd>q<cr>", { desc = "close", buffer = ev.buf })
