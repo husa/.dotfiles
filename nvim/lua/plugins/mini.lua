@@ -23,7 +23,7 @@ return {
       },
       lsp = {
         copilot = { glyph = "", hl = "MiniIconsBlue" },
-        codeium = { glyph = "🤖", hl = "MiniIconsGreen" },
+        codeium = { glyph = "󱙺", hl = "MiniIconsGreen" },
       },
     })
 

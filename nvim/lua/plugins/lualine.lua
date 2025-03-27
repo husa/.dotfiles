@@ -13,12 +13,13 @@ return {
         local names = vim.tbl_map(function(client)
           return client.name
         end, clients)
-        return table.concat(names, " ") .. " "
+        return table.concat(names, " ") .. " 󰘧"
       end
       return "-"
     end
 
-    local function copilot_status()
+    local function ai_status()
+      -- TODO: check for codeium status, icons could be 󱙺 and 󱙻
       if package.loaded["copilot"] and not require("copilot.client").is_disabled() then
         return " "
       end
@@ -93,7 +94,7 @@ return {
             },
           },
         },
-        lualine_x = { "searchcount", copilot_status, "encoding", "fileformat" },
+        lualine_x = { "searchcount", ai_status, "encoding", "fileformat" },
         lualine_y = {
           formatter_name,
           linter_name,
