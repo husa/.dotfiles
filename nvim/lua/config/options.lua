@@ -62,6 +62,9 @@ opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 opt.splitright = true -- split vertical window to the right
 opt.splitbelow = true -- split horizontal window to the bottom
 
+-- floating windows borders
+opt.winborder = "rounded"
+
 -- turn off swapfile
 opt.swapfile = false
 

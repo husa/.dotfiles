@@ -18,14 +18,6 @@ return {
           return {
             -- force solid background
             Folded = { bg = colors.surface1 }, -- folds
-            Pmenu = { bg = colors.surface0 }, -- popups(autocomplete)
-            -- NormalFloat = { fg = colors.text, bg = colors.mantle }, -- floating windows/popups
-
-            BlinkCmpDoc = { link = "Pmenu" },
-            BlinkCmpDocBorder = { link = "Pmenu" },
-            BlinkCmpDocSeparator = { link = "Pmenu" },
-            BlinkCmpSignatureHelp = { link = "Pmenu" },
-            BlinkCmpSignatureHelpBorder = { link = "Pmenu" },
           }
         end,
         integrations = {
