@@ -125,7 +125,7 @@ return {
     local tools = {
       "stylua",
       "prettier",
-      { "eslint_d", version = "13.1.2" },
+      "eslint_d",
       "tflint",
     }
 
