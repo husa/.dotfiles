@@ -4,6 +4,8 @@ append_keymap = [
   { on = ['g', 'b'], run = 'cd ~/.Trash', desc = "Go to Trash" },
   { on = ['g', '.'], run = 'cd ~/.dotfiles', desc = "Go to .dotfiles" },
   { on = ['g', 'p'], run = 'cd ~/Projects', desc = "Go to Projects" },
+  { on = ['g', '/'], run = 'cd /', desc = "Go to root" },
+  { on = ['g', 'v'], run = 'cd /Volumes', desc = "Go to /Volumes" },
 
   # navigation
   { on = "<S-Up>", run = "arrow -5", desc = "Move cursor 10 lines up" },
