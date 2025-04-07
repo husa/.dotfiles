@@ -13,8 +13,9 @@ config.color_scheme = "Catppuccin Mocha"
 
 -- font
 -- config.font = wezterm.font("FiraCode Nerd Font")
-config.font = wezterm.font("GeistMono Nerd Font")
-config.font_size = 15
+-- config.font = wezterm.font("GeistMono Nerd Font")
+config.font = wezterm.font_with_fallback({ "SF Mono", "FiraCode Nerd Font" })
+config.font_size = 16
 
 -- window appearance
 -- config.window_decorations = "MACOS_FORCE_ENABLE_SHADOW|INTEGRATED_BUTTONS|RESIZE"
