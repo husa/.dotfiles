@@ -21,6 +21,9 @@ return {
         ["tsconfig.build.json"] = { glyph = "", hl = "MiniIconsAzure" },
         ["yarn.lock"] = { glyph = "", hl = "MiniIconsBlue" },
       },
+      filetype = {
+        typescript = { glyph = "󰛦", hl = "MiniIconsBlue" },
+      },
       lsp = {
         copilot = { glyph = "", hl = "MiniIconsBlue" },
         codeium = { glyph = "󱙺", hl = "MiniIconsGreen" },
