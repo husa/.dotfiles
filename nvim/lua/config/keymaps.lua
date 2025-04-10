@@ -1,13 +1,16 @@
 local map = vim.keymap.set
 
--- move lines
--- use arrows(jk bindings in lazyvim)
+-- move lines using arrows
 map("n", "<A-Down>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
 map("n", "<A-Up>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
 map("i", "<A-Down>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
 map("i", "<A-Up>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 map("v", "<A-Down>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-Up>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
+map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- scroll
 map({ "n", "v" }, "<S-Down>", "10j", { desc = "Scroll down and center" })
@@ -35,9 +38,9 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+-- map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+-- map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- better indent
 map("v", ">", ">gv")
@@ -110,3 +113,9 @@ map("n", "<leader>un", function()
   vim.g.toggle_relativenumber = not vim.g.toggle_relativenumber
   vim.opt.relativenumber = vim.g.toggle_relativenumber
 end, { desc = "Toggle relative number" })
+
+-- Disable arrow keys
+map({ "n", "v" }, "<Up>", "")
+map({ "n", "v" }, "<Down>", "")
+map({ "n", "v" }, "<Left>", "")
+map({ "n", "v" }, "<Right>", "")
