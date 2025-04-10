@@ -73,10 +73,10 @@ map("n", "<leader>ui", "<cmd>LspInfo<cr>", { desc = "LspInfo" })
 
 -- next/prev diagnostics
 map("n", "]d", function()
-  vim.diagnostic.goto_next()
+  vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Diagnostics next" })
 map("n", "[d", function()
-  vim.diagnostic.goto_prev()
+  vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Diagnostics prev" })
 
 -- select and reload a lazy plugin
