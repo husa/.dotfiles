@@ -29,5 +29,21 @@ return {
       end,
       desc = "Toggle GitSigns",
     },
+    {
+      "[g",
+      function()
+        local gitsigns = require("gitsigns")
+        gitsigns.nav_hunk("prev", { preview = true })
+      end,
+      desc = "Prev Git Hunk",
+    },
+    {
+      "]g",
+      function()
+        local gitsigns = require("gitsigns")
+        gitsigns.nav_hunk("next", { preview = true })
+      end,
+      desc = "Next Git Hunk",
+    },
   },
 }
