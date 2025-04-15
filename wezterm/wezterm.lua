@@ -268,10 +268,10 @@ local function add_pane_nav_keys()
 
   -- map of { key = direction }
   local pane_nav_keys = {
-    UpArrow = "Up",
-    DownArrow = "Down",
-    LeftArrow = "Left",
-    RightArrow = "Right",
+    k = "Up",
+    j = "Down",
+    h = "Left",
+    l = "Right",
   }
 
   local is_vim = function(pane)
