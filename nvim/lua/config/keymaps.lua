@@ -113,9 +113,3 @@ map("n", "<leader>un", function()
   vim.g.toggle_relativenumber = not vim.g.toggle_relativenumber
   vim.opt.relativenumber = vim.g.toggle_relativenumber
 end, { desc = "Toggle relative number" })
-
--- Disable arrow keys
-map({ "n", "v" }, "<Up>", "")
-map({ "n", "v" }, "<Down>", "")
-map({ "n", "v" }, "<Left>", "")
-map({ "n", "v" }, "<Right>", "")
