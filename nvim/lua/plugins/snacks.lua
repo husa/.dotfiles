@@ -42,6 +42,9 @@ return {
               },
             },
           },
+          layout = {
+            preview = "main",
+          },
         },
       },
     },
