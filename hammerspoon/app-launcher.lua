@@ -40,7 +40,7 @@ local catpuccinPalette = {
 }
 
 local apps = {
-  { key = "a", app = "Arc", desc = " Arc", color = { hex = catpuccinPalette.rosewater } },
+  -- { key = "a", app = "Arc", desc = " Arc", color = { hex = catpuccinPalette.rosewater } },
   { key = "b", app = "Bitwarden", desc = " Bitwarden", color = { hex = catpuccinPalette.blue } },
   { key = "c", app = "Google Chrome Beta", desc = " Chrome Beta", color = { hex = catpuccinPalette.yellow } },
   {
@@ -90,7 +90,7 @@ local apps = {
 }
 
 local NUMBER_OF_COLUMNS = 2
-local OVERLAY_WIDTH_FRACTION = "3"
+local OVERLAY_WIDTH_FRACTION = 5
 local FONT_SIZE = 18
 local LINE_HEIGHT = 28
 local PADDING_Y = 8
@@ -207,7 +207,7 @@ for i = 1, NUMBER_OF_COLUMNS do
 end
 
 -- register modal key
-local modal = hotkey.modal.new({ "alt" }, "space")
+local modal = hotkey.modal.new({ "shift" }, "space")
 function modal:entered()
   setImmediate(function()
     overlay:show()
