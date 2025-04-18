@@ -6,12 +6,6 @@ vim.cmd("language en_US")
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.filetype.add({
-  extension = {
-    styl = "sass",
-  },
-})
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -111,6 +105,7 @@ opt.spell = true
 opt.spelllang = "en"
 opt.spellsuggest = "best,9"
 
+-- whitespace characters
 opt.list = true
 opt.listchars = {
   trail = "·",
@@ -121,9 +116,15 @@ opt.listchars = {
   -- eol = "↵",
 }
 
+-- scrolloff - screen lines to keep above and below the cursor
+opt.scrolloff = 10
+
 -- Custom filetypes
 vim.filetype.add({
   filename = {},
+  extension = {
+    styl = "sass",
+  },
   pattern = {
     ["git/config"] = "gitconfig",
     [".*/%.kube/config"] = "yaml",
