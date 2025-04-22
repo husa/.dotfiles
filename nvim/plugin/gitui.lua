@@ -35,4 +35,4 @@ local open_gitui = function()
 end
 
 -- set keymap
-vim.keymap.set("n", "<leader>gG", open_gitui, { desc = "Open GitUI", noremap = true, silent = true })
+vim.keymap.set("n", "<leader>gu", open_gitui, { desc = "Open GitUI", noremap = true, silent = true })
