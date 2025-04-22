@@ -22,9 +22,10 @@ ln -sv (pwd)/fish $HOME/.config/fish
 ln -sv (pwd)/starship/starship.toml $HOME/.config/starship.toml
 ln -sv (pwd)/yazi $HOME/.config/yazi
 ln -sv (pwd)/nvim $HOME/.config/nvim
-ln -sv (pwd)/nvim-lazyvim $HOME/.config/nvim-lazyvim
+# ln -sv (pwd)/nvim-lazyvim $HOME/.config/nvim-lazyvim
 ln -sv (pwd)/wezterm $HOME/.config/wezterm
 ln -sv (pwd)/hammerspoon $HOME/.config/hammerspoon
+ln -sv (pwd)/gitui $HOME/.config/gitui
 ```
 
 change default hammerspoon config location
@@ -65,3 +66,4 @@ curl https://raw.githubusercontent.com/dandavison/delta/main/themes.gitconfig > 
 - [jq](https://github.com/jqlang/jq) - JSON traversal
 - [jnv](https://github.com/ynqa/jnv) - interactive `jq`
 - [neovim](https://neovim.io/) - text editor
+- [gitui](https://github.com/gitui-org/gitui) - `git` TUI
