@@ -35,6 +35,8 @@ return {
       "sql",
       "properties",
       "java",
+      "rust",
+      "ron",
       -- temp
       "graphql",
       "vue",
