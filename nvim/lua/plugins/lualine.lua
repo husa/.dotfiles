@@ -63,10 +63,18 @@ return {
     local opts = {
       options = {
         globalstatus = true,
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
       },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { { "branch", icon = "" } },
+        lualine_a = {
+          {
+            "mode",
+            separator = { left = "", right = "" },
+            padding = { left = 0, right = 0 },
+          },
+        },
+        lualine_b = { { "branch", icon = "", padding = { left = 1, right = 0 } } },
         lualine_c = {
           { "filetype", separator = "", icon_only = true, padding = { left = 1, right = 0 } },
           {
@@ -104,11 +112,12 @@ return {
           {
             "progress",
             separator = "",
-            padding = { left = 1, right = 0 },
+            padding = { left = 0, right = 0 },
           },
           {
             "location",
-            padding = { left = 0 },
+            separator = { left = "", right = "" },
+            padding = { left = 1, right = 0 },
           },
         },
       },
