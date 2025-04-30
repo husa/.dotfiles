@@ -36,6 +36,9 @@ return {
         ['"'] = { action = "closeopen", pair = '""', neigh_pattern = neigh_pattern, register = { cr = false } },
         ["'"] = { action = "closeopen", pair = "''", neigh_pattern = neigh_pattern, register = { cr = false } },
         ["`"] = { action = "closeopen", pair = "``", neigh_pattern = neigh_pattern, register = { cr = false } },
+        ["("] = { action = "closeopen", pair = "()", neigh_pattern = neigh_pattern, register = { cr = false } },
+        ["["] = { action = "closeopen", pair = "[]", neigh_pattern = neigh_pattern, register = { cr = false } },
+        ["{"] = { action = "closeopen", pair = "{}", neigh_pattern = neigh_pattern, register = { cr = false } },
       },
     })
 
