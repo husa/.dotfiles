@@ -58,14 +58,14 @@ return {
 
     -- zen
     {
-      "<leader>uz",
+      "<leader>uZ",
       function()
         Snacks.zen.zen()
       end,
       desc = "Zen Mode",
     },
     {
-      "<leader>uZ",
+      "<leader>uz",
       function()
         Snacks.zen.zoom()
       end,
