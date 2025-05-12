@@ -60,6 +60,15 @@ return {
       return linters_str .. " 󱉶"
     end
 
+    local diagnostic_signs = vim.diagnostic.config().signs
+    local has_diagnostic_signs = disgnostic_signs and diagnostic_signs.text
+    local diagnostic_symbols = {
+      error = has_diagnostic_signs and diagnostic_signs.text[vim.diagnostic.severity.ERROR] or "",
+      warn = has_diagnostic_signs and diagnostic_signs.text[vim.diagnostic.severity.WARN] or "",
+      info = has_diagnostic_signs and diagnostic_signs.text[vim.diagnostic.severity.INFO] or "",
+      hint = has_diagnostic_signs and diagnostic_signs.text[vim.diagnostic.severity.HINT] or "",
+    }
+
     local opts = {
       options = {
         globalstatus = true,
@@ -94,12 +103,7 @@ return {
           "diff",
           {
             "diagnostics",
-            symbols = {
-              error = vim.diagnostic.config().signs.text[vim.diagnostic.severity.ERROR],
-              warn = vim.diagnostic.config().signs.text[vim.diagnostic.severity.WARN],
-              info = vim.diagnostic.config().signs.text[vim.diagnostic.severity.INFO],
-              hint = vim.diagnostic.config().signs.text[vim.diagnostic.severity.HINT],
-            },
+            symbols = diagnostic_symbols,
           },
         },
         lualine_x = { "searchcount", ai_status, "encoding", "fileformat" },
