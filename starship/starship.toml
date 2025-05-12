@@ -32,12 +32,12 @@ fish_indicator = "[ ](blue)"
 zsh_indicator = '\$'
 
 [character]
-success_symbol = "[ I [](green bg:none)](bold black bg:green)"
-error_symbol = "[ I [](green bg:none)](bold black bg:green)"
-vimcmd_symbol = "[ N [](blue bg:none)](bold black bg:blue)"
-vimcmd_visual_symbol = "[ V [](purple bg:none)](bold black bg:purple)"
-vimcmd_replace_one_symbol = "[ R [](cyan bg:none)](bold black bg:cyan)"
-vimcmd_replace_symbol = "[ R [](cyan bg:none)](bold black bg:cyan)"
+success_symbol = "[❯](green)"
+error_symbol = "[❯](green)"
+vimcmd_symbol = "[❮](blue)"
+vimcmd_visual_symbol = "[❮](purple)"
+vimcmd_replace_one_symbol = "[❯](red)"
+vimcmd_replace_symbol = "[❯](red)"
 
 
 [status]
