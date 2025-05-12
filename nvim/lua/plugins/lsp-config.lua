@@ -5,7 +5,6 @@ return {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
     "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
     "saghen/blink.cmp",
     {
       "folke/lazydev.nvim",
@@ -35,13 +34,17 @@ return {
         settings = {
           yaml = {
             schemas = {
+              -- default to kubernetes
+              kubernetes = { "*.yml", "*.yaml" },
               -- github workflows
-              ["https://json.schemastore.org/github-workflow.json"] = {
-                "**/.github/workflows/*.yml",
-                "**/.github/workflows/*.yaml",
-                "**/.gitea/workflows/*.yml",
-                "**/.gitea/workflows/*.yaml",
-              },
+
+              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+              -- ["https://json.schemastore.org/github-workflow.json"] = {
+              --   "/.github/workflows/*.yml",
+              --   "/.github/workflows/*.yaml",
+              --   "/.gitea/workflows/*.yml",
+              --   "/.gitea/workflows/*.yaml",
+              -- },
               -- docker compose
               ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = {
                 "*compose.yml",
@@ -51,8 +54,6 @@ return {
                 "serverless.yml",
                 "serverless.yaml",
               },
-              -- default to kubernetes
-              kubernetes = { "*.yml", "*.yaml" },
             },
           },
         },
@@ -92,35 +93,41 @@ return {
 
     -- Vue
     -- add vue-language-server and add to TS server
-    language_servers["volar"] = {
-      init_options = {
-        vue = {
-          hybridMode = true,
+    if false then
+      language_servers["volar"] = {
+        init_options = {
+          vue = {
+            hybridMode = true,
+          },
         },
-      },
-    }
-    local Utils = require("utils")
-    local vuels_package_path = require("mason-registry").get_package("vue-language-server"):get_install_path()
-    local vtsls_defaults = require("lspconfig.configs.vtsls").default_config
-    local vtsls_with_defaults = Utils.deep_extend(vtsls_defaults, language_servers.vtsls)
-    language_servers.vtsls = Utils.deep_extend(vtsls_with_defaults, {
-      filetypes = { "vue" },
-      settings = {
-        vtsls = {
-          tsserver = {
-            globalPlugins = {
-              {
-                name = "@vue/typescript-plugin",
-                location = vuels_package_path .. "/node_modules/@vue/language-server",
-                languages = { "vue" },
-                configNamespace = "typescript",
-                enableForWorkspaceTypeScriptVersions = true,
+      }
+      local Utils = require("utils")
+      local vuels_package = require("mason-registry").get_package("vue-language-server")
+      if vuels_package ~= nil then
+        print(vim.inspect(vuels_package))
+        local vuels_package_path = vuels_package:get_install_path()
+        local vtsls_defaults = require("lspconfig.configs.vtsls").default_config
+        local vtsls_with_defaults = Utils.deep_extend(vtsls_defaults, language_servers.vtsls)
+        language_servers.vtsls = Utils.deep_extend(vtsls_with_defaults, {
+          filetypes = { "vue" },
+          settings = {
+            vtsls = {
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = "@vue/typescript-plugin",
+                    location = vuels_package_path .. "/node_modules/@vue/language-server",
+                    languages = { "vue" },
+                    configNamespace = "typescript",
+                    enableForWorkspaceTypeScriptVersions = true,
+                  },
+                },
               },
             },
           },
-        },
-      },
-    })
+        })
+      end
+    end
 
     local tools = {
       "stylua",
@@ -135,44 +142,40 @@ return {
       },
     })
 
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    for server_name, server in pairs(language_servers) do
+      capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+      capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+      server.capabilities = capabilities
+      vim.lsp.config(server_name, server)
+    end
+
     local ensure_installed = vim.tbl_keys(language_servers or {})
     vim.list_extend(ensure_installed, tools)
 
-    require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-
     require("mason-lspconfig").setup({
-      handlers = {
-        function(server_name)
-          local server = language_servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for ts_ls)
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities)
-          require("lspconfig")[server_name].setup(server)
+      ensure_installed = ensure_installed,
+      automatic_installation = true,
+      automatic_enable = true,
+    })
 
-          -- configure diagnostics
-          vim.diagnostic.config({
-            float = {
-              source = true,
-            },
-            virtual_text = {
-              spacing = 4,
-              -- source = "if_many",
-              prefix = "●",
-            },
-            signs = {
-              text = {
-                [vim.diagnostic.severity.ERROR] = " ",
-                [vim.diagnostic.severity.WARN] = " ",
-                [vim.diagnostic.severity.HINT] = " ",
-                [vim.diagnostic.severity.INFO] = " ",
-              },
-            },
-          })
-        end,
+    -- configure diagnostics
+    vim.diagnostic.config({
+      float = {
+        source = true,
+      },
+      virtual_text = {
+        spacing = 4,
+        -- source = "if_many",
+        prefix = "●",
+      },
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = " ",
+          [vim.diagnostic.severity.INFO] = " ",
+        },
       },
     })
 
