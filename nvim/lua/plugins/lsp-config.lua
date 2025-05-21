@@ -3,7 +3,8 @@ return {
   version = "*",
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
-    { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+    { "williamboman/mason.nvim", opts = {} }, -- NOTE: Must be loaded before dependants
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     "williamboman/mason-lspconfig.nvim",
     "saghen/blink.cmp",
     {
@@ -153,8 +154,12 @@ return {
     local ensure_installed = vim.tbl_keys(language_servers or {})
     vim.list_extend(ensure_installed, tools)
 
-    require("mason-lspconfig").setup({
+    require("mason-tool-installer").setup({
       ensure_installed = ensure_installed,
+    })
+
+    require("mason-lspconfig").setup({
+      ensure_installed = {}, -- installed using mason-tool-installer
       automatic_installation = true,
       automatic_enable = true,
     })
