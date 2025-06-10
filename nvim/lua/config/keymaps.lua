@@ -81,6 +81,9 @@ end, { desc = "Diagnostics next" })
 map("n", "[d", function()
   vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Diagnostics prev" })
+map("n", "<leader>ud", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { silent = true, noremap = true, desc = "Toggle diagnostics" })
 
 -- select and reload a lazy plugin
 map("n", "<leader>ur", function()
