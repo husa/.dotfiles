@@ -28,8 +28,8 @@ style = 'yellow italic'
 
 [shell]
 disabled = false
-fish_indicator = "[ ](blue)"
-zsh_indicator = '\$'
+fish_indicator = "[󰈺](blue)"
+zsh_indicator = ''
 
 [character]
 success_symbol = "[❯](green)"
