@@ -4,9 +4,6 @@ local wezterm = require("wezterm")
 ---@class Config
 local config = wezterm.config_builder()
 
--- Spawn a fish shell in login mode
-config.default_prog = { "/usr/local/bin/fish", "-l" }
-
 -- colorscheme
 -- config.color_scheme = "Catppuccin Mocha (Gogh)" -- black tabs
 config.color_scheme = "Catppuccin Mocha"
