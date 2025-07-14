@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 append_keymap = [
   # directories shortcuts
   { on = ['g', 'b'], run = 'cd ~/.Trash', desc = "Go to Trash" },

@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 show_hidden = true
 linemode = "mtime"
 
@@ -22,6 +22,3 @@ append_rules = [
   # add "open" to the list
   { mime = "text/*", use = [ "edit", "open", "reveal" ] },
 ]
-
-[plugin]
-prepend_previewers = [{ name = "*.md", run = "glow" }]
