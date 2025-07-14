@@ -61,7 +61,7 @@ return {
     end
 
     local diagnostic_signs = vim.diagnostic.config().signs
-    local has_diagnostic_signs = disgnostic_signs and diagnostic_signs.text
+    local has_diagnostic_signs = diagnostic_signs and diagnostic_signs.text
     local diagnostic_symbols = {
       error = has_diagnostic_signs and diagnostic_signs.text[vim.diagnostic.severity.ERROR] or "",
       warn = has_diagnostic_signs and diagnostic_signs.text[vim.diagnostic.severity.WARN] or "",

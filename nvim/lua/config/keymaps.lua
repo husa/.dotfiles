@@ -81,6 +81,7 @@ end, { desc = "Diagnostics next" })
 map("n", "[d", function()
   vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Diagnostics prev" })
+-- toggle diagnostics
 map("n", "<leader>ud", function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { silent = true, noremap = true, desc = "Toggle diagnostics" })
