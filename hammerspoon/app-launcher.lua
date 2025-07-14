@@ -45,7 +45,7 @@ local apps = {
   { key = "c", app = "Google Chrome Beta", desc = " Chrome Beta", color = { hex = catpuccinPalette.yellow } },
   {
     key = "c",
-    modifier = { "shift" },
+    modifier = "shift",
     app = "Google Chrome",
     desc = " Chrome",
     keySymbol = "C",
@@ -62,7 +62,7 @@ local apps = {
   },
   {
     key = "o",
-    modifier = { "shift" },
+    modifier = "shift",
     app = "Microsoft Outlook",
     desc = "󰴢 Outlook",
     keySymbol = "O",
@@ -81,7 +81,7 @@ local apps = {
   },
   {
     key = "1",
-    modifier = { "shift" },
+    modifier = "shift",
     app = "Admin By Request",
     keySymbol = "!",
     desc = "󱥡 Admin By Request",
@@ -207,7 +207,8 @@ for i = 1, NUMBER_OF_COLUMNS do
 end
 
 -- register modal key
-local modal = hotkey.modal.new({ "shift" }, "space")
+local hyper = { "cmd", "alt", "ctrl", "shift" }
+local modal = hotkey.modal.new(hyper, "space")
 function modal:entered()
   setImmediate(function()
     overlay:show()
@@ -232,7 +233,13 @@ for i = 1, #apps do
   modal:bind(modifier, appConfig.key, nil, function()
     modal:exit()
     setImmediate(function()
-      application.launchOrFocus(appConfig.app)
+      if type(appConfig.app) == "function" then
+        appConfig.app()
+      elseif type(appConfig.app) == "string" then
+        application.launchOrFocus(appConfig.app)
+      else
+        print('Invalid app type: "' .. type(appConfig.app) .. '". App name must be a string or function.')
+      end
     end)
   end)
 end
