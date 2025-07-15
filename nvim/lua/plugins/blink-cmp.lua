@@ -5,7 +5,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
 
-    "codeium.nvim",
+    -- "codeium.nvim",
     "saghen/blink.compat",
     "giuxtaposition/blink-cmp-copilot",
   },
