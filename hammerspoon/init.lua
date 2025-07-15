@@ -16,7 +16,7 @@ hs.hotkey.bind(hyperKey, "R", function()
 end)
 
 -- hs.loadSpoon("MiroWindowsManager")
-hs.loadSpoon("WhichAppLauncher")
+hs.loadSpoon("WhichApp")
 local catpuccinPalette = {
   rosewater = "#f5e0dc",
   flamingo = "#f2cdcd",
@@ -45,7 +45,7 @@ local catpuccinPalette = {
   mantle = "#181825",
   crust = "#11111b",
 }
-spoon.WhichAppLauncher.apps = {
+spoon.WhichApp.apps = {
   { key = "b", app = "Bitwarden", desc = " Bitwarden", color = { hex = catpuccinPalette.blue } },
   {
     key = "c",
@@ -67,7 +67,7 @@ spoon.WhichAppLauncher.apps = {
   {
     key = "o",
     modifier = "shift",
-    app = "Microsoft Outlook",
+    app = "Outlook (PWA)",
     desc = "󰴢 Outlook",
     keySymbol = "O",
     color = { hex = catpuccinPalette.sky },
@@ -92,7 +92,7 @@ spoon.WhichAppLauncher.apps = {
     color = { hex = catpuccinPalette.peach },
   },
 }
-spoon.WhichAppLauncher.options = {
+spoon.WhichApp.options = {
   columns = 2,
   dialogWidth = 550,
   fontName = "Maple Mono NF",
@@ -103,22 +103,10 @@ spoon.WhichAppLauncher.options = {
   -- hideTimeout = 0,
 }
 
-spoon.WhichAppLauncher:bindHotkeys({
+spoon.WhichApp:bindHotkeys({
   show = { { "cmd" }, "escape" },
   hide = { nil, "escape" },
 })
--- -- window manager
--- hs.loadSpoon("MiroWindowsManager")
--- local windowManagerLeader = { "cmd", "ctrl", "shift" }
--- hs.window.animationDuration = 0.2
--- spoon.MiroWindowsManager:bindHotkeys({
---   up = { windowManagerLeader, "k" },
---   right = { windowManagerLeader, "l" },
---   down = { windowManagerLeader, "j" },
---   left = { windowManagerLeader, "h" },
---   fullscreen = { windowManagerLeader, "return" },
--- })
-
 -- window navigation
 -- require("window-navigation")
 
@@ -126,6 +114,9 @@ spoon.WhichAppLauncher:bindHotkeys({
 -- require("app-launcher")
 
 -- require("playground")
+
+-- window manager
+require("window-manager")
 
 -- display total config load time
 local loadTime = math.floor((hs.timer.absoluteTime() - startTime) / 1e6)

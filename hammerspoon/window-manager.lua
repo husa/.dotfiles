@@ -3,37 +3,60 @@ local window = require("hs.window")
 
 window.animationDuration = 0
 
--- resize windows
-local windowResizeLeader = { "alt", "ctrl", "shift" }
 -- fullscreen
 local windowSizeBeforeFullscreen = {}
 
+local leader = { "cmd", "ctrl" }
+local padding = 10 -- pixels of padding around windows
+
+-- move window to cell with specified coordinates and size
+local function moveToCell(x, y, w, h)
+  return function()
+    local win = hs.window.focusedWindow()
+    local screen = win:screen()
+    local screenFrame = screen:frame()
+    local halfW = screen:frame().w / 2
+    local halfH = screen:frame().h / 2
+
+    local wx = screenFrame.x + (x * halfW) + 1 / (1 + x) * padding
+    local wy = screenFrame.y + (y * halfH) + 1 / (1 + y) * padding
+    local ww = (w * halfW) - padding - w / 2 * padding
+    local wh = (h * halfH) - padding - h / 2 * padding
+
+    win:setFrame(hs.geometry.rect(wx, wy, ww, wh), 0)
+  end
+end
+
+-- helper
 local eqWithTolerance = function(tolerance)
   return function(a, b)
     return math.abs(a - b) <= tolerance
   end
 end
-local eq = eqWithTolerance(2)
-hotkey.bind(windowResizeLeader, "return", function()
-  local win = window.focusedWindow()
-  local id = win:id()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
-  local isFullScreen = eq(winFrame.w, screenFrame.w) and eq(winFrame.h, screenFrame.h)
+local eq = eqWithTolerance(10)
 
-  if not isFullScreen then
-    -- store current frame for restoration and fullscreen
-    windowSizeBeforeFullscreen[id] = winFrame
-    winFrame = screenFrame
-    win:setFrame(winFrame, 0)
-  else
-    -- try to restore frame
-    if windowSizeBeforeFullscreen[id] then
-      win:setFrame(windowSizeBeforeFullscreen[id], 0)
+-- toggle window size between target and previous size
+local toggleWindow = function(fn)
+  return function()
+    local win = window.focusedWindow()
+    local id = win:id()
+    local winFrame = win:frame()
+    local targetFrame = fn()
+    local isAtTarget = eq(winFrame.w, targetFrame.w) and eq(winFrame.h, targetFrame.h)
+
+    if not isAtTarget then
+      -- store current frame for restoration and fullscreen
+      windowSizeBeforeFullscreen[id] = winFrame
+      win:setFrame(targetFrame, 0)
+    else
+      -- try to restore frame
+      if windowSizeBeforeFullscreen[id] then
+        win:setFrame(windowSizeBeforeFullscreen[id], 0)
+      end
     end
   end
-end)
+end
+
 -- clear cached window size on window close
 -- NOTE: this "filter" is damn slow to initalize
 window.filter.default:subscribe(window.filter.windowDestroyed, function(win)
@@ -43,102 +66,40 @@ window.filter.default:subscribe(window.filter.windowDestroyed, function(win)
   end
 end)
 
--- halves
-hotkey.bind(windowResizeLeader, "left", function()
-  local win = window.focusedWindow()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
+hs.hotkey.bind(leader, "h", moveToCell(0, 0, 1, 2)) -- left half
+hs.hotkey.bind(leader, "j", moveToCell(0, 1, 2, 1)) -- bottom half
+hs.hotkey.bind(leader, "k", moveToCell(0, 0, 2, 1)) -- top half
+hs.hotkey.bind(leader, "l", moveToCell(1, 0, 1, 2)) -- right half
+hs.hotkey.bind(leader, "n", moveToCell(0, 0, 1, 1)) -- top left
+hs.hotkey.bind(leader, "m", moveToCell(0, 1, 1, 1)) -- bottom left
+hs.hotkey.bind(leader, ",", moveToCell(1, 1, 1, 1)) -- bottom right
+hs.hotkey.bind(leader, ".", moveToCell(1, 0, 1, 1)) -- top right
 
-  winFrame.x = screenFrame.x
-  winFrame.y = screenFrame.y
-  winFrame.w = screenFrame.w / 2
-  winFrame.h = screenFrame.h
-  win:setFrame(winFrame, 0)
-end)
-hotkey.bind(windowResizeLeader, "down", function()
-  local win = window.focusedWindow()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
+hotkey.bind(
+  leader,
+  "return",
+  toggleWindow(function()
+    local screenFrame = window.focusedWindow():screen():frame()
+    return hs.geometry.rect(
+      screenFrame.x + padding,
+      screenFrame.y + padding,
+      screenFrame.w - 2 * padding,
+      screenFrame.h - 2 * padding
+    )
+  end)
+)
 
-  winFrame.x = screenFrame.x
-  winFrame.y = screenFrame.y + (screenFrame.h / 2)
-  winFrame.w = screenFrame.w
-  winFrame.h = screenFrame.h / 2
-  win:setFrame(winFrame, 0)
-end)
-hotkey.bind(windowResizeLeader, "up", function()
-  local win = window.focusedWindow()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
-
-  winFrame.x = screenFrame.x
-  winFrame.y = screenFrame.y
-  winFrame.w = screenFrame.w
-  winFrame.h = screenFrame.h / 2
-  win:setFrame(winFrame, 0)
-end)
-hotkey.bind(windowResizeLeader, "right", function()
-  local win = window.focusedWindow()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
-
-  winFrame.x = screenFrame.x + (screenFrame.w / 2)
-  winFrame.y = screenFrame.y
-  winFrame.w = screenFrame.w / 2
-  winFrame.h = screenFrame.h
-  win:setFrame(winFrame, 0)
-end)
-
--- quarters
-hotkey.bind(windowResizeLeader, "u", function()
-  local win = window.focusedWindow()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
-
-  winFrame.x = screenFrame.x
-  winFrame.y = screenFrame.y
-  winFrame.w = screenFrame.w / 2
-  winFrame.h = screenFrame.h / 2
-  win:setFrame(winFrame, 0)
-end)
-hotkey.bind(windowResizeLeader, "j", function()
-  local win = window.focusedWindow()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
-
-  winFrame.x = screenFrame.x
-  winFrame.y = screenFrame.y + (screenFrame.h / 2)
-  winFrame.w = screenFrame.w / 2
-  winFrame.h = screenFrame.h / 2
-  win:setFrame(winFrame, 0)
-end)
-hotkey.bind(windowResizeLeader, "i", function()
-  local win = window.focusedWindow()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
-
-  winFrame.x = screenFrame.x + (screenFrame.w / 2)
-  winFrame.y = screenFrame.y
-  winFrame.w = screenFrame.w / 2
-  winFrame.h = screenFrame.h / 2
-  win:setFrame(winFrame, 0)
-end)
-hotkey.bind(windowResizeLeader, "k", function()
-  local win = window.focusedWindow()
-  local winFrame = win:frame()
-  local screen = win:screen()
-  local screenFrame = screen:frame()
-
-  winFrame.x = screenFrame.x + (screenFrame.w / 2)
-  winFrame.y = screenFrame.y + (screenFrame.h / 2)
-  winFrame.w = screenFrame.w / 2
-  winFrame.h = screenFrame.h / 2
-  win:setFrame(winFrame, 0)
-end)
+hotkey.bind(
+  leader,
+  "c",
+  toggleWindow(function()
+    local screenFrame = window.focusedWindow():screen():frame()
+    local coeff = 1.618
+    return hs.geometry.rect(
+      screenFrame.x + (screenFrame.w - screenFrame.w / coeff) / 2,
+      screenFrame.y + (screenFrame.h - screenFrame.h / coeff) / 2,
+      screenFrame.w / coeff,
+      screenFrame.h / coeff
+    )
+  end)
+)
