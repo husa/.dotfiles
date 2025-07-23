@@ -65,5 +65,5 @@
   navigate = true     # use n and N to move between diff sections
   side-by-side = true # side-by-side view
   line-numbers = true
-  features = colibri 
+  features = colibri
 
