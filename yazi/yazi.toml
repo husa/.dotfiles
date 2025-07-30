@@ -1,6 +1,6 @@
 [mgr]
 show_hidden = true
-linemode = "mtime"
+linemode = "custom_mtime"
 
 [preview]
 tab_size = 2
