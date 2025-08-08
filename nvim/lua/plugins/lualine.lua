@@ -90,7 +90,12 @@ return {
             "filename",
             path = 1,
             separator = "",
-            file_status = false,
+            file_status = true,
+            symbols = {
+              modified = "",
+              readonly = "",
+              unnamed = "[No Name]",
+            },
             padding = { left = 0, right = 0 },
             color = function()
               if vim.bo.modified then
