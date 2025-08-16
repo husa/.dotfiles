@@ -79,7 +79,7 @@ map("n", "]d", function()
   vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Diagnostics next" })
 map("n", "[d", function()
-  vim.diagnostic.jump({ count = 1, float = true })
+  vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Diagnostics prev" })
 -- toggle diagnostics
 map("n", "<leader>ud", function()
@@ -117,3 +117,6 @@ map("n", "<leader>un", function()
   vim.g.toggle_relativenumber = not vim.g.toggle_relativenumber
   vim.opt.relativenumber = vim.g.toggle_relativenumber
 end, { desc = "Toggle relative number" })
+
+-- toggle animated cursor
+map("n", "<leader>uc", "<cmd>SmearCursorToggle<cr>", { desc = "Toggle number" })
