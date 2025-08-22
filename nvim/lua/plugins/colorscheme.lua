@@ -20,6 +20,10 @@ return {
             Folded = { bg = colors.surface1 }, -- folds
           }
         end,
+        float = {
+          transparent = transparent_background,
+          solid = false,
+        },
         integrations = {
           blink_cmp = true,
           native_lsp = {
