@@ -10,7 +10,10 @@ append_keymap = [
   # navigation
   { on = "<S-Up>", run = "arrow -5", desc = "Move cursor 10 lines up" },
   { on = "<S-Down>", run = "arrow 5", desc = "Move cursor 10 lines down" },
-  #
+
+  # linemode shoftcut
+  { on = ["m", "c"], run = "linemode custom_mtime", "desc" = "Linemode: custom mtime" },
+
   # WFT! Shift works with arrow keys, but not PageUp/Down, Enter, etc.
   #
   # # testing
