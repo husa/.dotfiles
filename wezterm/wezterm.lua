@@ -12,8 +12,10 @@ config.color_scheme = "Catppuccin Mocha"
 -- config.font = wezterm.font("FiraCode Nerd Font")
 -- config.font = wezterm.font("GeistMono Nerd Font")
 -- config.font = wezterm.font_with_fallback({ "SF Mono", "FiraCode Nerd Font" })
-config.font = wezterm.font("Maple Mono NF")
-config.font_size = 16
+-- config.font = wezterm.font("Maple Mono NF")
+-- config.font = wezterm.font("PT Mono")
+-- config.font = wezterm.font("Monaco")
+config.font_size = 15
 config.line_height = 1.2
 
 -- window appearance
