@@ -47,6 +47,11 @@ set -x FZF_DEFAULT_COMMAND fd --type file --color=always
 set -x FZF_DEFAULT_OPTS "--ansi --border --highlight-line --layout=reverse --preview-window 'right:50%' --preview='bat --color=always --style=grid,numbers --wrap=character {}'"
 set -x FZF_CTRL_R_OPTS "--preview='echo {}' --preview-window=hidden"
 
-
 # Enable AWS CLI autocompletion: github.com/aws/aws-cli/issues/1079
 complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+
+# if file ./local.fish exists, source it
+if test -f $HOME/.config/fish/local.fish
+  source $HOME/.config/fish/local.fish
+end
+
