@@ -4,6 +4,9 @@ local copilot = {
   event = "BufReadPost",
   enabled = true,
   opts = {
+    filetypes = {
+      markdown = true,
+    },
     -- triggered by blink.cmp
     suggestion = {
       -- auto_trigger = true,
