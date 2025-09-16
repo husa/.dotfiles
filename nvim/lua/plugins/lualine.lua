@@ -4,6 +4,14 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   event = "VeryLazy",
   config = function()
+    local function format_brachname(branchname)
+      local limit = 20
+      if #branchname <= limit then
+        return branchname
+      end
+      return branchname:sub(1, limit - 3) .. "..."
+    end
+
     local function lsp_name()
       ---@type vim.lsp.Client[]
       local clients = vim.tbl_filter(function(client)
@@ -83,7 +91,7 @@ return {
             padding = { left = 0, right = 0 },
           },
         },
-        lualine_b = { { "branch", icon = "", padding = { left = 1, right = 0 } } },
+        lualine_b = { { "branch", fmt = format_brachname, icon = "", padding = { left = 1, right = 0 } } },
         lualine_c = {
           { "filetype", separator = "", icon_only = true, padding = { left = 1, right = 0 } },
           {
