@@ -4,9 +4,8 @@ return {
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     { "williamboman/mason.nvim", opts = {} }, -- NOTE: Must be loaded before dependants
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "saghen/blink.cmp",
+    "WhoIsSethDaniel/mason-tool-installer.nvim", -- automatically install LSPs and related tools
+    "williamboman/mason-lspconfig.nvim", -- used only by "mason-tool-installer" to convert LSP names to mason package names
     {
       "folke/lazydev.nvim",
       ft = "lua",
@@ -23,7 +22,7 @@ return {
       -- lua
       lua_ls = {
         settings = {
-          Lua = {
+          lua = {
             completion = {
               callSnippet = "Replace",
             },
@@ -94,42 +93,28 @@ return {
 
     -- Vue
     -- add vue-language-server and add to TS server
-    -- if false then
-    --   language_servers["volar"] = {
-    --     init_options = {
-    --       vue = {
-    --         hybridMode = true,
-    --       },
-    --     },
-    --   }
-    --   local Utils = require("utils")
-    --   local vuels_package = require("mason-registry").get_package("vue-language-server")
-    --   if vuels_package ~= nil then
-    --     print(vim.inspect(vuels_package))
-    --     local vuels_package_path = vuels_package:get_install_path()
-    --     local vtsls_defaults = require("lspconfig.configs.vtsls").default_config
-    --     local vtsls_with_defaults = Utils.deep_extend(vtsls_defaults, language_servers.vtsls)
-    --     language_servers.vtsls = Utils.deep_extend(vtsls_with_defaults, {
-    --       filetypes = { "vue" },
-    --       settings = {
-    --         vtsls = {
-    --           tsserver = {
-    --             globalPlugins = {
-    --               {
-    --                 name = "@vue/typescript-plugin",
-    --                 location = vuels_package_path .. "/node_modules/@vue/language-server",
-    --                 languages = { "vue" },
-    --                 configNamespace = "typescript",
-    --                 enableForWorkspaceTypeScriptVersions = true,
-    --               },
-    --             },
-    --           },
-    --         },
-    --       },
-    --     })
-    --   end
-    -- end
+    language_servers["vue_ls"] = {}
+    language_servers.vtsls = require("utils").deep_extend(language_servers.vtsls, {
+      filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+      settings = {
+        vtsls = {
+          tsserver = {
+            globalPlugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = vim.fn.stdpath("data")
+                  .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+                languages = { "vue" },
+                configNamespace = "typescript",
+                enableForWorkspaceTypeScriptVersions = true,
+              },
+            },
+          },
+        },
+      },
+    })
 
+    -- additional linters/formatters to install
     local tools = {
       "stylua",
       "prettier",
@@ -143,14 +128,6 @@ return {
       },
     })
 
-    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- for server_name, server in pairs(language_servers) do
-    --   capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-    --   capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-    --   server.capabilities = capabilities
-    --   vim.lsp.config(server_name, server)
-    -- end
-
     local ensure_installed = vim.tbl_keys(language_servers or {})
     vim.list_extend(ensure_installed, tools)
 
@@ -158,19 +135,13 @@ return {
       ensure_installed = ensure_installed,
     })
 
-    -- TODO: refactor this handlers and vim.lsp.config
-    require("mason-lspconfig").setup({
-      ensure_installed = {}, -- installed using mason-tool-installer
-      automatic_installation = false,
-      automatic_enable = true,
-      handlers = {
-        function(server_name)
-          require("lspconfig")[server_name].setup({
-            -- capabilities = capabilities,
-          })
-        end,
-      },
-    })
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    for server_name, server in pairs(language_servers) do
+      capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+      server.capabilities = capabilities
+      vim.lsp.config(server_name, server)
+    end
+    vim.lsp.enable(vim.tbl_keys(language_servers))
 
     -- configure diagnostics
     vim.diagnostic.config({
