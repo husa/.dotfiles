@@ -1,9 +1,9 @@
 [[plugin.deps]]
 use = "Reledia/glow"
-rev = "4e016fa"
-hash = "52e5f5c602962e7cbf874da28f52ba45"
+rev = "bd3eaa5"
+hash = "92b5c58159a51c567f82b618cee2b78"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "d479f67"
-hash = "228f8191fd4f8dbfcf70f9f87073718e"
+rev = "4296a38"
+hash = "deff42490f77b222e9d3a84dc16a76c5"

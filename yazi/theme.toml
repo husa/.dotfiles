@@ -1,5 +1,5 @@
 [flavor]
-use = "catppuccin-mocha"
+dark = "catppuccin-mocha"
 # use = "tokyo-night"
 # use = "ls-colors"
 # use = "gruvbox" # custom one
