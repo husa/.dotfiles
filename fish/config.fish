@@ -26,11 +26,25 @@ fish_config theme choose "fish default"
 # remove greeting
 set -U fish_greeting
 
+# generate completions for kubectl and docker if not exist
+set -l compdir $fish_complete_path[1]
 if command -q kubectl
-  kubectl completion fish | source
+  set -l kubectl_comp $compdir/kubectl.fish
+  if not test -e $kubectl_comp
+    begin
+      set -l tmp (mktemp "$kubectl_comp".XXXXXX)
+      kubectl completion fish > $tmp 2>/dev/null; and mv $tmp $kubectl_comp; or rm -f $tmp
+    end
+  end
 end
 if command -q docker
-  docker completion fish | source
+  set -l docker_comp $compdir/docker.fish
+  if not test -e $docker_comp
+    begin
+      set -l tmp (mktemp "$docker_comp".XXXXXX)
+      docker completion fish > $tmp 2>/dev/null; and mv $tmp $docker_comp; or rm -f $tmp
+    end
+  end
 end
 
 if command -q starship
