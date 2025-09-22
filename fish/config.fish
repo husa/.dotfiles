@@ -26,14 +26,23 @@ fish_config theme choose "fish default"
 # remove greeting
 set -U fish_greeting
 
-kubectl completion fish | source
-docker completion fish | source
+if command -q kubectl
+  kubectl completion fish | source
+end
+if command -q docker
+  docker completion fish | source
+end
 
-starship init fish | source
+if command -q starship
+  starship init fish | source
+end
 
-zoxide init fish | source
-
-fzf --fish | source
+if command -q fzf
+  fzf --fish | source
+end
+if command -q zoxide
+  zoxide init fish | source
+end
 
 # set default editor
 set -x EDITOR nvim
