@@ -126,7 +126,7 @@ vim.filetype.add({
     styl = "sass",
   },
   pattern = {
-    ["git/config"] = "gitconfig",
+    [".*/git/config"] = "gitconfig",
     [".*/%.kube/config"] = "yaml",
   },
 })
