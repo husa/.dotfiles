@@ -20,6 +20,8 @@ set fish_cursor_external line
 set fish_cursor_visual block
 # Force change it for Wezterm
 set fish_vi_force_cursor 1
+# set fish color scheme
+fish_config theme choose "fish default"
 
 # remove greeting
 set -U fish_greeting
