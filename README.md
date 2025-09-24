@@ -2,7 +2,7 @@
 
 ## Quick start
 
-### 1. Clone repo into your `$HOME` dir
+### 1. Clone repo into `$HOME` dir
 
 ```sh
 git clone git@github.com:husa/.dotfiles.git ~/.dotfiles
@@ -28,7 +28,7 @@ ln -sv (pwd)/hammerspoon $HOME/.config/hammerspoon
 ln -sv (pwd)/gitui $HOME/.config/gitui
 ```
 
-change default hammerspoon config location
+#### 3.1 change default hammerspoon config location
 
 ```sh
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
@@ -56,7 +56,7 @@ curl https://raw.githubusercontent.com/dandavison/delta/main/themes.gitconfig > 
 - [hammerspoon](https://www.hammerspoon.org/) - macos automation tool
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) - fonts with added glyphs
 
-# Tools
+# Tools, CLI utils, TUIs, etc.
 
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - better `cd`
 - [eza](https://github.com/ajeetdsouza/zoxide) - better `ls`, fork of `exa`
