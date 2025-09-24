@@ -40,19 +40,21 @@ defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/i
 - `delta` themes
 
 ```sh
+# yazi flavors and plugins
 ya pack -i
+# delta theme
 curl https://raw.githubusercontent.com/dandavison/delta/main/themes.gitconfig > git/delta.themes.gitconfig
 ```
 
 # General
 
 - ~~[iterm2](https://iterm2.com/) - terminal emulator~~
-- [wewzterm](https://wezfurlong.org/wezterm/index.html) - terminal emulator
+- [wezterm](https://wezfurlong.org/wezterm/index.html) - terminal emulator
 - [homebrew](https://brew.sh/) - package manager
 - [fish](https://fishshell.com/) - shell
 - [starship](https://starship.rs/) - prompt
 - [hammerspoon](https://www.hammerspoon.org/) - macos automation tool
-- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) - fonts with added glyphs, used - `font-fira-code-nerd-font`
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) - fonts with added glyphs
 
 # Tools
 

@@ -1,3 +1,4 @@
+# "cd" wrapper to handle commands like "cd ..", "cd ...", "cd ....", etc.
 function cd --wraps cd --description 'Change the current directory' -a path
     if test (string match -r '^\.{2,}$' $path)
         set dotcount (string length -- $path)
