@@ -114,6 +114,11 @@ return {
       },
     })
 
+    -- additional LSPs that should not be installed via mason
+    local additional_language_servers = {}
+    -- Swift
+    additional_language_servers["sourcekit"] = {}
+
     -- additional linters/formatters to install
     local tools = {
       "stylua",
@@ -135,13 +140,17 @@ return {
       ensure_installed = ensure_installed,
     })
 
+    local lsps = vim.tbl_extend("force", language_servers, additional_language_servers)
+
+    -- configure LSPs
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    for server_name, server in pairs(language_servers) do
+    for server_name, server in pairs(lsps) do
       capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
       server.capabilities = capabilities
       vim.lsp.config(server_name, server)
     end
-    vim.lsp.enable(vim.tbl_keys(language_servers))
+    -- enable all LSPs
+    vim.lsp.enable(vim.tbl_keys(lsps))
 
     -- configure diagnostics
     vim.diagnostic.config({
