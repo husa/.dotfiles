@@ -118,6 +118,7 @@ opt.listchars = {
 
 -- scrolloff - screen lines to keep above and below the cursor
 opt.scrolloff = 10
+opt.sidescrolloff = 20
 
 -- Custom filetypes
 vim.filetype.add({
