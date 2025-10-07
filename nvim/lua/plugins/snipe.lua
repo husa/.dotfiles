@@ -15,6 +15,7 @@ return {
       ui = {
         text_align = "file-first",
         open_win_override = {
+          title = "Open Buffers(Snipe)",
           border = "rounded",
         },
         preselect = require("snipe").preselect_by_classifier("#"),

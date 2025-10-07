@@ -186,7 +186,7 @@ return {
         map("gD", function()
           Snacks.picker.lsp_declarations()
         end, "Goto Declaration")
-        map("gr", function()
+        map("gR", function()
           Snacks.picker.lsp_references()
         end, "References")
         map("gI", function()

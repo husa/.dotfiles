@@ -38,19 +38,19 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
--- map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
--- map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- better indent
 map("v", ">", ">gv")
 map("v", "<", "<gv")
 
--- save file
+-- write buffer
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
--- new file
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+-- new buffer
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New Buffer" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
@@ -61,6 +61,15 @@ map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 -- map("n", "<leader>bd", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 map("n", "[b", "<cmd>bnext<cr>", { desc = "Previous Buffer" })
 map("n", "]b", "<cmd>bprevious<cr>", { desc = "Next Buffer" })
+
+-- tabs
+map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+map("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<leader>t]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader>t[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader>tf", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader>tl", "<cmd>tablast<cr>", { desc = "Last Tab" })
 
 -- toggle some options
 map("n", "<leader>uw", function()
