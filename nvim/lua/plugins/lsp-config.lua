@@ -203,6 +203,7 @@ return {
         map("<leader>cs", function()
           require("snacks").picker.lsp_symbols({
             layout = { preset = "vertical", preview = "main" },
+            sort = { fields = { "idx" } },
             filter = {
               default = {
                 "Class",
