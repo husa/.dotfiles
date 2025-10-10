@@ -25,6 +25,7 @@ config.line_height = 1.2
 config.window_decorations = "MACOS_FORCE_ENABLE_SHADOW|RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.enable_scroll_bar = true
+config.scrollback_lines = 20000
 config.window_background_opacity = 0.93
 config.macos_window_background_blur = 40
 config.window_padding = {
