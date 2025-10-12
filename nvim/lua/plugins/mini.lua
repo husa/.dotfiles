@@ -2,10 +2,30 @@ return {
   "echasnovski/mini.nvim",
   version = "*",
   event = "VeryLazy",
+  keys = {
+    {
+      "<leader>em",
+      function()
+        MiniFiles.open(vim.api.nvim_buf_get_name(0), true)
+        MiniFiles.reveal_cwd()
+      end,
+      desc = "Explorer",
+    },
+  },
   config = function()
     require("mini.ai").setup()
     require("mini.bufremove").setup()
     require("mini.indentscope").setup()
+    require("mini.files").setup({
+      options = {
+        use_as_default_explorer = false,
+      },
+      windows = {
+        preview = true,
+        width_preview = 40,
+        width_focus = 25,
+      },
+    })
 
     require("mini.icons").setup({
       file = {
