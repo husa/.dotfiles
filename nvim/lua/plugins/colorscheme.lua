@@ -18,6 +18,9 @@ return {
           return {
             -- force solid background
             Folded = { bg = colors.surface1 }, -- folds
+            MiniFilesTitleFocused = { fg = colors.rosewater },
+            MiniFilesBorderFocused = { fg = colors.rosewater }, -- actually custom
+            MiniFilesBorderModified = { fg = colors.peach },
           }
         end,
         float = {

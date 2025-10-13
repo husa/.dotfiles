@@ -17,6 +17,9 @@ return {
     require("mini.bufremove").setup()
     require("mini.indentscope").setup()
     require("mini.files").setup({
+      mappings = {
+        go_in_plus = "<CR>",
+      },
       options = {
         use_as_default_explorer = false,
       },
@@ -25,6 +28,26 @@ return {
         width_preview = 40,
         width_focus = 25,
       },
+    })
+    -- close on Esc
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesWindowOpen",
+      callback = function(ev)
+        vim.keymap.set("n", "<Esc>", function()
+          require("mini.files").close()
+        end, { buffer = ev.data.buf_id, noremap = true, silent = true })
+      end,
+    })
+    -- highlight focused window border
+    -- since https://github.com/nvim-mini/mini.nvim/pull/2060 was closed
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesWindowUpdate",
+      callback = function(ev)
+        local win_id = ev.data.win_id
+        if win_id == vim.api.nvim_get_current_win() then
+          vim.api.nvim_win_set_option(win_id, "winhighlight", "FloatBorder:MiniFilesBorderFocused")
+        end
+      end,
     })
 
     require("mini.icons").setup({
