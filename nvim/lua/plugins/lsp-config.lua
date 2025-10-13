@@ -115,16 +115,21 @@ return {
     })
 
     -- additional LSPs that should not be installed via mason
-    local additional_language_servers = {}
-    -- Swift
-    additional_language_servers["sourcekit"] = {}
+    local additional_language_servers = {
+      -- Swift
+      sourcekit = {},
+    }
 
-    -- additional linters/formatters to install
+    -- additional linters/formatters/DAPs to install
     local tools = {
+      -- formatters
       "stylua",
       "prettier",
+      -- linters
       "eslint_d",
       "tflint",
+      -- DAPs
+      "js-debug-adapter",
     }
 
     require("mason").setup({
