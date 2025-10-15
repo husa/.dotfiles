@@ -18,6 +18,7 @@ return {
     },
   },
   config = function(_)
+    ---@type table<string, vim.lsp.Config>
     local language_servers = {
       -- lua
       lua_ls = {
@@ -80,6 +81,7 @@ return {
       },
       -- js/ts
       vtsls = {},
+      eslint = {},
       -- python
       pyright = {},
       -- dockerfile
@@ -126,7 +128,7 @@ return {
       "stylua",
       "prettier",
       -- linters
-      "eslint_d",
+      -- "eslint_d", -- replaced by eslint LSP
       "tflint",
       -- DAPs
       "js-debug-adapter",
@@ -150,8 +152,7 @@ return {
     -- configure LSPs
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     for server_name, server in pairs(lsps) do
-      capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-      server.capabilities = capabilities
+      server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
       vim.lsp.config(server_name, server)
     end
     -- enable all LSPs
@@ -204,7 +205,14 @@ return {
           return vim.lsp.buf.signature_help()
         end, "Signature Help")
 
-        map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
+        map("<leader>ca", function()
+          -- force all code actions
+          vim.lsp.buf.code_action({
+            -- context = {
+            --   only = { "quickfix", "source", "refactor", "notebook" },
+            -- },
+          })
+        end, "Code Action", { "n", "x" })
         map("<leader>cs", function()
           require("snacks").picker.lsp_symbols({
             layout = { preset = "vertical", preview = "main" },
