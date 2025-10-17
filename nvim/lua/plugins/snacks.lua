@@ -7,7 +7,11 @@ return {
   opts = {
     bufdelete = {},
     statuscolumn = {},
-    zen = {},
+    zen = {
+      toggles = {
+        dim = false,
+      },
+    },
     input = {
       win = {
         title_pos = "left",
