@@ -8,6 +8,9 @@ hs.hotkey.bind("option", "tab", function()
     return
   end
   -- if there are other visible windows, cycle through them
+  table.sort(visibleWindows, function(a, b)
+    return a:id() < b:id()
+  end)
   local currentIndex = 1
   for i, window in ipairs(visibleWindows) do
     if window == focusedWindow then
