@@ -89,6 +89,7 @@ return {
       -- css
       cssls = {},
       somesass_ls = {},
+      tailwindcss = {},
       -- terraform
       terraformls = {},
     }
