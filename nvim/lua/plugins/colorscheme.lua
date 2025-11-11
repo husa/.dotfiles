@@ -36,7 +36,7 @@ return {
           },
         },
         integrations = {
-          blink_cmp = true,
+          blink_cmp = { style = "bordered" },
         },
       })
       vim.cmd.colorscheme("catppuccin")
