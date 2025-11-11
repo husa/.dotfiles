@@ -27,17 +27,16 @@ return {
           transparent = transparent_background,
           solid = false,
         },
+        lsp_styles = {
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
+        },
         integrations = {
           blink_cmp = true,
-          native_lsp = {
-            enabled = true,
-            underlines = {
-              errors = { "undercurl" },
-              hints = { "undercurl" },
-              warnings = { "undercurl" },
-              information = { "undercurl" },
-            },
-          },
         },
       })
       vim.cmd.colorscheme("catppuccin")
