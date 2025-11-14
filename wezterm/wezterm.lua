@@ -15,7 +15,9 @@ config.color_scheme = "Catppuccin Mocha"
 -- config.font = wezterm.font("Maple Mono NF")
 -- config.font = wezterm.font("PT Mono")
 -- config.font = wezterm.font("Monaco")
-config.font = wezterm.font("JetBrains Mono")
+-- config.font = wezterm.font({ "JetBrains Mono" })
+config.font = wezterm.font("JetBrainsMono Nerd Font")
+
 config.font_size = 15
 config.line_height = 1.2
 
