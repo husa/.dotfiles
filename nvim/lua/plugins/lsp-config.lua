@@ -86,6 +86,7 @@ return {
       pyright = {},
       -- dockerfile
       dockerls = {},
+      fish_lsp = {},
       -- css
       cssls = {},
       somesass_ls = {},
