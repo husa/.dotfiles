@@ -2,23 +2,25 @@
 hs.hotkey.bind("option", "tab", function()
   local focusedWindow = hs.window.focusedWindow()
   local app = focusedWindow:application()
-  local visibleWindows = app:visibleWindows()
+  -- to get only visible windows of the focused application
+  -- local visibleWindows = app:visibleWindows()
+  local appWindows = app:allWindows()
   -- if there are no other visible windows, do nothing
-  if #visibleWindows <= 1 then
+  if #appWindows <= 1 then
     return
   end
   -- if there are other visible windows, cycle through them
-  table.sort(visibleWindows, function(a, b)
+  table.sort(appWindows, function(a, b)
     return a:id() < b:id()
   end)
   local currentIndex = 1
-  for i, window in ipairs(visibleWindows) do
+  for i, window in ipairs(appWindows) do
     if window == focusedWindow then
       currentIndex = i
       break
     end
   end
-  local nextIndex = (currentIndex % #visibleWindows) + 1
-  local nextWindow = visibleWindows[nextIndex]
+  local nextIndex = (currentIndex % #appWindows) + 1
+  local nextWindow = appWindows[nextIndex]
   nextWindow:focus()
 end)
