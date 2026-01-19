@@ -20,6 +20,9 @@ map({ "n", "v" }, "<S-Up>", "10k", { desc = "Scroll up and center" })
 map("n", "n", "nzzzv", { desc = "Find next and center" })
 map("n", "N", "Nzzzv", { desc = "Find previous and center" })
 
+-- jump and center
+map("n", "G", "Gzzzv", { desc = "Go to end of file and center" })
+
 -- delete single character without copying into register
 map({ "n", "v" }, "x", '"_x', { desc = "Delete single character" })
 
