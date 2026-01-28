@@ -1,2 +1,3 @@
 flavors
-plugins
+plugins/*
+!plugins/folder-rules.yazi

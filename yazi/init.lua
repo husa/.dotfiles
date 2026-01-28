@@ -18,3 +18,5 @@ function Linemode:custom_sizemtime()
   local size = self._file:size()
   return string.format("%s %s", mtime, size and ya.readable_size(size) or "-")
 end
+
+require("folder-rules"):setup()
