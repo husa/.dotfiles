@@ -12,3 +12,9 @@ function Linemode:custom_mtime()
   -- return string.format("%s %s", size and ya.readable_size(size) or "-", time)
   return time
 end
+
+function Linemode:custom_sizemtime()
+  local mtime = Linemode.custom_mtime(self)
+  local size = self._file:size()
+  return string.format("%s %s", mtime, size and ya.readable_size(size) or "-")
+end

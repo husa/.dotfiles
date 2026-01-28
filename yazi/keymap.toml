@@ -13,6 +13,7 @@ append_keymap = [
 
   # linemode shoftcut
   { on = ["m", "c"], run = "linemode custom_mtime", "desc" = "Linemode: custom mtime" },
+  { on = ["m", "C"], run = "linemode custom_sizemtime", "desc" = "Linemode: custom sizemtime" },
 
   # WFT! Shift works with arrow keys, but not PageUp/Down, Enter, etc.
   #
