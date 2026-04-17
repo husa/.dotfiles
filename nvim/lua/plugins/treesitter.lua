@@ -4,10 +4,11 @@ return {
   build = ":TSUpdate",
   main = "nvim-treesitter.configs",
   lazy = false,
-  opts = {
-    highlight = { enable = true },
-    indent = { enable = true },
-    ensure_installed = {
+  config = function()
+    local treesitter = require("nvim-treesitter")
+    treesitter.setup()
+
+    local ensure_installed = {
       "json",
       "javascript",
       "typescript",
@@ -24,6 +25,7 @@ return {
       "python",
       "toml",
       "bash",
+      "fish",
       "lua",
       "vim",
       "vimdoc",
@@ -44,19 +46,8 @@ return {
       "swift",
       "kotlin",
       "prisma",
-    },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "<C-space>",
-        node_incremental = "<C-space>",
-        scope_incremental = false,
-        node_decremental = "<bs>",
-      },
-    },
-  },
-  config = function(_, opts)
-    local treesitter = require("nvim-treesitter")
-    treesitter.setup(opts)
+    }
+
+    treesitter.install(ensure_installed)
   end,
 }
