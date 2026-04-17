@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
--- move lines using arrows
+-- move lines with Opt-<direction>
 map("n", "<A-Down>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
 map("n", "<A-Up>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
@@ -113,6 +113,9 @@ map("n", "<leader>ur", function()
     require("lazy").reload({ plugins = { selected } })
   end)
 end, { desc = "Reload plugin" })
+
+-- reload nvim
+map("n", "<leader>uR", "<cmd>restart<cr>", { desc = "Reload nvim" })
 
 -- select and set filetype
 map("n", "<leader>ut", function()
