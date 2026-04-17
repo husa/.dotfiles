@@ -1,6 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  -- version = "*", -- releases are not really updated
+  branch = "main",
   build = ":TSUpdate",
   main = "nvim-treesitter.configs",
   lazy = false,
@@ -43,6 +43,7 @@ return {
       "ruby",
       "swift",
       "kotlin",
+      "prisma",
     },
     incremental_selection = {
       enable = true,
@@ -54,4 +55,8 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    local treesitter = require("nvim-treesitter")
+    treesitter.setup(opts)
+  end,
 }
