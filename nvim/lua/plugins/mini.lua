@@ -13,7 +13,14 @@ return {
     },
   },
   config = function()
-    require("mini.ai").setup()
+    require("mini.ai").setup({
+      mappings = {
+        around_next = "aan",
+        around_prev = "aal",
+        inside_next = "ian",
+        inside_prev = "ial",
+      },
+    })
     require("mini.bufremove").setup()
     require("mini.indentscope").setup()
     require("mini.files").setup({
