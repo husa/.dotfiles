@@ -49,5 +49,13 @@ return {
     }
 
     treesitter.install(ensure_installed)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function()
+        if vim.treesitter.get_parser() then
+          vim.treesitter.start()
+        end
+      end,
+    })
   end,
 }
