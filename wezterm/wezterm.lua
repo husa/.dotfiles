@@ -156,7 +156,7 @@ config.keys = {
     action = act.ActivateKeyTable({
       name = "tab_mode",
       one_shot = false,
-      until_unknown = false,
+      prevent_fallback = true,
     }),
   },
   {
@@ -165,7 +165,7 @@ config.keys = {
     action = act.ActivateKeyTable({
       name = "pane_mode",
       one_shot = true,
-      until_unknown = false,
+      prevent_fallback = true,
     }),
   },
   {
@@ -174,7 +174,7 @@ config.keys = {
     action = act.ActivateKeyTable({
       name = "workspace_mode",
       one_shot = true,
-      until_unknown = false,
+      prevent_fallback = true,
     }),
   },
 }
