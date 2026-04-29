@@ -54,7 +54,7 @@ config.cursor_thickness = "200%"
 -- inactive panes
 config.inactive_pane_hsb = {
   saturation = 0.7,
-  brightness = 0.3,
+  brightness = 0.5,
 }
 
 -- command palette
@@ -265,7 +265,7 @@ config.key_tables = {
         name = "resize_pane",
         one_shot = false,
         replace_current = true,
-        until_unknown = false,
+        prevent_fallback = true,
       }),
     },
 
