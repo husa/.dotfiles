@@ -9,4 +9,7 @@ RUN passwd -d node && adduser node sudo
 RUN npm i -g @openai/codex@latest @github/copilot@latest
 
 USER node
+RUN curl https://cursor.com/install -fsS | bash
+ENV PATH="/home/node/.local/bin:${PATH}"
+
 WORKDIR /home/node/app

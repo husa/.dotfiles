@@ -7,15 +7,18 @@ function __run_ai_tool
         echo "$image missing; building it now."
 
         echo "Using Dockerfile $dockerfile"
-        docker build --pull --no-cache -t $image - <$dockerfile
+        docker build --pull --no-cache --progress=plain -t $image - <$dockerfile
         echo "Build finished with status $status"
     end
 
     echo "Launching \"$argv\" in \"$image\" with workspace \"$(pwd)\" mounted."
 
     docker run --rm -it \
+        -v $HOME/.agents:/home/node/.agents \
         -v $HOME/.codex:/home/node/.codex \
         -v $HOME/.copilot:/home/node/.copilot \
+        -v $HOME/.cursor:/home/node/.cursor \
+        -v $HOME/.config/cursor:/home/node/.config/cursor \
         -v (pwd):/home/node/app \
         $image $argv
 end
