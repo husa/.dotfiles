@@ -1,5 +1,6 @@
 ---@type Wezterm
 local wezterm = require("wezterm")
+local act = wezterm.action
 
 ---@class Config
 local config = wezterm.config_builder()
@@ -71,12 +72,6 @@ config.keys = {
     mods = "SUPER",
     action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
   },
-  -- close pane, then tab, then window
-  {
-    key = "w",
-    mods = "CMD",
-    action = wezterm.action.CloseCurrentPane({ confirm = true }),
-  },
   -- zoom panel
   {
     key = "F",
@@ -111,12 +106,7 @@ config.keys = {
     mods = "SUPER|SHIFT",
     action = wezterm.action.ActivateCommandPalette,
   },
-  -- pane selection
-  {
-    key = "p",
-    mods = "SUPER",
-    action = wezterm.action.PaneSelect,
-  },
+
   -- pane swap
   {
     key = "s",
@@ -158,31 +148,197 @@ config.keys = {
       end),
     }),
   },
+
+  -- modal key tables (zellij-style)
+  {
+    key = "t",
+    mods = "SUPER",
+    action = act.ActivateKeyTable({
+      name = "tab_mode",
+      one_shot = false,
+      until_unknown = false,
+    }),
+  },
+  {
+    key = "p",
+    mods = "SUPER",
+    action = act.ActivateKeyTable({
+      name = "pane_mode",
+      one_shot = true,
+      until_unknown = false,
+    }),
+  },
+  {
+    key = "w",
+    mods = "SUPER",
+    action = act.ActivateKeyTable({
+      name = "workspace_mode",
+      one_shot = true,
+      until_unknown = false,
+    }),
+  },
+}
+
+local function mode_help(mode_name)
+  return wezterm.action_callback(function(window, pane)
+    local choices = {}
+    for _, entry in ipairs(config.key_tables[mode_name]) do
+      if entry.desc then
+        local keys = entry.keys or entry.key
+        table.insert(choices, { label = keys .. " \t " .. entry.desc })
+      end
+    end
+    window:perform_action(
+      act.InputSelector({
+        title = mode_name,
+        choices = choices,
+        fuzzy = true,
+        action = wezterm.action_callback(function() end),
+      }),
+      pane
+    )
+  end)
+end
+
+-- modal key tables
+local pane_resize_step = 3
+config.key_tables = {
+  tab_mode = {
+    { key = "h", keys = "hl", desc = "navigate tabs", action = act.ActivateTabRelative(-1) },
+    { key = "l", action = act.ActivateTabRelative(1) },
+
+    { key = "n", desc = "new tab", action = act.Multiple({ act.SpawnTab("CurrentPaneDomain"), "PopKeyTable" }) },
+    {
+      key = "x",
+      desc = "close tab",
+      action = act.Multiple({ act.CloseCurrentTab({ confirm = true }), "PopKeyTable" }),
+    },
+
+    {
+      key = "r",
+      desc = "rename tab",
+      action = act.Multiple({
+        act.PromptInputLine({
+          description = "Enter new name for tab",
+          action = wezterm.action_callback(function(window, _, line)
+            if line then
+              window:active_tab():set_title(line)
+            end
+          end),
+        }),
+        "PopKeyTable",
+      }),
+    },
+
+    { key = "H", keys = "HL", desc = "reorder tab", action = act.MoveTabRelative(-1) },
+    { key = "L", action = act.MoveTabRelative(1) },
+
+    { key = "s", desc = "tab list", action = act.Multiple({ "ShowTabNavigator", "PopKeyTable" }) },
+
+    { key = "?", desc = "help", action = mode_help("tab_mode") },
+    { key = "Escape", action = "PopKeyTable" },
+  },
+
+  pane_mode = {
+    { key = "h", keys = "hjkl", desc = "navigate panes", action = act.ActivatePaneDirection("Left") },
+    { key = "j", action = act.ActivatePaneDirection("Down") },
+    { key = "k", action = act.ActivatePaneDirection("Up") },
+    { key = "l", action = act.ActivatePaneDirection("Right") },
+
+    { key = "d", desc = "split vertical", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "v", desc = "split horizontal", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "n", desc = "new pane", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+
+    { key = "x", desc = "close pane", action = act.CloseCurrentPane({ confirm = true }) },
+    { key = "z", desc = "toggle zoom", action = act.TogglePaneZoomState },
+
+    { key = "Space", keys = "␣", desc = "select pane", action = act.PaneSelect },
+    { key = "s", desc = "swap pane", action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }) },
+
+    { key = "o", keys = "oO", desc = "rotate panes", action = act.RotatePanes("Clockwise") },
+    { key = "O", action = act.RotatePanes("CounterClockwise") },
+
+    {
+      key = "r",
+      desc = "resize mode",
+      action = act.ActivateKeyTable({
+        name = "resize_pane",
+        one_shot = false,
+        replace_current = true,
+        until_unknown = false,
+      }),
+    },
+
+    { key = "?", desc = "help", action = mode_help("pane_mode") },
+    { key = "Escape", action = "PopKeyTable" },
+  },
+
+  resize_pane = {
+    { key = "h", keys = "hjkl", desc = "resize pane", action = act.AdjustPaneSize({ "Left", pane_resize_step }) },
+    { key = "j", action = act.AdjustPaneSize({ "Down", pane_resize_step }) },
+    { key = "k", action = act.AdjustPaneSize({ "Up", pane_resize_step }) },
+    { key = "l", action = act.AdjustPaneSize({ "Right", pane_resize_step }) },
+    { key = "H", keys = "HJKL", desc = "resize fine", action = act.AdjustPaneSize({ "Left", 1 }) },
+    { key = "J", action = act.AdjustPaneSize({ "Down", 1 }) },
+    { key = "K", action = act.AdjustPaneSize({ "Up", 1 }) },
+    { key = "L", action = act.AdjustPaneSize({ "Right", 1 }) },
+
+    { key = "?", desc = "help", action = mode_help("resize_pane") },
+    { key = "Escape", action = "PopKeyTable" },
+  },
+
+  workspace_mode = {
+    { key = "h", keys = "hl", desc = "prev/next workspace", action = act.SwitchWorkspaceRelative(-1) },
+    { key = "l", action = act.SwitchWorkspaceRelative(1) },
+
+    {
+      key = "n",
+      desc = "new workspace",
+      action = act.PromptInputLine({
+        description = "Enter name for new workspace",
+        action = wezterm.action_callback(function(window, pane, line)
+          if line and #line > 0 then
+            window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
+          end
+        end),
+      }),
+    },
+
+    {
+      key = "r",
+      desc = "rename workspace",
+      action = act.PromptInputLine({
+        description = "Enter new name for workspace",
+        action = wezterm.action_callback(function(window, pane, line)
+          if line and #line > 0 then
+            wezterm.mux.rename_workspace(window:active_workspace(), line)
+          end
+        end),
+      }),
+    },
+
+    {
+      key = "s",
+      desc = "workspace list",
+      action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+    },
+
+    { key = "?", desc = "help", action = mode_help("workspace_mode") },
+    { key = "Escape", action = "PopKeyTable" },
+  },
 }
 
 -- status
 config.status_update_interval = 1000
-wezterm.on("update-status", function(window, pane)
-  local status = ""
-  -- current workspace and number of workspaces
-  status = wezterm.nerdfonts.oct_table .. " " .. window:active_workspace()
-  local numberOfWorkspaces = #wezterm.mux.get_workspace_names()
-  if numberOfWorkspaces > 1 then
-    status = status .. " [" .. numberOfWorkspaces .. "]"
-  end
-  -- active key table
-  if window:active_key_table() then
-    status = status .. window:active_key_table()
-  end
 
-  -- make it italic
-  window:set_right_status(wezterm.format({
-    { Attribute = { Italic = true } },
-    { Text = status .. " " },
-  }))
-end)
+local mode_display = {
+  tab_mode = { label = " TAB ", color = "#cba6f7" },
+  pane_mode = { label = " PANE ", color = "#a6e3a1" },
+  resize_pane = { label = " RESIZE ", color = "#f38ba8" },
+  workspace_mode = { label = " WORKSPACE ", color = "#89b4fa" },
+}
 
--- format and color tab bar
+-- format and colors tab bar
 local colors = {
   active = "#cba6f7",
   focused = "#fab387",
@@ -196,6 +352,38 @@ config.colors = {
     background = colors.background,
   },
 }
+wezterm.on("update-status", function(window, pane)
+  local elements = {}
+
+  local key_table = window:active_key_table()
+  local mode = key_table and mode_display[key_table]
+  if mode then
+    table.insert(elements, { Background = { Color = colors.background } })
+    table.insert(elements, { Foreground = { Color = mode.color } })
+    table.insert(elements, { Text = wezterm.nerdfonts.ple_left_half_circle_thick })
+    table.insert(elements, { Background = { Color = mode.color } })
+    table.insert(elements, { Foreground = { Color = "#1e1e2e" } })
+    table.insert(elements, { Attribute = { Intensity = "Bold" } })
+    table.insert(elements, { Text = mode.label })
+    table.insert(elements, "ResetAttributes")
+    table.insert(elements, { Background = { Color = colors.background } })
+    table.insert(elements, { Foreground = { Color = mode.color } })
+    table.insert(elements, { Text = wezterm.nerdfonts.ple_right_half_circle_thick })
+    table.insert(elements, "ResetAttributes")
+    table.insert(elements, { Text = " " })
+  end
+
+  local workspace = wezterm.nerdfonts.oct_table .. " " .. window:active_workspace()
+  local num_workspaces = #wezterm.mux.get_workspace_names()
+  if num_workspaces > 1 then
+    workspace = workspace .. " [" .. num_workspaces .. "]"
+  end
+
+  table.insert(elements, { Attribute = { Italic = true } })
+  table.insert(elements, { Text = workspace .. " " })
+
+  window:set_right_status(wezterm.format(elements))
+end)
 
 local list_concat = function(...)
   local result = {}
@@ -267,10 +455,8 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   -- focused indicator
   local prefix = ""
   if tab.active_pane.is_zoomed then
-    print("title before: " .. title)
     prefix = wezterm.nerdfonts.oct_screen_full .. " "
     additional_symbols_length = additional_symbols_length + 2 -- focused indicator and space
-    print("title after: " .. title)
   end
 
   -- truncate title
