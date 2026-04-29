@@ -57,7 +57,7 @@ config.inactive_pane_hsb = {
 }
 
 -- command palette
-config.command_palette_font_size = 16
+config.command_palette_font_size = 18
 
 config.keys = {
   -- create "panes" as in iTerm
@@ -143,6 +143,21 @@ config.keys = {
     mods = "ALT",
     action = wezterm.action.DisableDefaultAssignment,
   },
+
+  -- playground
+  {
+    key = "o",
+    mods = "SUPER|SHIFT",
+    action = wezterm.action.PromptInputLine({
+      description = "Enter new name for tab",
+      -- initial_value = "My Tab Name",
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    }),
+  },
 }
 
 -- status
@@ -193,9 +208,23 @@ local list_concat = function(...)
   return result
 end
 
-wezterm.on("format-tab-title", function(tab)
-  local panel_title = tab.active_pane.title
-  local tab_index = tab.tab_index + 1
+local get_tab_title = function(tab_info)
+  local title = tab_info.tab_title
+  if title and #title > 0 then
+    return title
+  end
+  return tab_info.active_pane.title
+end
+
+local truncate_tab_title = function(title, max_width)
+  if #title > max_width then
+    return title:sub(1, max_width - 1) .. ""
+  end
+  return title
+end
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+  local title = get_tab_title(tab)
 
   -- define background/foreground colors
   local background = colors.inactive
@@ -213,6 +242,7 @@ wezterm.on("format-tab-title", function(tab)
       foreground = colors.focused
     end
   end
+
   -- set start/end symbols
   local start_symbol_text = wezterm.nerdfonts.ple_left_half_circle_thick
   local end_symbol_text = wezterm.nerdfonts.ple_right_half_circle_thick .. " "
@@ -233,19 +263,27 @@ wezterm.on("format-tab-title", function(tab)
     { Background = { Color = background } },
     { Foreground = { Color = foreground } },
   }
-  -- truncate title
-  local total_width_of_symbols = 3 + #tostring(tab_index) + 5 -- make more space on the right
-  local max_title_width = config.tab_max_width - total_width_of_symbols
-  if #panel_title > max_title_width then
-    panel_title = panel_title:sub(1, max_title_width - 3) .. ""
-  end
-
-  local title = { { Text = tab_index .. ": " .. panel_title } }
+  local additional_symbols_length = 3 -- start and end symbols, space in the end
+  -- focused indicator
+  local prefix = ""
   if tab.active_pane.is_zoomed then
-    title = list_concat({ { Text = wezterm.nerdfonts.oct_screen_full .. " " } }, title)
+    print("title before: " .. title)
+    prefix = wezterm.nerdfonts.oct_screen_full .. " "
+    additional_symbols_length = additional_symbols_length + 2 -- focused indicator and space
+    print("title after: " .. title)
   end
 
-  return list_concat(start_symbol, main_style, title, end_symbol)
+  -- truncate title
+  if max_width < additional_symbols_length then
+    title = tab.tab_index + 1
+  else
+    local max_title_width = max_width - additional_symbols_length
+    title = truncate_tab_title(title, max_title_width)
+    title = prefix .. title
+  end
+
+  local ws_title = { { Text = title } }
+  return list_concat(start_symbol, main_style, ws_title, end_symbol)
   -- add highlight for panes with unseen output
   -- doesn't work well with nvim(it always has unseen output)
   -- might add a check for nvim specifically
