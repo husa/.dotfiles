@@ -401,7 +401,10 @@ local get_tab_title = function(tab_info)
   if title and #title > 0 then
     return title
   end
-  return tab_info.active_pane.title
+  if tab_info.active_pane.title and #tab_info.active_pane.title > 0 then
+    return tab_info.active_pane.title
+  end
+  return "Tab #" .. (tab_info.tab_index + 1)
 end
 
 local truncate_tab_title = function(title, max_width)
