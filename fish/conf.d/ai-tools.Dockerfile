@@ -15,5 +15,6 @@ RUN curl -fsSL https://gh.io/copilot-install | bash && \
   curl -fsSL https://claude.ai/install.sh | bash
 
 ENV PATH="/home/node/.local/bin:${PATH}"
+ENV COLORTERM=truecolor
 
 WORKDIR /home/node/app
