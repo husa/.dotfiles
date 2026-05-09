@@ -29,38 +29,37 @@ set -U fish_greeting
 # generate completions for kubectl and docker if not exist
 set -l compdir $fish_complete_path[1]
 if command -q kubectl
-  set -l kubectl_comp $compdir/kubectl.fish
-  if not test -e $kubectl_comp
-    begin
-      set -l tmp (mktemp "$kubectl_comp".XXXXXX)
-      kubectl completion fish > $tmp 2>/dev/null; and mv $tmp $kubectl_comp; or rm -f $tmp
+    set -l kubectl_comp $compdir/kubectl.fish
+    if not test -e $kubectl_comp
+        begin
+            set -l tmp (mktemp "$kubectl_comp".XXXXXX)
+            kubectl completion fish >$tmp 2>/dev/null; and mv $tmp $kubectl_comp; or rm -f $tmp
+        end
     end
-  end
 end
 if command -q docker
-  set -l docker_comp $compdir/docker.fish
-  if not test -e $docker_comp
-    begin
-      set -l tmp (mktemp "$docker_comp".XXXXXX)
-      docker completion fish > $tmp 2>/dev/null; and mv $tmp $docker_comp; or rm -f $tmp
+    set -l docker_comp $compdir/docker.fish
+    if not test -e $docker_comp
+        begin
+            set -l tmp (mktemp "$docker_comp".XXXXXX)
+            docker completion fish >$tmp 2>/dev/null; and mv $tmp $docker_comp; or rm -f $tmp
+        end
     end
-  end
 end
 
 if command -q starship
-  starship init fish | source
+    starship init fish | source
 end
 
 if command -q fzf
-  fzf --fish | source
+    fzf --fish | source
 end
 if command -q zoxide
-  zoxide init fish | source
+    zoxide init fish | source
 end
 
 # set default editor
 set -x EDITOR nvim
-
 
 # configure neovide(not worth creating a config file)
 set -x NEOVIDE_FRAME transparent
@@ -68,7 +67,7 @@ set -x NEOVIDE_TITLE_HIDDEN transparent
 set -x NEOVIDE_FORK 1
 
 # add fzf defaults
-set -x FZF_DEFAULT_COMMAND fd --type file --color=always
+set -x FZF_DEFAULT_COMMAND "fd --type file --color=always"
 set -x FZF_DEFAULT_OPTS "--ansi --border --highlight-line --layout=reverse --preview-window 'right:50%' --preview='bat --color=always --style=grid,numbers --wrap=character {}'"
 set -x FZF_CTRL_R_OPTS "--preview='echo {}' --preview-window=hidden"
 
@@ -77,6 +76,5 @@ complete --command aws --no-files --arguments '(begin; set --local --export COMP
 
 # if file ./local.fish exists, source it
 if test -f $HOME/.config/fish/local.fish
-  source $HOME/.config/fish/local.fish
+    source $HOME/.config/fish/local.fish
 end
-

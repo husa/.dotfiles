@@ -24,7 +24,7 @@ function structurizr
     end
 
     if not test -d $workspace
-        echo "Workspace directory '$workspace' does not exist. It will be created."
+        echo "Workspace directory '$workspace' does not exist. It will be created by structurizr automatically."
     end
 
     docker run \
