@@ -64,17 +64,17 @@ config.keys = {
   -- create "panes" as in iTerm
   {
     key = "d",
-    mods = "SUPER",
+    mods = "CMD",
     action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
   },
   {
-    key = "D",
-    mods = "SUPER",
+    key = "d",
+    mods = "CMD|SHIFT",
     action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
   },
   -- zoom panel
   {
-    key = "F",
+    key = "f",
     mods = "CMD|SHIFT",
     action = wezterm.action.TogglePaneZoomState,
   },
@@ -103,14 +103,14 @@ config.keys = {
   -- command palette(as in Sublime Text, waay too old)
   {
     key = "p",
-    mods = "SUPER|SHIFT",
+    mods = "CMD|SHIFT",
     action = wezterm.action.ActivateCommandPalette,
   },
 
   -- pane swap
   {
     key = "s",
-    mods = "SUPER",
+    mods = "CMD",
     action = wezterm.action.PaneSelect({
       mode = "SwapWithActiveKeepFocus",
     }),
@@ -119,12 +119,12 @@ config.keys = {
   -- pane rotation
   {
     key = "r",
-    mods = "SUPER",
+    mods = "CMD",
     action = wezterm.action.RotatePanes("Clockwise"),
   },
   {
     key = "r",
-    mods = "SUPER|SHIFT",
+    mods = "CMD|SHIFT",
     action = wezterm.action.RotatePanes("CounterClockwise"),
   },
   -- disable full-screen toggle by ALT+Enter
@@ -137,7 +137,7 @@ config.keys = {
   -- playground
   {
     key = "o",
-    mods = "SUPER|SHIFT",
+    mods = "CMD|SHIFT",
     action = wezterm.action.PromptInputLine({
       description = "Enter new name for tab",
       -- initial_value = "My Tab Name",
@@ -152,7 +152,7 @@ config.keys = {
   -- modal key tables (zellij-style)
   {
     key = "t",
-    mods = "SUPER",
+    mods = "CMD",
     action = act.ActivateKeyTable({
       name = "tab_mode",
       one_shot = false,
@@ -161,7 +161,7 @@ config.keys = {
   },
   {
     key = "p",
-    mods = "SUPER",
+    mods = "CMD",
     action = act.ActivateKeyTable({
       name = "pane_mode",
       one_shot = true,
@@ -170,7 +170,7 @@ config.keys = {
   },
   {
     key = "w",
-    mods = "SUPER",
+    mods = "CMD",
     action = act.ActivateKeyTable({
       name = "workspace_mode",
       one_shot = true,
@@ -362,7 +362,7 @@ wezterm.on("update-status", function(window, pane)
     table.insert(elements, { Foreground = { Color = mode.color } })
     table.insert(elements, { Text = wezterm.nerdfonts.ple_left_half_circle_thick })
     table.insert(elements, { Background = { Color = mode.color } })
-    table.insert(elements, { Foreground = { Color = "#1e1e2e" } })
+    table.insert(elements, { Foreground = { Color = colors.text_on_light } })
     table.insert(elements, { Attribute = { Intensity = "Bold" } })
     table.insert(elements, { Text = mode.label })
     table.insert(elements, "ResetAttributes")
@@ -408,8 +408,8 @@ local get_tab_title = function(tab_info)
 end
 
 local truncate_tab_title = function(title, max_width)
-  if #title > max_width then
-    return title:sub(1, max_width - 1) .. ""
+  if wezterm.column_width(title) > max_width then
+    return wezterm.truncate_right(title, max_width - 1) .. ""
   end
   return title
 end
@@ -454,7 +454,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     { Background = { Color = background } },
     { Foreground = { Color = foreground } },
   }
-  local additional_symbols_length = 3 -- start and end symbols, space in the end
+  local additional_symbols_length = wezterm.column_width(start_symbol_text) + wezterm.column_width(end_symbol_text)
   -- focused indicator
   local prefix = ""
   if tab.active_pane.is_zoomed then
@@ -464,7 +464,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
   -- truncate title
   if max_width < additional_symbols_length then
-    title = tab.tab_index + 1
+    title = tostring(tab.tab_index + 1)
   else
     local max_title_width = max_width - additional_symbols_length
     title = truncate_tab_title(title, max_title_width)
