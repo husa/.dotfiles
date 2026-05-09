@@ -6,7 +6,7 @@ function usenode20
         set -gx PATH /opt/homebrew/opt/node@20/bin $PATH
         set -gx LDFLAGS "-L/opt/homebrew/opt/node@20/lib"
         set -gx CPPFLAGS "-I/opt/homebrew/opt/node@20/include"
-        echo "✅ Using Node.js version:"
+        echo "Using Node.js version:"
         node --version
     else
         echo "Node.js version 20 not found at $node20_path"
