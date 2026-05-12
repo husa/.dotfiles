@@ -11,7 +11,14 @@ function __run_ai_tool
         echo "Build finished with status $status"
     end
 
-    echo "Launching \"$argv\" in \"$image\" with workspace \"$(pwd)\" mounted."
+    set -l hostpwd (pwd)
+    set -l relpath (string replace -- "$HOME" "" $hostpwd | string trim -l -c /)
+    if test -z "$relpath"
+        set relpath (basename $hostpwd)
+    end
+    set -l workdir /home/node/projects/$relpath
+
+    echo "Launching \"$argv\" in \"$image\" with workspace \"$hostpwd\" mounted at \"$workdir\"."
 
     docker run --rm -it \
         -v $HOME/.agents:/home/node/.agents \
@@ -22,6 +29,7 @@ function __run_ai_tool
         -v $HOME/.claude.json:/home/node/.claude.json \
         -v $HOME/.cursor:/home/node/.cursor \
         -v $HOME/.config/cursor:/home/node/.config/cursor \
-        -v (pwd):/home/node/app \
+        -v $hostpwd:$workdir \
+        -w $workdir \
         $image $argv
 end
