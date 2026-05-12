@@ -19,6 +19,7 @@ function __run_ai_tool
         -v $HOME/.copilot:/home/node/.copilot \
         -v $HOME/.claude:/home/node/.claude \
         -v $HOME/.agents/skills:/home/node/.claude/skills \
+        -v $HOME/.claude.json:/home/node/.claude.json \
         -v $HOME/.cursor:/home/node/.cursor \
         -v $HOME/.config/cursor:/home/node/.config/cursor \
         -v (pwd):/home/node/app \
