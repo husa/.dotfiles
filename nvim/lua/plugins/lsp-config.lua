@@ -10,9 +10,11 @@ return {
       "folke/lazydev.nvim",
       ft = "lua",
       cmd = "LazyDev",
+      dependencies = { "DrKJeff16/wezterm-types" },
       opts = {
         library = {
           { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          { path = "wezterm-types", mods = { "wezterm" } },
         },
       },
     },
