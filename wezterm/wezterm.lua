@@ -332,7 +332,7 @@ config.key_tables = {
 config.status_update_interval = 1000
 
 local mode_display = {
-  tab_mode = { label = " TAB ", color = "#cba6f7" },
+  tab_mode = { label = " TAB ", color = "#f2cdcd" },
   pane_mode = { label = " PANE ", color = "#a6e3a1" },
   resize_pane = { label = " RESIZE ", color = "#f38ba8" },
   workspace_mode = { label = " WORKSPACE ", color = "#89b4fa" },
@@ -341,7 +341,7 @@ local mode_display = {
 -- format and colors tab bar
 local colors = {
   active = "#cba6f7",
-  focused = "#fab387",
+  zoomed = "#fab387",
   inactive = "#313244",
   background = "#1e1e2e",
   text_on_dark = "#cdd6f4",
@@ -352,7 +352,11 @@ config.colors = {
     background = colors.background,
   },
 }
+local keytable_cache = {}
 wezterm.on("update-status", function(window, pane)
+  -- cache current window keytable
+  keytable_cache[window:window_id()] = window:active_key_table()
+
   local elements = {}
 
   local key_table = window:active_key_table()
@@ -415,23 +419,29 @@ local truncate_tab_title = function(title, max_width)
 end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+  local current_key_table = keytable_cache[tab.window_id]
+
   local title = get_tab_title(tab)
 
   -- define background/foreground colors
   local background = colors.inactive
   local foreground = colors.text_on_dark
-  if tab.is_active and not tab.active_pane.is_zoomed then
+
+  if tab.is_active then
     background = colors.active
     foreground = colors.text_on_light
   end
-  if tab.active_pane.is_zoomed then
-    if tab.is_active then
-      background = colors.focused
-      foreground = colors.text_on_light
-    else
-      background = colors.inactive
-      foreground = colors.focused
-    end
+  if current_key_table then
+    background = mode_display[current_key_table].color
+    foreground = colors.text_on_light
+  end
+  if tab.is_active and tab.active_pane.is_zoomed then
+    background = colors.zoomed
+    foreground = colors.text_on_light
+  end
+  if tab.is_active and current_key_table then
+    background = wezterm.color.parse(mode_display[current_key_table].color):darken(0.2)
+    foreground = colors.text_on_light
   end
 
   -- set start/end symbols
