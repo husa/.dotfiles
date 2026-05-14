@@ -61,6 +61,12 @@ config.inactive_pane_hsb = {
 config.command_palette_font_size = 18
 
 config.keys = {
+  -- close pane/tab
+  {
+    key = "w",
+    mods = "CMD",
+    action = wezterm.action.CloseCurrentPane({ confirm = true }),
+  },
   -- create "panes" as in iTerm
   {
     key = "d",
@@ -169,7 +175,7 @@ config.keys = {
     }),
   },
   {
-    key = "w",
+    key = "e",
     mods = "CMD",
     action = act.ActivateKeyTable({
       name = "workspace_mode",
@@ -506,7 +512,7 @@ end)
 
 -- pane navigation between Wezterm and Neovim
 local function add_pane_nav_keys()
-  local pane_nav_mods = "CTRL|SHIFT"
+  local pane_nav_mods = "CTRL|SHIFT|ALT"
 
   -- map of { key = direction }
   local pane_nav_keys = {

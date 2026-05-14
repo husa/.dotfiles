@@ -30,16 +30,9 @@ local function try_move(direction)
   end
 end
 
--- attach keymaps(same as wezterm)
-vim.keymap.set("n", "<C-S-k>", function()
-  try_move("k")
-end)
-vim.keymap.set("n", "<C-S-j>", function()
-  try_move("j")
-end)
-vim.keymap.set("n", "<C-S-h>", function()
-  try_move("h")
-end)
-vim.keymap.set("n", "<C-S-l>", function()
-  try_move("l")
-end)
+local keys = { "k", "j", "h", "l" }
+for _, key in ipairs(keys) do
+  vim.keymap.set("n", "<C-S-A-" .. key .. ">", function()
+    try_move(key)
+  end)
+end
