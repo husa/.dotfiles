@@ -95,6 +95,17 @@ config.keys = {
     mods = "CMD",
     action = wezterm.action.ActivateTabRelative(1),
   },
+  {
+    key = "y",
+    mods = "CTRL|SHIFT|ALT",
+    action = wezterm.action.ActivateTabRelative(-1),
+  },
+  {
+    key = "o",
+    mods = "CTRL|SHIFT|ALT",
+    action = wezterm.action.ActivateTabRelative(1),
+  },
+
   -- tab reordering
   {
     key = "[",
