@@ -124,6 +124,7 @@ vim.filetype.add({
   filename = {},
   extension = {
     styl = "sass",
+    mdc = "markdown",
   },
   pattern = {
     [".*/git/config"] = "gitconfig",
