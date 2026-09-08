@@ -7,14 +7,14 @@ tab_size = 2
 
 [opener]
 edit = [
-  { run = '${EDITOR:-vi} "$@"', desc = "Open in $EDITOR", block = true },
-  { run = 'nvim "$@"', desc = "Open in nvim", block = true },
-  { run = 'neovide "$@"', block = false, orphan = true, desc = "Open in Neovide" },
-  { run = 'code "$@"', block = false, orphan = true, desc = "Open in VSCode" },
-  { run = 'open "$@"',  desc = "Open", for = "macos" },
+  { run = '${EDITOR:-vi} %s', desc = "Open in $EDITOR", block = true },
+  { run = 'nvim %s', desc = "Open in nvim", block = true },
+  { run = 'neovide %s', block = false, orphan = true, desc = "Open in Neovide" },
+  { run = 'code %s', block = false, orphan = true, desc = "Open in VSCode" },
+  { run = 'open %s',  desc = "Open", for = "macos" },
 ]
 open = [
-  { run = 'open "$@"',  desc = "Open", for = "macos" },
+  { run = 'open %s',  desc = "Open", for = "macos" },
 ]
 
 [open]
