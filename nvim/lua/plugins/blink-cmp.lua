@@ -5,7 +5,6 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
 
-    -- "codeium.nvim",
     "saghen/blink.compat",
     "giuxtaposition/blink-cmp-copilot",
   },
@@ -46,8 +45,6 @@ return {
               text = function(ctx)
                 if ctx.source_name == "copilot" then
                   ctx.kind = "copilot"
-                elseif ctx.source_name == "codeium" then
-                  ctx.kind = "codeium"
                 end
                 local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
                 return kind_icon
@@ -56,8 +53,6 @@ return {
               highlight = function(ctx)
                 if ctx.source_name == "copilot" then
                   ctx.kind = "copilot"
-                elseif ctx.source_name == "codeium" then
-                  ctx.kind = "codeium"
                 end
                 local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
                 return hl
@@ -90,7 +85,6 @@ return {
         "buffer",
 
         "copilot",
-        -- "codeium",
       },
 
       providers = {
@@ -100,12 +94,6 @@ return {
           score_offset = 100,
           async = true,
         },
-        -- codeium = {
-        --   name = "codeium",
-        --   module = "blink.compat.source",
-        --   score_offset = 100,
-        --   async = true,
-        -- },
       },
     },
 

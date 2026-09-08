@@ -27,7 +27,6 @@ return {
     end
 
     local function ai_status()
-      -- TODO: check for codeium status, icons could be 󱙺 and 󱙻
       if package.loaded["copilot"] and not require("copilot.client").is_disabled() then
         return " "
       end
