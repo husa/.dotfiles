@@ -23,8 +23,7 @@
   a = add
   # log/history
   # one-line graph with date and author
-  history = log --graph --all --date short --date-order --pretty=format:'%C(auto)%h %d %s %C(cyan) %ad %C(cyan bold) %an'
-  h = !git history
+  h = log --graph --all --date short --date-order --pretty=format:'%C(auto)%h %d %s %C(cyan) %ad %C(cyan bold) %an'
   # minimal one-line
   hs = log --graph --all --oneline
   unstage = reset HEAD
